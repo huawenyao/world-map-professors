@@ -1,0 +1,208 @@
+# ========================================
+# 能力/技能模板文件
+# Capability/Skill Template
+# ========================================
+#
+# 使用说明:
+# 1. 复制此模板文件到 data/capabilities/core-skills/ 目录
+# 2. 将文件重命名为 {capability-id}.yaml
+# 3. 填写所有必填字段 (标记为 REQUIRED)
+# 4. 定义至少2个能力等级
+# 5. 运行验证命令: world-professors validate capability {file-path}
+
+# ========================================
+# 基本信息 (REQUIRED)
+# ========================================
+
+# 能力唯一标识符 (格式: cap-{category}-{num}, 如: cap-cognitive-001)
+# {num} 必须是3位数字 (001-999)
+id: "cap-cognitive-001"
+
+# 能力名称 (最多200字符)
+name: "提示工程能力"
+
+# 能力详细描述
+description: |
+  设计、优化和调试AI提示词的能力,能够根据任务需求构建有效的提示词,
+  引导大语言模型产生高质量输出。
+
+# 能力分类 (REQUIRED)
+# 可选值: cognitive, technical, interpersonal, domain-specific
+category: "cognitive"
+
+# 子分类 (可选)
+sub_category: "AI交互与应用"
+
+# ========================================
+# 元数据
+# ========================================
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "能力体系研究组"
+  version: "1.0"
+  schema_version: "1.0"
+
+# ========================================
+# 别名 (可选)
+# ========================================
+aliases:
+  - "Prompt Engineering"
+  - "提示词设计"
+  - "AI指令优化"
+
+# ========================================
+# 能力等级定义 (REQUIRED, 至少2个等级)
+# ========================================
+levels:
+  beginner:
+    description: "能够使用基础提示词与AI交互,理解提示词的基本结构"
+    skills:
+      - "掌握零样本提示 (Zero-shot Prompting)"
+      - "了解提示词的基本要素 (任务、上下文、格式)"
+      - "能够调整简单提示词以改进输出"
+    tasks:
+      - "编写清晰的任务指令"
+      - "为AI提供必要的背景信息"
+      - "指定输出格式 (如JSON、表格)"
+
+  intermediate:
+    description: "熟练运用多种提示词技术,能够针对复杂任务设计有效提示词"
+    skills:
+      - "掌握少样本学习 (Few-shot Learning)"
+      - "理解思维链提示 (Chain-of-Thought)"
+      - "能够分解复杂任务为子步骤"
+      - "掌握角色扮演提示技术"
+    tasks:
+      - "设计多步骤推理提示词"
+      - "构建领域专家角色提示"
+      - "优化提示词以减少幻觉现象"
+      - "处理结构化数据提取任务"
+
+  advanced:
+    description: "精通提示工程的高级技术,能够系统化设计提示词框架"
+    skills:
+      - "掌握自洽性提示 (Self-Consistency)"
+      - "理解检索增强生成 (RAG) 提示设计"
+      - "熟悉提示词安全与越狱防御"
+      - "能够设计可复用的提示词模板"
+    tasks:
+      - "构建企业级提示词库"
+      - "设计多轮对话提示词策略"
+      - "优化提示词以控制成本与延迟"
+      - "评估不同提示词策略的效果"
+
+  expert:
+    description: "提示工程领域的专家,能够创新提示词技术并指导团队"
+    skills:
+      - "开发新型提示词技术"
+      - "跨模型提示词迁移与优化"
+      - "提示词与Fine-tuning策略决策"
+      - "提示词安全审计与加固"
+    tasks:
+      - "制定企业提示工程规范"
+      - "训练团队提示工程能力"
+      - "研究前沿提示技术 (如Auto-CoT)"
+      - "设计复杂AI Agent系统的提示词架构"
+
+# ========================================
+# 学习路径 (可选,建议填写)
+# ========================================
+learning_path:
+  # 前置能力要求
+  prerequisites:
+    - "cap-cognitive-critical-thinking"
+    - "cap-technical-basic-programming"
+
+  # 预估学习时长
+  estimated_time: "3-6个月 (从零基础到中级)"
+
+  # 学习资源
+  resources:
+    courses:
+      - "OpenAI官方Prompt Engineering指南"
+      - "吴恩达《ChatGPT Prompt Engineering for Developers》"
+      - "Learn Prompting在线课程"
+
+    books:
+      - "《The Prompt Engineering Handbook》"
+      - "《AI大模型应用实战》"
+
+    practice:
+      - "在PromptBase研究优秀提示词案例"
+      - "参与LangChain项目实践"
+      - "完成100个不同领域的提示词设计"
+
+  # 学习里程碑
+  milestones:
+    - month: 1
+      goal: "掌握基础提示词技术,能够完成简单任务"
+
+    - month: 2
+      goal: "熟练使用Few-shot和CoT,处理中等复杂度任务"
+
+    - month: 3
+      goal: "能够设计多步骤工作流,优化提示词性能"
+
+    - month: 6
+      goal: "达到高级水平,能够独立设计企业级提示词方案"
+
+# ========================================
+# 相关能力 (可选)
+# ========================================
+related_capabilities:
+  - "cap-cognitive-critical-thinking"
+  - "cap-technical-nlp-basics"
+  - "cap-domain-ai-model-understanding"
+
+# ========================================
+# 适用角色 (可选)
+# ========================================
+applicable_roles:
+  - "AI产品经理"
+  - "提示工程师"
+  - "AI应用开发者"
+  - "内容运营专员"
+  - "数据分析师"
+
+# ========================================
+# 可迁移性 (可选)
+# ========================================
+transferability:
+  # 跨行业迁移性 (high/medium/low)
+  across_industries: "high"
+
+  # 跨场景迁移性
+  across_scenarios: "high"
+
+# ========================================
+# AI影响 (可选)
+# ========================================
+# 可选值: enhanced (AI增强), augmented (AI辅助), automated (AI自动化), obsolete (已过时)
+ai_impact: "enhanced"
+
+
+# ========================================
+# 其他能力类别示例
+# ========================================
+
+# 技术能力示例 (category: technical)
+# -----------------------------------------
+# id: "cap-technical-python-programming"
+# name: "Python编程能力"
+# category: "technical"
+# sub_category: "编程语言"
+
+# 人际能力示例 (category: interpersonal)
+# -----------------------------------------
+# id: "cap-interpersonal-cross-team-collaboration"
+# name: "跨团队协作能力"
+# category: "interpersonal"
+# sub_category: "沟通协作"
+
+# 领域特定能力示例 (category: domain-specific)
+# -----------------------------------------
+# id: "cap-domain-financial-modeling"
+# name: "财务建模能力"
+# category: "domain-specific"
+# sub_category: "金融财务"

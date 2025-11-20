@@ -1,0 +1,331 @@
+{
+  "$defs": {
+    "AIImpact": {
+      "description": "AI's impact on this capability.",
+      "enum": [
+        "enhanced",
+        "augmented",
+        "automated",
+        "obsolete"
+      ],
+      "title": "AIImpact",
+      "type": "string"
+    },
+    "CapabilityCategory": {
+      "description": "Capability category classification.",
+      "enum": [
+        "cognitive",
+        "technical",
+        "interpersonal",
+        "domain-specific"
+      ],
+      "title": "CapabilityCategory",
+      "type": "string"
+    },
+    "LearningPath": {
+      "description": "Learning path for capability development.",
+      "properties": {
+        "prerequisites": {
+          "description": "Prerequisite capability IDs",
+          "items": {
+            "type": "string"
+          },
+          "title": "Prerequisites",
+          "type": "array"
+        },
+        "estimated_time": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g., '3 months', '6-12 months'",
+          "title": "Estimated Time"
+        },
+        "resources": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LearningResources"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "milestones": {
+          "items": {
+            "$ref": "#/$defs/Milestone"
+          },
+          "title": "Milestones",
+          "type": "array"
+        }
+      },
+      "title": "LearningPath",
+      "type": "object"
+    },
+    "LearningResources": {
+      "description": "Learning resources for capability development.",
+      "properties": {
+        "courses": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Courses",
+          "type": "array"
+        },
+        "books": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Books",
+          "type": "array"
+        },
+        "practice": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Practice",
+          "type": "array"
+        }
+      },
+      "title": "LearningResources",
+      "type": "object"
+    },
+    "LevelDefinition": {
+      "description": "Definition of a proficiency level.",
+      "properties": {
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "skills": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Skills",
+          "type": "array"
+        },
+        "tasks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tasks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "title": "LevelDefinition",
+      "type": "object"
+    },
+    "Metadata": {
+      "additionalProperties": true,
+      "description": "Metadata for all entities.",
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Author"
+        },
+        "version": {
+          "default": "1.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "Milestone": {
+      "description": "Learning milestone.",
+      "properties": {
+        "month": {
+          "description": "Timeline in months",
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Month",
+          "type": "integer"
+        },
+        "goal": {
+          "minLength": 1,
+          "title": "Goal",
+          "type": "string"
+        }
+      },
+      "required": [
+        "month",
+        "goal"
+      ],
+      "title": "Milestone",
+      "type": "object"
+    },
+    "Transferability": {
+      "description": "Transferability level across contexts.",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Transferability",
+      "type": "string"
+    },
+    "TransferabilityProfile": {
+      "description": "Transferability profile across contexts.",
+      "properties": {
+        "across_industries": {
+          "$ref": "#/$defs/Transferability",
+          "default": "medium"
+        },
+        "across_scenarios": {
+          "$ref": "#/$defs/Transferability",
+          "default": "medium"
+        }
+      },
+      "title": "TransferabilityProfile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Capability/skill model.",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "category": {
+      "$ref": "#/$defs/CapabilityCategory",
+      "description": "Capability category"
+    },
+    "sub_category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Sub-category classification",
+      "title": "Sub Category"
+    },
+    "aliases": {
+      "description": "Alternative names",
+      "items": {
+        "type": "string"
+      },
+      "title": "Aliases",
+      "type": "array"
+    },
+    "levels": {
+      "additionalProperties": {
+        "$ref": "#/$defs/LevelDefinition"
+      },
+      "description": "Proficiency level definitions",
+      "title": "Levels",
+      "type": "object"
+    },
+    "learning_path": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LearningPath"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "related_capabilities": {
+      "description": "Related capability IDs",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Capabilities",
+      "type": "array"
+    },
+    "applicable_roles": {
+      "description": "Applicable roles (descriptive)",
+      "items": {
+        "type": "string"
+      },
+      "title": "Applicable Roles",
+      "type": "array"
+    },
+    "transferability": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransferabilityProfile"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "ai_impact": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AIImpact"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "description",
+    "category"
+  ],
+  "title": "Capability",
+  "type": "object"
+}

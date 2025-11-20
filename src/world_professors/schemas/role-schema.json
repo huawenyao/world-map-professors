@@ -1,0 +1,418 @@
+{
+  "$defs": {
+    "AITool": {
+      "description": "AI tool used in the role.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "vendor": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Vendor",
+          "type": "array"
+        },
+        "cost": {
+          "anyOf": [
+            {
+              "pattern": "^(free|freemium|paid)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost"
+        }
+      },
+      "required": [
+        "name",
+        "purpose"
+      ],
+      "title": "AITool",
+      "type": "object"
+    },
+    "AutomationLevel": {
+      "description": "Automation level for workflow steps.",
+      "enum": [
+        "manual",
+        "assisted",
+        "automated"
+      ],
+      "title": "AutomationLevel",
+      "type": "string"
+    },
+    "CapabilityLevel": {
+      "description": "Capability proficiency level.",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "title": "CapabilityLevel",
+      "type": "string"
+    },
+    "Metadata": {
+      "additionalProperties": true,
+      "description": "Metadata for all entities.",
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Author"
+        },
+        "version": {
+          "default": "1.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "Priority": {
+      "description": "Priority level for capabilities.",
+      "enum": [
+        "must-have",
+        "should-have",
+        "nice-to-have"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "RequiredCapability": {
+      "description": "Capability requirement for a role.",
+      "properties": {
+        "capability_id": {
+          "pattern": "^cap-[a-z]+-\\d{3}$",
+          "title": "Capability Id",
+          "type": "string"
+        },
+        "level": {
+          "$ref": "#/$defs/CapabilityLevel"
+        },
+        "priority": {
+          "$ref": "#/$defs/Priority",
+          "default": "should-have"
+        }
+      },
+      "required": [
+        "capability_id",
+        "level"
+      ],
+      "title": "RequiredCapability",
+      "type": "object"
+    },
+    "Responsibilities": {
+      "description": "Responsibility distribution between human and AI.",
+      "properties": {
+        "core": {
+          "description": "AI cannot replace",
+          "items": {
+            "type": "string"
+          },
+          "title": "Core",
+          "type": "array"
+        },
+        "delegated_to_ai": {
+          "description": "Delegated to AI",
+          "items": {
+            "type": "string"
+          },
+          "title": "Delegated To Ai",
+          "type": "array"
+        },
+        "collaborative": {
+          "description": "Human-AI collaboration",
+          "items": {
+            "type": "string"
+          },
+          "title": "Collaborative",
+          "type": "array"
+        }
+      },
+      "title": "Responsibilities",
+      "type": "object"
+    },
+    "RoleType": {
+      "description": "Role type classification.",
+      "enum": [
+        "traditional",
+        "ai-enhanced",
+        "emerging",
+        "ai-agent"
+      ],
+      "title": "RoleType",
+      "type": "string"
+    },
+    "SalaryRange": {
+      "description": "Salary range for the role.",
+      "properties": {
+        "min": {
+          "exclusiveMinimum": 0,
+          "title": "Min",
+          "type": "integer"
+        },
+        "max": {
+          "exclusiveMinimum": 0,
+          "title": "Max",
+          "type": "integer"
+        },
+        "currency": {
+          "default": "CNY",
+          "title": "Currency",
+          "type": "string"
+        },
+        "region": {
+          "default": "China",
+          "title": "Region",
+          "type": "string"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ],
+      "title": "SalaryRange",
+      "type": "object"
+    },
+    "TransformationImpact": {
+      "description": "Impact of AI transformation on the role.",
+      "properties": {
+        "efficiency_gain": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g., '3x', '50%'",
+          "title": "Efficiency Gain"
+        },
+        "quality_improvement": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Quality metrics improvement",
+          "title": "Quality Improvement"
+        },
+        "new_capabilities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "New Capabilities",
+          "type": "array"
+        },
+        "obsolete_skills": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Obsolete Skills",
+          "type": "array"
+        }
+      },
+      "title": "TransformationImpact",
+      "type": "object"
+    },
+    "WorkflowStep": {
+      "description": "A step in typical workflow.",
+      "properties": {
+        "step": {
+          "minLength": 1,
+          "title": "Step",
+          "type": "string"
+        },
+        "human_time": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Human Time"
+        },
+        "ai_time": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ai Time"
+        },
+        "automation_level": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AutomationLevel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "step"
+      ],
+      "title": "WorkflowStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Digital role model in AI era.",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "type": {
+      "$ref": "#/$defs/RoleType",
+      "description": "Role type classification"
+    },
+    "scenario_ref": {
+      "description": "Reference to scenario ID",
+      "title": "Scenario Ref",
+      "type": "string"
+    },
+    "traditional_role": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Traditional role name (required for ai-enhanced)",
+      "title": "Traditional Role"
+    },
+    "responsibilities": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Responsibilities"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "required_capabilities": {
+      "items": {
+        "$ref": "#/$defs/RequiredCapability"
+      },
+      "title": "Required Capabilities",
+      "type": "array"
+    },
+    "ai_tools": {
+      "items": {
+        "$ref": "#/$defs/AITool"
+      },
+      "title": "Ai Tools",
+      "type": "array"
+    },
+    "typical_workflow": {
+      "items": {
+        "$ref": "#/$defs/WorkflowStep"
+      },
+      "title": "Typical Workflow",
+      "type": "array"
+    },
+    "transformation_impact": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransformationImpact"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "salary_range": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SalaryRange"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "description",
+    "type",
+    "scenario_ref"
+  ],
+  "title": "Role",
+  "type": "object"
+}

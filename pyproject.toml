@@ -1,0 +1,103 @@
+[tool.poetry]
+name = "world-professors"
+version = "0.1.0"
+description = "AI时代的数字角色与能力维基百科"
+authors = ["World Professors Team"]
+readme = "README.md"
+packages = [{include = "world_professors", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.8"
+pydantic-settings = "^2.3"
+pyyaml = "^6.0"
+typer = "^0.12"
+rich = "^13.7"
+networkx = "^3.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5"
+black = "^24.4"
+mypy = "^1.10"
+pytest = "^8.2"
+pytest-cov = "^5.0"
+types-pyyaml = "^6.0"
+
+[tool.poetry.scripts]
+wp = "world_professors.cli.app:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Ruff配置
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports in __init__.py
+
+# Black配置
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+
+# Mypy配置
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+exclude = ["tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+# Pytest配置
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=world_professors",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "-v"
+]
+
+# Coverage配置
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
