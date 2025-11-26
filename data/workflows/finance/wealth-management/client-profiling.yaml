@@ -1,0 +1,169 @@
+# ========================================
+# 流程定义: 客户画像流程
+# Workflow: Client Profiling
+# ========================================
+
+id: wf-fin-wm-profiling
+name: 客户画像流程
+scenario_ref: scn-fin-wealth-mgmt
+
+description: |
+  从客户接触到完成风险画像的标准化流程，
+  输出完整的客户投资画像用于后续方案设计。
+
+# 流程步骤
+steps:
+  - id: step-01
+    name: 基础信息采集
+    description: 收集客户身份、联系方式、职业等基础信息
+    type: automated
+    
+    input:
+      type: object
+      properties:
+        client_id:
+          type: string
+        source:
+          type: string
+      required:
+        - client_id
+    
+    output:
+      type: object
+      properties:
+        basic_info:
+          type: object
+        identity_verified:
+          type: boolean
+    
+    tools:
+      - tool-crm-api
+      - tool-ocr-id-card
+    
+    capabilities:
+      - cap-data-001
+    
+    estimated_duration: "5min"
+    requires_human_confirmation: false
+
+  - id: step-02
+    name: 风险偏好评估
+    description: 通过问卷和行为分析评估客户风险承受能力
+    type: assisted
+    
+    depends_on:
+      - step-01
+    
+    input:
+      type: object
+      properties:
+        basic_info:
+          type: object
+    
+    output:
+      type: object
+      properties:
+        risk_tolerance:
+          type: string
+        investment_horizon:
+          type: string
+        liquidity_needs:
+          type: string
+    
+    tools:
+      - tool-risk-questionnaire
+      - tool-behavioral-analysis
+    
+    capabilities:
+      - cap-fin-003
+    
+    estimated_duration: "15min"
+    requires_human_confirmation: true
+
+  - id: step-03
+    name: 资产状况盘点
+    description: 收集并分析客户现有资产配置情况
+    type: assisted
+    
+    depends_on:
+      - step-01
+    
+    input:
+      type: object
+      properties:
+        client_id:
+          type: string
+    
+    output:
+      type: object
+      properties:
+        asset_summary:
+          type: object
+        current_allocation:
+          type: object
+    
+    tools:
+      - tool-asset-aggregator
+      - tool-portfolio-analyzer
+    
+    capabilities:
+      - cap-fin-004
+    
+    estimated_duration: "10min"
+    requires_human_confirmation: false
+
+  - id: step-04
+    name: 画像生成与确认
+    description: 整合所有信息生成完整客户画像
+    type: automated
+    
+    depends_on:
+      - step-02
+      - step-03
+    
+    output:
+      type: object
+      properties:
+        client_profile:
+          type: object
+        profile_score:
+          type: number
+        recommended_strategy:
+          type: string
+    
+    tools:
+      - tool-profile-generator
+    
+    capabilities:
+      - cap-ai-001
+    
+    estimated_duration: "2min"
+    requires_human_confirmation: true
+
+# 入口条件
+entry_conditions:
+  - 客户已完成身份验证
+  - 客户已签署服务协议
+
+# 出口条件
+exit_conditions:
+  - 客户画像已生成并确认
+  - 风险等级已确定
+
+# 人工检查点
+human_checkpoints:
+  - step-02
+  - step-04
+
+# 流程指标
+metrics:
+  avg_duration: "30min"
+  automation_rate: "60%"
+  success_rate: "95%"
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

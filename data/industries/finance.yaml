@@ -1,0 +1,58 @@
+# ========================================
+# 行业定义: 金融服务
+# Industry: Financial Services
+# ========================================
+
+id: ind-finance
+name: 金融服务
+name_en: Financial Services
+description: |
+  银行、证券、保险、资产管理等金融服务领域，
+  为企业和个人提供资金融通、风险管理、财富管理等服务。
+
+# 子行业定义
+sub_industries:
+  - id: ind-finance-banking
+    name: 银行业
+    name_en: Banking
+    description: 商业银行、投资银行、零售银行服务
+  
+  - id: ind-finance-securities
+    name: 证券业
+    name_en: Securities
+    description: 证券经纪、投资银行、资产管理
+  
+  - id: ind-finance-insurance
+    name: 保险业
+    name_en: Insurance
+    description: 寿险、财险、再保险
+  
+  - id: ind-finance-asset-mgmt
+    name: 资产管理
+    name_en: Asset Management
+    description: 公募基金、私募基金、财富管理
+
+# 行业特征
+characteristics:
+  regulatory_level: high      # 高度监管
+  data_sensitivity: high      # 数据高度敏感
+  ai_maturity: medium         # AI应用中等成熟度
+
+# 行业通用能力要求
+common_capabilities:
+  - cap-fin-001  # 金融合规
+  - cap-fin-002  # 风险管理基础
+  - cap-fin-003  # 金融市场知识
+
+# 相关行业
+related_industries:
+  - ind-technology
+  - ind-consulting
+
+# 元数据
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

@@ -1,0 +1,131 @@
+# ========================================
+# 能力定义: 风险评估能力
+# Capability: Risk Assessment
+# ========================================
+
+id: cap-fin-003
+name: 风险评估能力
+name_en: Risk Assessment
+category: domain-specific
+sub_category: finance
+
+description: |
+  评估投资组合、客户或业务的风险水平，
+  包括市场风险、信用风险、流动性风险等。
+  是金融从业者和AI Agent的核心能力之一。
+
+# 别名
+aliases:
+  - 风险分析
+  - Risk Analysis
+  - 风控能力
+
+# === 能力等级定义 ===
+levels:
+  beginner:
+    description: 理解基础风险概念
+    skills:
+      - 识别常见风险类型（市场、信用、流动性）
+      - 使用标准风险评估工具
+      - 理解VaR、标准差等基础指标
+    tasks:
+      - 完成标准化风险问卷
+      - 计算基础风险指标
+      - 阅读风险评估报告
+  
+  intermediate:
+    description: 独立进行风险评估
+    skills:
+      - 设计风险评估框架
+      - 多维度风险分析
+      - 风险归因分析
+    tasks:
+      - 独立完成客户风险画像
+      - 提出风险缓释建议
+      - 编写风险评估报告
+  
+  advanced:
+    description: 复杂场景风险建模
+    skills:
+      - 量化风险模型构建
+      - 压力测试设计
+      - 极端情景分析
+    tasks:
+      - 开发风险评估模型
+      - 处理复杂衍生品风险
+      - 设计压力测试方案
+  
+  expert:
+    description: 风险体系设计
+    skills:
+      - 企业级风险管理框架设计
+      - 创新风险产品设计
+      - 监管合规框架理解
+    tasks:
+      - 制定企业风险策略
+      - 设计新型风险产品
+      - 监管沟通与汇报
+
+# === 学习路径 ===
+learning_path:
+  prerequisites:
+    - cap-fin-001  # 金融市场知识
+    - cap-data-001 # 数据分析基础
+  
+  estimated_time: "6个月"
+  
+  resources:
+    courses:
+      - "FRM (Financial Risk Manager) 认证"
+      - "CFA Level 2 - Portfolio Management"
+      - "Courserta - Financial Risk Management"
+    books:
+      - "《风险管理与金融机构》- John Hull"
+      - "《Value at Risk》- Philippe Jorion"
+      - "《金融风险管理师手册》"
+    practice:
+      - "模拟组合风险监控项目"
+      - "历史压力测试案例复现"
+      - "风险因子分析实战"
+  
+  milestones:
+    - month: 2
+      goal: 掌握基础风险概念和VaR计算
+    - month: 4
+      goal: 能独立完成客户风险评估
+    - month: 6
+      goal: 能设计和实施压力测试
+
+# === 关联工具 ===
+# associated_tools:
+#   - tool-risk-calculator
+#   - tool-var-model
+#   - tool-stress-test
+
+# === 可迁移性 ===
+transferability:
+  across_industries: medium  # 可迁移到保险、银行
+  across_scenarios: high     # 金融领域内高度通用
+
+# === AI影响评估 ===
+ai_impact: augmented  # enhanced | augmented | automated | obsolete
+
+# 相关能力
+related_capabilities:
+  - cap-fin-001  # 金融市场知识
+  - cap-fin-004  # 投资组合管理
+  - cap-data-002 # 统计分析
+
+# 适用角色描述
+applicable_roles:
+  - 风险管理师
+  - 投资顾问
+  - 基金经理
+  - 财富管理Agent
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

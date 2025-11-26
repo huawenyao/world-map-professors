@@ -1,0 +1,160 @@
+# ========================================
+# 工具定义: 市场行情数据API
+# Tool: Market Data API
+# ========================================
+
+id: tool-market-data-api
+name: 市场行情数据API
+name_en: Market Data API
+category: data-retrieval
+
+description: |
+  提供实时和历史市场行情数据查询，
+  支持股票、基金、债券等多种资产类型。
+
+# 适用范围
+applicable_industries:
+  - ind-finance
+
+applicable_scenarios:
+  - scn-fin-wealth-mgmt
+  - scn-fin-investment-research
+  - scn-fin-risk-control
+
+# === 接口定义 ===
+interface:
+  type: rest-api
+  base_url: "https://api.marketdata.example.com"
+  
+  endpoints:
+    - name: get_quote
+      method: GET
+      path: "/v1/quote/{symbol}"
+      description: 获取单个标的实时行情
+      
+      parameters:
+        - name: symbol
+          location: path
+          type: string
+          required: true
+          description: 标的代码，如 AAPL, 600519.SH
+        
+        - name: fields
+          location: query
+          type: array
+          required: false
+          description: 返回字段列表
+      
+      response:
+        type: object
+        properties:
+          symbol:
+            type: string
+          price:
+            type: number
+          change:
+            type: number
+          change_pct:
+            type: number
+          volume:
+            type: integer
+          timestamp:
+            type: string
+      
+      examples:
+        - request:
+            symbol: "600519.SH"
+            fields: ["price", "change"]
+          response:
+            symbol: "600519.SH"
+            price: 1850.00
+            change: 25.50
+            change_pct: 1.40
+            volume: 12500000
+            timestamp: "2025-01-20T15:00:00+08:00"
+
+    - name: get_history
+      method: GET
+      path: "/v1/history/{symbol}"
+      description: 获取历史行情数据
+      
+      parameters:
+        - name: symbol
+          location: path
+          type: string
+          required: true
+        
+        - name: start_date
+          location: query
+          type: string
+          required: true
+          description: 开始日期 YYYY-MM-DD
+        
+        - name: end_date
+          location: query
+          type: string
+          required: true
+          description: 结束日期 YYYY-MM-DD
+        
+        - name: interval
+          location: query
+          type: string
+          required: false
+          default: "1d"
+          enum: ["1m", "5m", "1h", "1d", "1w", "1M"]
+      
+      response:
+        type: object
+        properties:
+          symbol:
+            type: string
+          data:
+            type: array
+
+# === 使用要求 ===
+requirements:
+  authentication:
+    type: api-key
+    header: "X-API-Key"
+    env_var: "MARKET_DATA_API_KEY"
+  
+  rate_limit:
+    requests_per_minute: 100
+    requests_per_day: 10000
+  
+  permissions:
+    - "market.read"
+    - "history.read"
+
+# === 定价信息 ===
+pricing:
+  model: freemium
+  cost_per_call: 0.001
+  currency: "USD"
+  free_tier: 1000
+
+# === 供应商 ===
+providers:
+  - name: Wind
+    tier: enterprise
+    url: "https://www.wind.com.cn"
+  
+  - name: 聚宽数据
+    tier: standard
+    url: "https://www.joinquant.com"
+  
+  - name: Tushare
+    tier: freemium
+    url: "https://tushare.pro"
+
+# 关联能力
+related_capabilities:
+  - cap-data-001
+  - cap-fin-001
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
