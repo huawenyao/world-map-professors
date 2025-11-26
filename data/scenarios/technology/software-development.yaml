@@ -1,0 +1,98 @@
+# ========================================
+# 场景定义: 软件开发
+# Scenario: Software Development
+# ========================================
+
+id: scn-tech-software-dev
+name: 软件开发
+industry: 科技互联网
+sub_industry: 软件开发
+
+description: |
+  完整的软件开发生命周期，从需求分析到上线运维，
+  包括编码、测试、部署等核心环节。是AI Agent应用最广泛的场景之一。
+
+# 价值流定义
+value_flow:
+  - stage: 需求分析
+    activities:
+      - 需求收集与整理
+      - 用户故事编写
+      - 技术可行性评估
+      - 需求优先级排序
+  
+  - stage: 设计阶段
+    activities:
+      - 系统架构设计
+      - 数据库设计
+      - API设计
+      - UI/UX设计
+  
+  - stage: 开发阶段
+    activities:
+      - 代码编写
+      - 代码审查
+      - 单元测试
+      - 技术文档编写
+  
+  - stage: 测试阶段
+    activities:
+      - 功能测试
+      - 集成测试
+      - 性能测试
+      - 安全测试
+  
+  - stage: 部署运维
+    activities:
+      - CI/CD流水线
+      - 环境部署
+      - 监控告警
+      - 故障排查
+
+# 关键指标
+key_metrics:
+  - 交付周期 (Lead Time)
+  - 部署频率 (Deployment Frequency)
+  - 变更失败率 (Change Failure Rate)
+  - 平均恢复时间 (MTTR)
+  - 代码覆盖率
+  - 缺陷密度
+
+# 传统痛点
+traditional_pain_points:
+  - 需求文档编写耗时，容易遗漏
+  - 代码审查效率低，标准不统一
+  - 测试用例编写繁琐，覆盖不全
+  - 文档更新滞后，知识难以沉淀
+  - 重复性编码工作占用大量时间
+  - 技术债务积累，代码质量下降
+
+# AI应用机会
+ai_opportunities:
+  - AI辅助需求分析与PRD生成
+  - 智能代码补全与生成
+  - AI代码审查与质量检测
+  - 自动化测试用例生成
+  - 智能文档生成与维护
+  - AI辅助故障诊断与修复
+  - 代码重构建议
+
+# 标签
+tags:
+  - 软件开发
+  - 敏捷开发
+  - DevOps
+  - 代码质量
+  - AI编程
+
+# 相关场景
+related_scenarios:
+  - scn-tech-devops
+  - scn-tech-qa
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

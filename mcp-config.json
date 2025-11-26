@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "world-professors": {
+      "command": "python",
+      "args": [
+        "-m",
+        "world_professors.mcp.main",
+        "--data-dir",
+        "data"
+      ],
+      "cwd": "/workspace",
+      "env": {
+        "PYTHONPATH": "src"
+      }
+    }
+  }
+}

@@ -1,0 +1,164 @@
+# ========================================
+# 工具定义: 代码生成器
+# Tool: Code Generator
+# ========================================
+
+id: tool-code-generator
+name: 代码生成器
+name_en: Code Generator
+category: generation
+
+description: |
+  基于自然语言描述生成代码的AI工具，
+  支持多种编程语言，可生成函数、类、模块等。
+
+# 适用范围
+applicable_industries:
+  - ind-technology
+
+applicable_scenarios:
+  - scn-tech-software-dev
+
+# === 接口定义 ===
+interface:
+  type: function-call
+  
+  function_name: generate_code
+  function_schema:
+    type: object
+    properties:
+      description:
+        type: string
+        description: 功能描述
+      language:
+        type: string
+        enum: ["python", "javascript", "typescript", "java", "go", "rust", "cpp"]
+      context:
+        type: string
+        description: 相关代码上下文
+      style:
+        type: string
+        description: 代码风格要求
+      include_tests:
+        type: boolean
+        default: false
+      include_docs:
+        type: boolean
+        default: true
+    required:
+      - description
+      - language
+  
+  endpoints:
+    - name: generate
+      method: POST
+      path: "/v1/code/generate"
+      description: 生成代码
+      
+      parameters:
+        - name: body
+          location: body
+          type: object
+          required: true
+      
+      response:
+        type: object
+        properties:
+          code:
+            type: string
+          language:
+            type: string
+          explanation:
+            type: string
+          confidence:
+            type: number
+      
+      examples:
+        - request:
+            description: "实现一个计算斐波那契数列的函数"
+            language: "python"
+            include_docs: true
+          response:
+            code: |
+              def fibonacci(n: int) -> int:
+                  """计算第n个斐波那契数。
+                  
+                  Args:
+                      n: 斐波那契数列的位置（从0开始）
+                  
+                  Returns:
+                      第n个斐波那契数
+                  """
+                  if n <= 1:
+                      return n
+                  return fibonacci(n - 1) + fibonacci(n - 2)
+            language: "python"
+            confidence: 0.95
+
+    - name: refactor
+      method: POST
+      path: "/v1/code/refactor"
+      description: 重构代码
+      
+      parameters:
+        - name: code
+          location: body
+          type: string
+          required: true
+        - name: goal
+          location: body
+          type: string
+          required: true
+      
+      response:
+        type: object
+        properties:
+          refactored_code:
+            type: string
+          changes:
+            type: array
+          explanation:
+            type: string
+
+# === 使用要求 ===
+requirements:
+  authentication:
+    type: api-key
+    header: "Authorization"
+    env_var: "CODE_GENERATOR_API_KEY"
+  
+  rate_limit:
+    requests_per_minute: 60
+    tokens_per_minute: 100000
+  
+  permissions:
+    - "code.generate"
+    - "code.refactor"
+
+# === 定价信息 ===
+pricing:
+  model: usage-based
+  cost_per_call: 0.01
+  currency: "USD"
+  free_tier: 100
+
+# === 供应商 ===
+providers:
+  - name: OpenAI Codex
+    tier: enterprise
+  - name: GitHub Copilot
+    tier: standard
+  - name: Claude
+    tier: standard
+
+# 关联能力
+related_capabilities:
+  - cap-tech-001
+  - cap-ai-002
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

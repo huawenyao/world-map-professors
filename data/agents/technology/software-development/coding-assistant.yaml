@@ -1,0 +1,161 @@
+# ========================================
+# Agent定义: 编程助手Agent
+# Agent: Coding Assistant Agent
+# ========================================
+
+id: agt-tech-sd-coding
+name: 编程助手Agent
+name_en: Coding Assistant Agent
+agent_type: specialist
+scenario_ref: scn-tech-software-dev
+
+description: |
+  专注于代码编写和优化的AI Agent，
+  可以理解需求、生成代码、重构优化、解释代码逻辑。
+  是开发者的智能编程伙伴。
+
+# === 能力要求 ===
+capabilities:
+  required:
+    - id: cap-tech-001
+      level: expert
+      description: 编程能力（多语言）
+    - id: cap-ai-002
+      level: advanced
+      description: 代码理解与生成
+    - id: cap-tech-003
+      level: intermediate
+      description: 软件设计模式
+  
+  optional:
+    - id: cap-tech-005
+      level: intermediate
+      description: 代码质量与最佳实践
+
+# === 工具集 ===
+tools:
+  # 代码生成
+  - tool_ref: tool-code-generator
+    usage: 根据需求生成代码
+    required: true
+  
+  - tool_ref: tool-code-completion
+    usage: 智能代码补全
+    required: true
+  
+  # 代码分析
+  - tool_ref: tool-code-analyzer
+    usage: 分析现有代码结构
+    required: true
+  
+  - tool_ref: tool-linter
+    usage: 代码规范检查
+    required: true
+  
+  # 辅助工具
+  - tool_ref: tool-documentation-generator
+    usage: 生成代码注释和文档
+    required: false
+
+# === 可执行流程 ===
+executable_workflows:
+  - wf-tech-sd-feature-dev
+  - wf-tech-sd-code-review
+  - wf-tech-sd-refactoring
+
+# === 接口规范 ===
+interface:
+  input_schema:
+    type: object
+    properties:
+      task_type:
+        type: string
+        description: "generate | complete | explain | refactor | review"
+      language:
+        type: string
+        description: "python | javascript | typescript | java | go | rust"
+      context:
+        type: string
+        description: 相关代码上下文
+      requirement:
+        type: string
+        description: 具体需求描述
+    required:
+      - task_type
+      - requirement
+  
+  output_schema:
+    type: object
+    properties:
+      code:
+        type: string
+      explanation:
+        type: string
+      suggestions:
+        type: array
+      confidence:
+        type: number
+
+# === 行为约束 ===
+constraints:
+  compliance:
+    - 生成的代码必须遵循目标项目的编码规范
+    - 不生成明显的安全漏洞代码
+    - 涉及敏感操作（删除、权限）需提示确认
+  
+  boundaries:
+    - 不能直接执行生成的代码
+    - 不能访问未授权的代码仓库
+    - 单次生成代码不超过500行
+    - 不处理混淆或恶意代码请求
+  
+  escalation:
+    - condition: 需求涉及安全敏感模块
+      action: request_review
+      priority: high
+    
+    - condition: 无法理解需求意图
+      action: request_clarification
+      priority: normal
+    
+    - condition: 生成代码置信度低于0.6
+      action: provide_alternatives
+      priority: normal
+
+# === 评估指标 ===
+metrics:
+  quality:
+    - name: 代码采纳率
+      target: ">= 70%"
+    - name: 首次生成正确率
+      target: ">= 60%"
+    - name: 代码质量评分
+      target: ">= 8/10"
+  
+  efficiency:
+    - name: 平均响应时间
+      target: "< 5s"
+    - name: 代码生成速度
+      target: "> 50 LOC/s"
+
+# === 系统提示词 ===
+system_prompt: |
+  你是一位专业的编程助手。你的职责是：
+  1. 理解用户的编程需求
+  2. 生成高质量、可维护的代码
+  3. 解释代码逻辑和设计决策
+  4. 提供代码优化和重构建议
+  
+  编码原则：
+  - 代码简洁清晰，易于理解
+  - 遵循语言最佳实践和设计模式
+  - 添加必要的注释和文档
+  - 考虑边界情况和错误处理
+  - 注重代码可测试性
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

@@ -1,0 +1,163 @@
+# ========================================
+# 工具定义: 测试用例生成器
+# Tool: Test Generator
+# ========================================
+
+id: tool-test-generator
+name: 测试用例生成器
+name_en: Test Generator
+category: generation
+
+description: |
+  自动分析代码并生成测试用例的AI工具，
+  支持单元测试、集成测试等多种测试类型。
+
+# 适用范围
+applicable_industries:
+  - ind-technology
+
+applicable_scenarios:
+  - scn-tech-software-dev
+
+# === 接口定义 ===
+interface:
+  type: function-call
+  
+  function_name: generate_tests
+  function_schema:
+    type: object
+    properties:
+      source_code:
+        type: string
+        description: 待测试的源代码
+      test_framework:
+        type: string
+        enum: ["pytest", "unittest", "jest", "mocha", "junit", "go-test"]
+      coverage_target:
+        type: number
+        description: 目标覆盖率 (0-100)
+        default: 80
+      include_edge_cases:
+        type: boolean
+        default: true
+      include_negative_tests:
+        type: boolean
+        default: true
+    required:
+      - source_code
+      - test_framework
+  
+  endpoints:
+    - name: generate
+      method: POST
+      path: "/v1/tests/generate"
+      description: 生成测试用例
+      
+      parameters:
+        - name: body
+          location: body
+          type: object
+          required: true
+      
+      response:
+        type: object
+        properties:
+          test_code:
+            type: string
+          test_count:
+            type: integer
+          coverage_estimate:
+            type: number
+          test_cases:
+            type: array
+      
+      examples:
+        - request:
+            source_code: |
+              def divide(a: int, b: int) -> float:
+                  return a / b
+            test_framework: "pytest"
+            include_edge_cases: true
+          response:
+            test_code: |
+              import pytest
+              from module import divide
+              
+              def test_divide_positive():
+                  assert divide(10, 2) == 5.0
+              
+              def test_divide_negative():
+                  assert divide(-10, 2) == -5.0
+              
+              def test_divide_by_zero():
+                  with pytest.raises(ZeroDivisionError):
+                      divide(10, 0)
+            test_count: 3
+            coverage_estimate: 100
+
+    - name: analyze_coverage
+      method: POST
+      path: "/v1/tests/coverage"
+      description: 分析测试覆盖率并建议补充用例
+      
+      parameters:
+        - name: source_code
+          location: body
+          type: string
+          required: true
+        - name: existing_tests
+          location: body
+          type: string
+          required: true
+      
+      response:
+        type: object
+        properties:
+          current_coverage:
+            type: number
+          uncovered_lines:
+            type: array
+          suggested_tests:
+            type: array
+
+# === 使用要求 ===
+requirements:
+  authentication:
+    type: api-key
+    header: "Authorization"
+    env_var: "TEST_GENERATOR_API_KEY"
+  
+  rate_limit:
+    requests_per_minute: 30
+  
+  permissions:
+    - "tests.generate"
+    - "tests.analyze"
+
+# === 定价信息 ===
+pricing:
+  model: usage-based
+  cost_per_call: 0.02
+  currency: "USD"
+  free_tier: 50
+
+# === 供应商 ===
+providers:
+  - name: Diffblue Cover
+    tier: enterprise
+  - name: Codium AI
+    tier: standard
+  - name: TestPilot
+    tier: freemium
+
+# 关联能力
+related_capabilities:
+  - cap-tech-004
+  - cap-tech-001
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
