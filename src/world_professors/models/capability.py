@@ -78,6 +78,9 @@ class TransferabilityProfile(BaseModel):
 class Capability(BaseEntity):
     """Capability/skill model."""
 
+    # Naming
+    name_en: str | None = Field(None, description="English name")
+
     # Classification
     category: CapabilityCategory = Field(..., description="Capability category")
     sub_category: str | None = Field(None, description="Sub-category classification")

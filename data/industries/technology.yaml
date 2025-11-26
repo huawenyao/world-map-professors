@@ -1,0 +1,62 @@
+# ========================================
+# 行业定义: 科技互联网
+# Industry: Technology & Internet
+# ========================================
+
+id: ind-technology
+name: 科技互联网
+name_en: Technology & Internet
+description: |
+  软件开发、互联网服务、人工智能、云计算等科技领域，
+  是AI应用最成熟、创新最活跃的行业之一。
+
+# 子行业定义
+sub_industries:
+  - id: ind-tech-software
+    name: 软件开发
+    name_en: Software Development
+    description: 企业软件、SaaS、移动应用开发
+  
+  - id: ind-tech-internet
+    name: 互联网服务
+    name_en: Internet Services
+    description: 电商、社交、内容、本地生活服务
+  
+  - id: ind-tech-ai
+    name: 人工智能
+    name_en: Artificial Intelligence
+    description: AI基础设施、AI应用、AI服务
+  
+  - id: ind-tech-cloud
+    name: 云计算
+    name_en: Cloud Computing
+    description: IaaS、PaaS、SaaS云服务
+  
+  - id: ind-tech-data
+    name: 大数据
+    name_en: Big Data
+    description: 数据平台、数据分析、数据服务
+
+# 行业特征
+characteristics:
+  regulatory_level: low       # 监管相对宽松
+  data_sensitivity: medium    # 数据敏感度中等
+  ai_maturity: advanced       # AI应用成熟度高
+
+# 行业通用能力要求
+common_capabilities:
+  - cap-tech-001  # 编程能力
+  - cap-tech-002  # 系统设计
+  - cap-ai-001    # AI工具使用
+
+# 相关行业
+related_industries:
+  - ind-finance
+  - ind-consulting
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

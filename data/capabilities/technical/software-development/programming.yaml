@@ -1,0 +1,127 @@
+# ========================================
+# 能力定义: 编程能力
+# Capability: Programming
+# ========================================
+
+id: cap-tech-001
+name: 编程能力
+name_en: Programming
+category: technical
+sub_category: software-development
+
+description: |
+  使用编程语言解决问题的能力，包括算法设计、
+  代码实现、调试优化等核心技能。是软件开发的基础能力。
+
+# 别名
+aliases:
+  - 代码能力
+  - Coding
+  - 软件开发能力
+
+# === 能力等级定义 ===
+levels:
+  beginner:
+    description: 能编写基础程序
+    skills:
+      - 理解编程基础概念（变量、循环、函数）
+      - 能使用一种编程语言
+      - 能读懂简单代码
+    tasks:
+      - 完成基础算法题
+      - 编写简单脚本
+      - 修复简单Bug
+  
+  intermediate:
+    description: 能独立完成功能开发
+    skills:
+      - 熟练掌握至少一门语言
+      - 理解面向对象/函数式编程
+      - 掌握常用数据结构和算法
+      - 能编写单元测试
+    tasks:
+      - 独立开发完整功能模块
+      - 进行代码审查
+      - 优化代码性能
+  
+  advanced:
+    description: 能设计复杂系统
+    skills:
+      - 精通多种编程语言
+      - 掌握设计模式
+      - 理解系统架构
+      - 具备性能调优能力
+    tasks:
+      - 设计系统架构
+      - 解决复杂技术难题
+      - 指导初级开发者
+  
+  expert:
+    description: 技术专家/架构师水平
+    skills:
+      - 深入理解语言底层原理
+      - 掌握多种技术栈
+      - 具备技术选型能力
+      - 能定义编码规范
+    tasks:
+      - 制定技术战略
+      - 设计大型分布式系统
+      - 技术布道和分享
+
+# === 学习路径 ===
+learning_path:
+  prerequisites:
+    - 逻辑思维能力
+    - 基础数学知识
+  
+  estimated_time: "6-12个月"
+  
+  resources:
+    courses:
+      - "CS50 - Introduction to Computer Science"
+      - "MIT 6.006 - Introduction to Algorithms"
+      - "Stanford CS106A - Programming Methodology"
+    books:
+      - "《代码大全》"
+      - "《算法导论》"
+      - "《重构：改善既有代码的设计》"
+    practice:
+      - "LeetCode 刷题 (100+道)"
+      - "开源项目贡献"
+      - "个人项目实战"
+  
+  milestones:
+    - month: 3
+      goal: 熟练掌握一门编程语言
+    - month: 6
+      goal: 能独立完成功能开发
+    - month: 12
+      goal: 能进行代码审查和技术分享
+
+# === 可迁移性 ===
+transferability:
+  across_industries: high   # 各行业都需要
+  across_scenarios: high    # 多场景通用
+
+# === AI影响评估 ===
+ai_impact: augmented  # AI增强，但不会完全替代
+
+# 相关能力
+related_capabilities:
+  - cap-tech-002  # 系统设计
+  - cap-tech-004  # 软件测试
+  - cap-tech-005  # 代码质量
+
+# 适用角色
+applicable_roles:
+  - 软件工程师
+  - 全栈开发者
+  - 编程助手Agent
+  - DevOps工程师
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

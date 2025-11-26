@@ -1,0 +1,143 @@
+# ========================================
+# 工具定义: 代码审查工具
+# Tool: Code Reviewer
+# ========================================
+
+id: tool-code-reviewer
+name: AI代码审查工具
+name_en: AI Code Reviewer
+category: computation
+
+description: |
+  AI驱动的代码审查工具，自动检测代码质量问题、
+  潜在Bug、安全漏洞，并提供改进建议。
+
+# 适用范围
+applicable_industries:
+  - ind-technology
+
+applicable_scenarios:
+  - scn-tech-software-dev
+
+# === 接口定义 ===
+interface:
+  type: rest-api
+  base_url: "https://api.codereview.example.com"
+  
+  endpoints:
+    - name: review_diff
+      method: POST
+      path: "/v1/review/diff"
+      description: 审查代码差异
+      
+      parameters:
+        - name: diff
+          location: body
+          type: string
+          required: true
+          description: Git diff格式的代码变更
+        
+        - name: context
+          location: body
+          type: string
+          required: false
+          description: 相关上下文代码
+        
+        - name: rules
+          location: body
+          type: array
+          required: false
+          description: 自定义审查规则
+      
+      response:
+        type: object
+        properties:
+          overall_score:
+            type: number
+          issues:
+            type: array
+          suggestions:
+            type: array
+          summary:
+            type: string
+      
+      examples:
+        - request:
+            diff: |
+              + def process(data):
+              +     result = eval(data)
+              +     return result
+          response:
+            overall_score: 3.5
+            issues:
+              - severity: "critical"
+                line: 2
+                message: "使用eval()存在代码注入风险"
+                suggestion: "使用ast.literal_eval()或json.loads()"
+            summary: "发现1个高危安全问题"
+
+    - name: analyze_complexity
+      method: POST
+      path: "/v1/review/complexity"
+      description: 分析代码复杂度
+      
+      parameters:
+        - name: code
+          location: body
+          type: string
+          required: true
+      
+      response:
+        type: object
+        properties:
+          cyclomatic_complexity:
+            type: number
+          cognitive_complexity:
+            type: number
+          maintainability_index:
+            type: number
+          hotspots:
+            type: array
+
+# === 使用要求 ===
+requirements:
+  authentication:
+    type: api-key
+    header: "X-API-Key"
+    env_var: "CODE_REVIEWER_API_KEY"
+  
+  rate_limit:
+    requests_per_minute: 30
+    requests_per_day: 1000
+  
+  permissions:
+    - "review.read"
+    - "review.analyze"
+
+# === 定价信息 ===
+pricing:
+  model: subscription
+  cost_per_call: 0.05
+  currency: "USD"
+  free_tier: 50
+
+# === 供应商 ===
+providers:
+  - name: SonarQube
+    tier: enterprise
+  - name: CodeClimate
+    tier: standard
+  - name: DeepCode
+    tier: freemium
+
+# 关联能力
+related_capabilities:
+  - cap-tech-005
+  - cap-tech-008
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

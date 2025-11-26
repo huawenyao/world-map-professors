@@ -1,0 +1,124 @@
+# ========================================
+# 能力定义: AI工具使用能力
+# Capability: AI Tool Usage
+# ========================================
+
+id: cap-ai-001
+name: AI工具使用能力
+name_en: AI Tool Usage
+category: technical
+sub_category: ai-engineering
+
+description: |
+  在工作场景中有效使用AI工具提升效率的能力，
+  包括Prompt工程、工具选择、工作流设计等。
+  是AI时代的核心通用能力。
+
+# 别名
+aliases:
+  - AI素养
+  - AI Literacy
+  - Prompt工程
+
+# === 能力等级定义 ===
+levels:
+  beginner:
+    description: 能使用基础AI工具
+    skills:
+      - 理解AI工具的基本原理
+      - 使用ChatGPT等通用AI助手
+      - 编写基础Prompt
+    tasks:
+      - 使用AI生成常规文案
+      - AI辅助信息检索
+      - 简单问答交互
+  
+  intermediate:
+    description: 能选择和组合AI工具
+    skills:
+      - 评估不同AI工具的适用场景
+      - 设计多步骤Prompt
+      - 调试和优化AI输出
+      - 理解AI局限性
+    tasks:
+      - 构建专业领域AI助手
+      - 设计AI工作流
+      - 评估AI输出质量
+  
+  advanced:
+    description: 能定制AI应用
+    skills:
+      - 微调模型和RAG应用
+      - 评估模型性能
+      - 设计Agent系统
+    tasks:
+      - 开发AI驱动的业务系统
+      - 训练行业专用模型
+      - 构建多Agent协作系统
+  
+  expert:
+    description: 能引领AI战略
+    skills:
+      - 架构企业级AI能力体系
+      - 评估AI技术趋势
+      - 设计AI驱动商业模式
+    tasks:
+      - 制定企业AI战略
+      - 孵化AI创新业务
+      - AI伦理与治理
+
+# === 学习路径 ===
+learning_path:
+  prerequisites:
+    - 基础数据素养
+    - 领域专业知识
+  
+  estimated_time: "3-6个月"
+  
+  resources:
+    courses:
+      - "Andrew Ng - AI For Everyone"
+      - "DeepLearning.AI - Prompt Engineering"
+      - "Anthropic Prompt Engineering Guide"
+    books:
+      - "《AI超级个体》"
+      - "《Co-Intelligence》"
+      - "《Prompt Engineering Guide》"
+    practice:
+      - "每日AI工具实践（30天计划）"
+      - "构建个人AI工作流"
+      - "开发一个AI小应用"
+  
+  milestones:
+    - month: 1
+      goal: 掌握3种AI工具的熟练使用
+    - month: 3
+      goal: 建立个人AI工作流，效率提升50%
+    - month: 6
+      goal: 能够培训他人使用AI工具
+
+# === 可迁移性 ===
+transferability:
+  across_industries: high   # 各行业通用
+  across_scenarios: high    # 各场景通用
+
+# === AI影响评估 ===
+ai_impact: enhanced  # AI持续增强这项能力
+
+# 相关能力
+related_capabilities:
+  - cap-data-001  # 数据分析
+  - cap-ai-002    # 代码生成
+  - cap-tech-001  # 编程能力
+
+# 适用角色
+applicable_roles:
+  - 几乎所有知识工作角色
+  - 重点：分析师、顾问、创意工作者、开发者
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

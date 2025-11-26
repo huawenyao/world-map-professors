@@ -1,0 +1,99 @@
+# ========================================
+# 场景定义: 财富管理
+# Scenario: Wealth Management
+# ========================================
+
+id: scn-fin-wealth-mgmt
+name: 财富管理
+industry: 金融服务
+sub_industry: 资产管理
+
+description: |
+  为高净值客户提供个性化资产配置和财富增值服务，
+  包括客户画像、投资方案设计、执行交易、持续监控等环节。
+
+# 关联的标准流程
+# workflows:
+#   - wf-fin-wm-profiling
+#   - wf-fin-wm-planning
+#   - wf-fin-wm-monitoring
+
+# 价值流定义
+value_flow:
+  - stage: 客户获取
+    activities:
+      - 渠道引流
+      - 初步筛选
+      - 建立联系
+  
+  - stage: 客户画像
+    activities:
+      - 基础信息采集
+      - 风险偏好评估
+      - 资产状况盘点
+      - 投资目标确认
+  
+  - stage: 方案设计
+    activities:
+      - 市场分析
+      - 产品筛选
+      - 资产配置建模
+      - 方案呈现
+  
+  - stage: 执行交易
+    activities:
+      - 合规审核
+      - 订单执行
+      - 资金划转
+      - 持仓确认
+  
+  - stage: 持续服务
+    activities:
+      - 定期复盘
+      - 动态调仓
+      - 业绩归因
+      - 客户沟通
+
+# 关键指标
+key_metrics:
+  - 客户满意度 (CSAT >= 90%)
+  - 资产年化收益率 (vs Benchmark)
+  - 客户留存率
+  - 净推荐值 (NPS)
+  - 人均管理资产规模 (AUM per Advisor)
+
+# 传统痛点
+traditional_pain_points:
+  - 客户画像依赖人工访谈，耗时且主观
+  - 投资方案个性化程度低，千人一面
+  - 市场跟踪不及时，错失调仓时机
+  - 合规审核流程长，影响客户体验
+  - 业绩归因复杂，难以向客户解释
+
+# AI应用机会
+ai_opportunities:
+  - 智能问卷与客户画像自动生成
+  - AI驱动的资产配置优化
+  - 实时市场监控与智能预警
+  - 自动化合规检查
+  - AI辅助业绩归因与报告生成
+  - 智能客服与FAQ自动回复
+
+# 标签
+tags:
+  - 财富管理
+  - 资产配置
+  - 高净值客户
+  - 投资顾问
+
+# 相关场景
+related_scenarios:
+  - scn-fin-investment-research
+  - scn-fin-risk-control
+
+metadata:
+  created_at: "2025-01-20T10:00:00"
+  updated_at: "2025-01-20T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
