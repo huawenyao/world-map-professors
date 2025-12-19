@@ -19,8 +19,11 @@ class ScenarioRepository(BaseRepository[Scenario]):
         Args:
             data_dir: Root data directory (expects scenarios in taxonomy/scenarios/)
         """
-        # Scenarios are stored in taxonomy/scenarios/
-        scenarios_dir = data_dir / "taxonomy" / "scenarios"
+        # Prefer current layout: data/scenarios/**.yaml
+        # Backward compatible with legacy layout: data/taxonomy/scenarios/**.yaml
+        primary_dir = data_dir / "scenarios"
+        legacy_dir = data_dir / "taxonomy" / "scenarios"
+        scenarios_dir = primary_dir if primary_dir.exists() else legacy_dir
         super().__init__(scenarios_dir, Scenario)
 
     def get_by_industry(self, industry: str) -> list[Scenario]:

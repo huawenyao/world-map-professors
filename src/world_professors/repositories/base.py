@@ -144,6 +144,30 @@ class BaseRepository(Generic[T]):
         file_path = self._index[entity_id]
         return self.load(file_path)
 
+    def get_path(self, entity_id: str) -> Path:
+        """Get file path for an entity ID.
+
+        Args:
+            entity_id: Unique entity identifier
+
+        Returns:
+            Path to the YAML file containing the entity
+
+        Raises:
+            EntityNotFoundError: If entity with given ID doesn't exist
+        """
+        if entity_id not in self._index:
+            raise EntityNotFoundError(entity_id, self.model_class.__name__)
+        return self._index[entity_id]
+
+    def iter_paths(self) -> list[Path]:
+        """Return all indexed file paths (stable snapshot)."""
+        return list(self._index.values())
+
+    def iter_ids(self) -> list[str]:
+        """Return all indexed entity IDs (stable snapshot)."""
+        return list(self._index.keys())
+
     def save(self, entity: T, file_path: Path | None = None) -> Path:
         """Save entity to YAML file.
 
