@@ -19,8 +19,11 @@ class RoleRepository(BaseRepository[Role]):
         Args:
             data_dir: Root data directory (expects roles in roles/by-industry/)
         """
-        # Roles are stored in roles/by-industry/
-        roles_dir = data_dir / "roles" / "by-industry"
+        # Prefer legacy test layout: data/roles/by-industry/**.yaml
+        # If absent, fall back to a simpler layout: data/roles/**.yaml
+        legacy_dir = data_dir / "roles" / "by-industry"
+        primary_dir = data_dir / "roles"
+        roles_dir = legacy_dir if legacy_dir.exists() else primary_dir
         super().__init__(roles_dir, Role)
 
     def get_by_scenario(self, scenario_ref: str) -> list[Role]:

@@ -9,8 +9,12 @@ from world_professors.repositories.base import (
     ValidationFailedError,
 )
 from world_professors.repositories.capability_repo import CapabilityRepository
+from world_professors.repositories.industry_repo import IndustryRepository
 from world_professors.repositories.role_repo import RoleRepository
 from world_professors.repositories.scenario_repo import ScenarioRepository
+from world_professors.repositories.agent_repo import AgentRepository
+from world_professors.repositories.tool_repo import ToolRepository
+from world_professors.repositories.workflow_repo import WorkflowRepository
 
 __all__ = [
     "BaseRepository",
@@ -20,6 +24,10 @@ __all__ = [
     "ScenarioRepository",
     "RoleRepository",
     "CapabilityRepository",
+    "IndustryRepository",
+    "WorkflowRepository",
+    "AgentRepository",
+    "ToolRepository",
     "RepositoryFactory",
 ]
 
@@ -46,6 +54,10 @@ class RepositoryFactory:
         self._scenarios: ScenarioRepository | None = None
         self._roles: RoleRepository | None = None
         self._capabilities: CapabilityRepository | None = None
+        self._industries: IndustryRepository | None = None
+        self._workflows: WorkflowRepository | None = None
+        self._agents: AgentRepository | None = None
+        self._tools: ToolRepository | None = None
 
     @property
     def scenarios(self) -> ScenarioRepository:
@@ -80,6 +92,34 @@ class RepositoryFactory:
             self._capabilities = CapabilityRepository(self.data_dir)
         return self._capabilities
 
+    @property
+    def industries(self) -> IndustryRepository:
+        """Get industry repository (lazy-loaded singleton)."""
+        if self._industries is None:
+            self._industries = IndustryRepository(self.data_dir)
+        return self._industries
+
+    @property
+    def workflows(self) -> WorkflowRepository:
+        """Get workflow repository (lazy-loaded singleton)."""
+        if self._workflows is None:
+            self._workflows = WorkflowRepository(self.data_dir)
+        return self._workflows
+
+    @property
+    def agents(self) -> AgentRepository:
+        """Get agent repository (lazy-loaded singleton)."""
+        if self._agents is None:
+            self._agents = AgentRepository(self.data_dir)
+        return self._agents
+
+    @property
+    def tools(self) -> ToolRepository:
+        """Get tool repository (lazy-loaded singleton)."""
+        if self._tools is None:
+            self._tools = ToolRepository(self.data_dir)
+        return self._tools
+
     def refresh_all(self) -> None:
         """Refresh indices for all loaded repositories.
 
@@ -91,3 +131,11 @@ class RepositoryFactory:
             self._roles.refresh()
         if self._capabilities is not None:
             self._capabilities.refresh()
+        if self._industries is not None:
+            self._industries.refresh()
+        if self._workflows is not None:
+            self._workflows.refresh()
+        if self._agents is not None:
+            self._agents.refresh()
+        if self._tools is not None:
+            self._tools.refresh()

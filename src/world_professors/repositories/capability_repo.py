@@ -19,8 +19,11 @@ class CapabilityRepository(BaseRepository[Capability]):
         Args:
             data_dir: Root data directory (expects capabilities in capabilities/core-skills/)
         """
-        # Capabilities are stored in capabilities/core-skills/
-        capabilities_dir = data_dir / "capabilities" / "core-skills"
+        # Prefer current layout: data/capabilities/**.yaml
+        # Backward compatible with legacy layout: data/capabilities/core-skills/**.yaml
+        primary_dir = data_dir / "capabilities"
+        legacy_dir = data_dir / "capabilities" / "core-skills"
+        capabilities_dir = primary_dir if primary_dir.exists() else legacy_dir
         super().__init__(capabilities_dir, Capability)
 
     def get_by_category(self, category: CapabilityCategory) -> list[Capability]:
