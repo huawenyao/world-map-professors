@@ -1,0 +1,128 @@
+# ========================================
+# 能力定义: 经济学人风格金融市场分析写作
+# Capability: Economist-Style Financial Market Analysis Writing
+# ========================================
+
+id: cap-fin-005
+name: 经济学人风格金融市场分析写作
+name_en: Economist-Style Financial Market Analysis Writing
+category: domain-specific
+sub_category: finance
+
+description: |
+  以《经济学人》风格撰写专业金融市场分析的能力，
+  强调清晰论点、事实证据、跨市场联动与历史比较，
+  在有限篇幅内形成有洞见且克制的观点表达。
+
+# 别名
+aliases:
+  - 金融市场评论写作
+  - 宏观与市场观察写作
+  - Economist 风格写作
+
+# === 能力等级定义 ===
+levels:
+  beginner:
+    description: 能完成结构清晰的市场简评
+    skills:
+      - 把握核心结论并给出简短论据
+      - 使用标准宏观与市场指标支撑观点
+      - 采用简洁、客观的语气表达
+    tasks:
+      - 撰写 300-500 字的市场周评
+      - 为单一资产类别整理要点与数据
+      - 按“结论-证据-影响”结构成稿
+
+  intermediate:
+    description: 能结合多维信息形成平衡视角
+    skills:
+      - 解释宏观变量与资产价格的传导机制
+      - 识别共识与反例，呈现对立观点
+      - 将政策、行业与市场情绪纳入叙事
+    tasks:
+      - 撰写 800-1200 字的专题分析
+      - 在文章中加入风险与反身性讨论
+      - 通过一段简短类比提升可读性
+
+  advanced:
+    description: 能构建有深度的分析框架与叙事
+    skills:
+      - 区分结构性与周期性驱动因素
+      - 进行跨资产、跨区域的比较分析
+      - 用证据链支撑非共识观点
+    tasks:
+      - 完成深度报告的市场观点章节
+      - 设计“基准情景-替代情景”写作结构
+      - 将估值、资金流与基本面整合为统一结论
+
+  expert:
+    description: 能输出具有编辑级水准的旗舰分析
+    skills:
+      - 建立稳定一致的经济学人式文体风格
+      - 提炼长期主题并形成持续跟踪框架
+      - 指导团队提升写作质量与事实核查
+    tasks:
+      - 输出可作为行业标杆的年度市场展望
+      - 制定团队写作规范与审稿清单
+      - 为高层决策者提供可行动的观点摘要
+
+# === 学习路径 ===
+learning_path:
+  prerequisites:
+    - cap-fin-001  # 金融市场知识
+    - cap-data-001 # 数据分析基础
+    - cap-comm-001 # 专业写作与表达
+
+  estimated_time: "2-4个月"
+
+  resources:
+    courses:
+      - "Financial Markets - Yale (Coursera)"
+      - "Writing in the Sciences - Stanford (Coursera)"
+      - "Macro-Finance Fundamentals (edX)"
+    books:
+      - "The Economist Style Guide"
+      - "Writing About Economics - David N. H. Weil"
+      - "The Sense of Style - Steven Pinker"
+    practice:
+      - "每周拆解1篇《经济学人》市场相关文章"
+      - "构建个人宏观指标与市场因子备忘录"
+      - "进行同主题多版本改写与压缩训练"
+
+  milestones:
+    - month: 1
+      goal: "建立标准结构与数据引用习惯"
+    - month: 2
+      goal: "能够写出平衡观点与风险的专题分析"
+    - month: 4
+      goal: "形成稳定且可复用的写作框架"
+
+# === 可迁移性 ===
+transferability:
+  across_industries: medium
+  across_scenarios: high
+
+# === AI影响评估 ===
+ai_impact: enhanced
+
+# 相关能力
+related_capabilities:
+  - cap-fin-001  # 金融市场知识
+  - cap-fin-003  # 风险评估能力
+  - cap-data-001 # 数据分析
+  - cap-comm-001 # 专业写作与沟通
+
+# 适用角色
+applicable_roles:
+  - 宏观研究员
+  - 策略分析师
+  - 市场研究员
+  - 投资顾问
+  - 金融内容编辑
+
+metadata:
+  created_at: "2026-01-28T10:00:00"
+  updated_at: "2026-01-28T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
