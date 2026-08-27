@@ -135,7 +135,7 @@ const DATA = {
     quote: "审查这关，还得你点头。我不会替你按下合并。",
     desc: "我在写代码这条街。功能我能写完，测试我能补上。你要是让我去给人理财，我会拒绝——那不是我的活。",
     does: ["听懂你要什么", "把功能写完", "补上测试", "审查前提醒你"],
-    wont: ["替你按合并", "假装会理财", "不打招呼就上线"],
+    yours: ["点头才能合并", "管钱的判断", "上线前说一声"],
   },
   solution: {
     id: "sol-tech-sd-feature-delivery",
@@ -445,7 +445,7 @@ function viewAiMan() {
       <article class="card talk">
         <p class="quote">${m.quote}</p>
         <p><strong>我能帮你</strong>　${m.does.join("、")}</p>
-        <p><strong>请你自己来</strong>　${m.wont.join("、")}</p>
+        <p><strong>请你自己来</strong>　${m.yours.join("、")} </p>
         <p class="soft" style="margin-top:10px">${m.desc}</p>
       </article>
       <article class="card">
