@@ -18,11 +18,21 @@ world-professors/
 │   ├── templates/               # 模板
 │   └── approvals/               # 审批记录
 │
-├── data/                        # 核心内容数据(Git追踪)
-│   ├── taxonomy/                # 行业场景分类体系
-│   ├── roles/                   # 数字角色库
-│   ├── capabilities/            # 能力知识库
-│   └── practices/               # 最佳实践库
+├── data/
+├── taxonomy/                    # 行业场景分类体系
+├── roles/                       # 数字角色库
+├── capabilities/                # 能力知识库
+├── practices/                   # 最佳实践库
+└── plaza/                       # 数字时代广场实体（人物/品牌/产品/榜单）
+    ├── catalogs/                # 受控词表
+    ├── people/
+    ├── brands/
+    ├── products/
+    ├── rankings/
+    │   ├── methods/
+    │   └── snapshots/
+    ├── ads/                     # 精选位；禁止被排名模块读取
+    └── templates/
 │
 ├── src/                         # Python源代码
 │   └── world_professors/        # 主包

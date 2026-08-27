@@ -1,0 +1,13 @@
+id: plaza-org-types
+schema_version: "1.0"
+types:
+  - id: company
+    name: 公司
+  - id: lab
+    name: 实验室
+  - id: opensource
+    name: 开源组织
+  - id: alliance
+    name: 联盟 / 标准组织
+  - id: university
+    name: 高校 / 研究机构

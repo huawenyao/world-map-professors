@@ -1,0 +1,21 @@
+id: plaza-product-categories
+schema_version: "1.0"
+categories:
+  - id: foundation-model
+    name: 基础模型
+  - id: coding-assistant
+    name: 编程助手
+  - id: image-generation
+    name: 图像生成
+  - id: video-generation
+    name: 视频生成
+  - id: search-answer
+    name: 搜索与问答
+  - id: agent-platform
+    name: Agent 平台
+  - id: enterprise-suite
+    name: 企业套件
+  - id: data-infra
+    name: 数据与训练基础设施
+  - id: vertical-industry
+    name: 行业垂直应用

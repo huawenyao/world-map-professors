@@ -1,0 +1,23 @@
+id: rnk-s-prd-scn-tech-software-dev-2026q3
+method_ref: rnk-m-influence-v1
+entity_type: product
+scope:
+  type: scenario
+  ref: scn-tech-software-dev
+computed_at: "2026-08-01T00:00:00Z"
+editorial_v0: true
+entries:
+  - rank: 1
+    entity_ref: prd-github-copilot
+    band: S
+    notes: "编辑 v0：官方产品页与文档可复核；场景适配 high。"
+  - rank: 2
+    entity_ref: prd-anthropic-claude
+    band: A
+    notes: "编辑 v0：长上下文代码任务公开文档充分；场景适配 high。"
+  - rank: 3
+    entity_ref: prd-openai-chatgpt
+    band: A
+    notes: "编辑 v0：通用产品，软件场景适配 medium，不因热度压过专用助手。"
+metadata:
+  schema_version: "1.0"

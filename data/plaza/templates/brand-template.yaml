@@ -1,0 +1,40 @@
+# ========================================
+# 模板: 广场品牌 Brand
+# ========================================
+
+id: brd-{slug}
+name: ""
+name_en: ""
+org_type: company            # company | lab | opensource | alliance | university
+region: global               # cn | us | eu | global | other
+status: draft
+
+description: |
+  公开定位，避免广告套话。
+
+coordinates:
+  industries: []
+  scenarios: []
+
+products: []
+tools: []
+
+presence:
+  hq: ""
+  founded_year: 0
+  stage: operating
+
+sources:
+  - url: https://
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

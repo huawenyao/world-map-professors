@@ -1,0 +1,50 @@
+# 样例数字人格：演示强制披露运营方与模型，禁止与真人混排。
+
+id: psn-tech-sample-coding-persona
+name: 示例·仓库编程分身
+name_en: Sample Repo Coding Persona
+persona_type: digital-persona
+status: published
+operator_brand_ref: brd-anthropic
+model_disclosure: "样例披露：由 Anthropic Claude 类模型驱动的编程助手人格，非自然人。"
+
+headline: 数字人格样例（非真人）
+bio: |
+  用于演示广场对 AI Persona 的隔离规则：标题区必须可见非自然人标识，
+  并写明运营品牌与模型披露。本条不进入真人影响力榜。
+
+affiliations:
+  - brand_ref: brd-anthropic
+    role_title: 产品内数字人格（样例）
+    current: true
+
+coordinates:
+  industries: [ind-technology]
+  scenarios: [scn-tech-software-dev]
+  capabilities:
+    - capability_id: cap-tech-001
+      level: intermediate
+      evidence: "样例：绑定编程能力条目，非正式评测"
+
+known_for_products: [prd-anthropic-claude]
+contributed_assets: []
+
+sources:
+  - url: https://www.anthropic.com/claude
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://docs.anthropic.com/en/docs/welcome
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+  claimed_at: null
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
+  sample: true

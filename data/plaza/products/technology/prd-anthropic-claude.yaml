@@ -1,0 +1,43 @@
+id: prd-anthropic-claude
+name: Claude
+name_en: Claude
+status: published
+category: search-answer
+user_type: [consumer, developer, business]
+brand_ref: brd-anthropic
+
+description: |
+  通用对话与 API 模型产品。在软件研发中常用于长上下文代码阅读、重构建议与审查辅助。
+
+pricing:
+  model: freemium
+  notes: "消费级订阅 + API 按用量；以官方定价为准。"
+
+coordinates:
+  industries: [ind-technology]
+  scenarios:
+    - scenario_ref: scn-tech-software-dev
+      fit: high
+      enhances_roles: []
+      kpis: ["代码理解速度", "审查意见覆盖"]
+
+implements_tools: [tool-code-generator, tool-code-reviewer]
+compliance_notes: "商业数据使用政策以 Anthropic 官方条款为准。"
+
+sources:
+  - url: https://www.anthropic.com/claude
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://docs.anthropic.com/en/docs/welcome
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

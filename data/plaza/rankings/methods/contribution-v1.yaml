@@ -1,0 +1,23 @@
+id: rnk-m-contribution-v1
+name: 专业贡献方法 v1
+applies_to: [person, brand, product]
+window: trailing_180d
+paid_features_excluded: true
+signals:
+  - id: standard_library_refs
+    weight: 0.4
+    note: 被行业资产库流程/Agent/工具正式引用
+  - id: verifiable_artifacts
+    weight: 0.35
+    note: 开源、论文、可复核案例
+  - id: scenario_fit
+    weight: 0.25
+    note: 场景适配等级与角色增强关系
+exclusions:
+  - 付费曝光
+  - 粉丝量与广告曝光
+  - 自报 GMV
+appeal_window_days: 14
+metadata:
+  schema_version: "1.0"
+  created_at: "2026-08-27T00:00:00"

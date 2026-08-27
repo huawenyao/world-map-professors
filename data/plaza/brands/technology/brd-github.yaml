@@ -1,0 +1,40 @@
+id: brd-github
+name: GitHub
+name_en: GitHub
+org_type: company
+region: us
+status: published
+
+description: |
+  软件协作与代码托管平台，提供 Copilot 等 AI 编程产品，
+  是软件研发场景中最常见的协作基础设施之一。
+
+coordinates:
+  industries: [ind-technology]
+  scenarios: [scn-tech-software-dev]
+
+products: [prd-github-copilot]
+tools: [tool-code-generator]
+
+presence:
+  hq: "San Francisco"
+  founded_year: 2008
+  stage: operating
+
+sources:
+  - url: https://github.com/about
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://github.blog/news-insights/product-news/github-copilot-research-recap/
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

@@ -1,6 +1,7 @@
 # World Professors 🎓
 
-> **行业Agent标准库** - 定义行业×场景×流程×Agent×能力×工具的标准化体系
+> **数字时代广场** 的产业坐标系 — 行业 × 场景 × 流程 × Agent × 能力 × 工具  
+> 产品层覆盖：AI 名人榜 · AI 品牌榜 · AI 产品榜 · AI 行业资产库 · AI 工具库
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -9,7 +10,9 @@
 
 ## 🌟 项目定位
 
-**World Professors** 是一个**行业Agent标准库**，为AI Agent开发提供标准化定义：
+**World Professors** 是广场的知识层：**行业 Agent 标准库**，为人和 Agent 提供同一套场景坐标。
+
+**数字时代广场** 是产品层：把标准库变成可被看见、认领、订阅和调用的公共广场。
 
 | 核心价值 | 描述 |
 |---------|------|
@@ -18,11 +21,16 @@
 | 🤖 **Agent标准化** | Agent的能力边界、工具集、行为约束 |
 | 🛠️ **工具标准化** | 工具接口、参数、认证的统一规范 |
 | 📊 **能力标准化** | 可量化、可评估的能力等级体系 |
+| 🏛️ **广场五馆** | 名人 / 品牌 / 产品 / 行业资产 / 工具，全部挂在场景上 |
+
+规划全文：[docs/plaza](docs/plaza/README.md)（愿景、商业模式、产品、数据模型、GTM）
 
 **使用场景**：当你需要构建一个"金融投顾Agent"时，直接查询标准库获取：
 - 该场景的标准工作流程是什么？
 - Agent需要哪些能力？使用哪些工具？
 - 有什么行为约束和合规要求？
+
+打开同一场景的广场街区时，还应看到：该场景下该关注谁、用哪类产品、哪些工具可被编排。
 
 ## 🏗️ 核心模型链路
 
@@ -228,10 +236,12 @@ poetry run black src/ tests/
 
 ## 📚 文档
 
+- [数字时代广场规划](docs/plaza/README.md)
 - [项目状态与路线图](docs/project-status-and-roadmap.md)
 - [产品愿景](.spec-workflow/steering/product.md)
 - [技术架构](.spec-workflow/steering/tech.md)
 - [数据模型规范](.spec-workflow/specs/data-models-foundation/)
+- [广场 Spec](.spec-workflow/specs/digital-era-plaza/)
 
 ## 🗺️ 路线图
 
@@ -254,6 +264,13 @@ poetry run black src/ tests/
 - [ ] 金融行业完整覆盖
 - [ ] 科技行业覆盖
 - [ ] 开放社区贡献
+
+### Phase 5: 数字时代广场
+- [x] 商业模式与产品规划（`docs/plaza/`）
+- [x] Person / Brand / Product 模板与旗舰场景样例
+- [ ] Pydantic 模型、引用校验、场景聚合页
+- [ ] 认领流与双榜快照流水线
+
 
 ## 🤝 贡献指南
 

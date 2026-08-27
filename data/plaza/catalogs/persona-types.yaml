@@ -1,0 +1,8 @@
+id: plaza-persona-types
+schema_version: "1.0"
+types:
+  - id: human
+    name: 自然人
+  - id: digital-persona
+    name: 数字人格 / AI Persona
+    requires: [operator_brand_ref, model_disclosure]
