@@ -2,7 +2,7 @@
 
 ## Introduction
 
-在 world-professors 既有本体（行业、场景、流程、角色、Agent、能力、工具）之上，建设面向公众与产业的产品层「数字时代广场」，覆盖五馆：AI 名人榜、AI 品牌榜、AI 产品榜、AI 行业资产库、AI 工具库。目标是用同一套场景坐标同时服务注意力（榜单）、资产（标准库）与调用（工具/Agent）。
+在 world-professors 既有本体之上，建设「数字时代广场」：五馆负责看见与选型，**场景解决方案 + AI Man** 负责按专业场景自适应交付。
 
 完整商业与产品说明见 `docs/plaza/`。本文件只定义可验收需求。
 
@@ -94,6 +94,18 @@
 1. WHEN 新增 Person/Brand/Product YAML THEN Schema 校验 SHALL 覆盖必填字段与枚举。
 2. WHEN 运行仓库校验 THEN 损坏的 `scenario_ref` / `brand_ref` / `tool` 引用 SHALL 被报告。
 3. WHEN 付费精选数据存在 THEN 其存储位置 SHALL 与 RankingSnapshot 分离。
+
+### Requirement 9: 场景解决方案与 AI Man
+
+**User Story:** 作为业务负责人，我想启用绑定场景的解决方案，让 AI Man 按流程交付，以便不是只看到工具列表；当目标场景变化时，系统先给出适配计划。
+
+#### Acceptance Criteria
+
+1. WHEN 打开已发布解决方案 THEN 系统 SHALL 展示 scenario_ref、workflow_ref、ai_man_ref、出口条件与人机检查点。
+2. WHEN 启用交付 THEN 系统 SHALL 按流程步骤展示状态，且 `requires_human_confirmation` 的步骤不得显示为已自动完成。
+3. WHEN 对 AI Man 选择相邻高适配场景 THEN 系统 SHALL 给出工具重绑/流程映射的改编计划并可继续。
+4. WHEN 对 AI Man 选择低适配或禁改编场景 THEN 系统 SHALL 拒绝自动交付，并说明缺失能力，不得静默换皮继续。
+5. WHEN 展示 AI Man THEN 系统 SHALL 强制非真人/数字专才标识，且该实体 SHALL NOT 进入真人名人榜。
 
 ## Non-Functional Requirements
 

@@ -57,5 +57,7 @@
   - Files: `.github/ISSUE_TEMPLATE/plaza-claim.md`
   - _Requirements: 7_
 
-- [ ] 12. P2 排名流水线与只读 API（依赖校验与覆盖密度）
-  - _Requirements: 3, 企业/开发者故事_
+- [x] 13. 场景解决方案服务与 AI Man（规划 + 样例 + Demo）
+  - Files: `docs/plaza/07-scenario-solution-ai-man.md`, `data/plaza/ai-men/`, `data/plaza/solutions/`, `demo/plaza/`
+  - Purpose: 交付层与自适应改编，补齐 Find→Shortlist→Engage
+  - _Requirements: 9_

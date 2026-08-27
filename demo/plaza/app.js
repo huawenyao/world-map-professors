@@ -7,12 +7,14 @@ const DATA = {
     coverage: { people: 2, brands: 3, products: 3, tools: 3, assets: 4 },
     density: "100%",
     claimsOpen: 2,
+    solutions: 1,
+    running: 1,
   },
   kpis: [
-    { label: "旗舰场景正式条", value: "12", note: "人+品牌+产品+工具" },
+    { label: "运行中的交付", value: "1", note: "功能开发解决方案" },
     { label: "坐标密度", value: "100%", note: "均含 scenario_ref" },
-    { label: "待审认领", value: "2", note: "InboxHub 语法" },
-    { label: "精选位写入榜", value: "0", note: "隔离检查通过" },
+    { label: "待签检查点", value: "1", note: "代码审查人机门" },
+    { label: "改编拒绝", value: "1", note: "财富管理低适配" },
   ],
   products: [
     {
@@ -102,12 +104,72 @@ const DATA = {
     { id: "c3", status: "claimed", entity: "brd-openai", who: "开放收录", ask: "尚未认领，仅公开资料" },
     { id: "c4", status: "rejected", entity: "prd-spam", who: "未知域名", ask: "要求总榜第一（已拒：名次不可买）" },
   ],
+  aiMan: {
+    id: "aim-tech-sd-feature",
+    name: "研发交付 AI Man",
+    home: "scn-tech-software-dev",
+    homeName: "软件研发",
+    agent: "agt-tech-sd-coding",
+    mode: "human-gated",
+    desc: "主场是软件研发。按功能开发流程跑完编码、测试、审查。换场景必须走改编台。",
+    capabilities: [
+      { id: "cap-tech-001", name: "编程能力", level: "expert" },
+      { id: "cap-ai-002", name: "代码理解与生成", level: "advanced" },
+    ],
+    tools: ["tool-code-generator", "tool-code-reviewer", "tool-test-generator"],
+  },
+  solution: {
+    id: "sol-tech-sd-feature-delivery",
+    name: "功能开发场景解决方案",
+    outcome: "可合并功能分支 + 测试 + 审查记录",
+    mode: "human-gated",
+    checkpoints: ["需求理解", "方案设计", "代码审查"],
+    kpis: ["自动化率 ≥ 50%", "检查点跳过 = 0"],
+  },
+  runSteps: [
+    { id: "step-01", name: "需求理解与拆解", type: "assisted", status: "done", gate: true, tools: [] },
+    { id: "step-02", name: "方案设计", type: "assisted", status: "done", gate: true, tools: [] },
+    { id: "step-03", name: "编码实现", type: "assisted", status: "done", gate: false, tools: ["tool-code-generator"] },
+    { id: "step-04", name: "测试生成", type: "automated", status: "done", gate: false, tools: ["tool-test-generator"] },
+    { id: "step-05", name: "代码审查", type: "assisted", status: "gate", gate: true, tools: ["tool-code-reviewer"] },
+    { id: "step-06", name: "合并与部署", type: "automated", status: "queued", gate: false, tools: [] },
+  ],
+  adaptPlans: {
+    home: {
+      label: "主场 · 软件研发",
+      scene: "scn-tech-software-dev",
+      fit: "high",
+      action: "直接交付",
+      detail: "流程 wf-tech-sd-feature-dev 全覆盖。三个人机门保留。",
+      tools: "代码生成 / 审查 / 测试生成",
+      allow: true,
+    },
+    qa: {
+      label: "相邻 · 测试与质量",
+      scene: "scn-tech-qa（相邻，演示）",
+      fit: "high",
+      action: "自动改编",
+      detail: "能力可迁移。重绑 tool-test-generator 为必选，加测试步骤门。",
+      tools: "测试生成升为 required；审查保留",
+      allow: true,
+    },
+    wealth: {
+      label: "跨域 · 财富管理",
+      scene: "scn-fin-wealth-mgmt",
+      fit: "low",
+      action: "拒绝自动交付",
+      detail: "缺失 cap-fin-003 风险评估等金融能力。监管场景禁止研发 AI Man 硬上。请改派投顾主场 AI Man，或仅允许人工专家主导。",
+      tools: "市场数据 API 未授权给该 AI Man",
+      allow: false,
+    },
+  },
 };
 
 const $ = (id) => document.getElementById(id);
 let compareSet = new Set(["prd-github-copilot", "prd-anthropic-claude"]);
 let claimFocus = "c1";
 let finder = { category: "all", fit: "all", q: "" };
+let adaptKey = "home";
 
 function go(hash) {
   location.hash = hash.startsWith("#") ? hash : "#" + hash;
@@ -125,6 +187,9 @@ function navActive(name) {
     const map = {
       home: "home",
       finder: "finder",
+      solutions: "solutions",
+      aiman: "aiman",
+      run: "solutions",
       people: "people",
       brands: "brands",
       products: "products",
@@ -166,9 +231,19 @@ function viewHome() {
   const s = DATA.scene;
   return `
     <h1 class="page">工作台</h1>
-    <p class="sub">对标 Campaigns + Analytics：场景是工作单元，不是栏目首页。</p>
+    <p class="sub">选型在五馆。交付在解决方案里跑——对标 Campaigns 正在发送，而不是再贴一张榜。</p>
     ${kpis()}
     <div class="tiles">
+      <article class="card tile">
+        <span class="tag gold">运行中</span>
+        <h3>${DATA.solution.name}</h3>
+        <p>AI Man：${DATA.aiMan.name} · 模式 ${DATA.solution.mode} · 卡在「代码审查」人机门。</p>
+        <div class="stats">
+          <span>步骤 <b>4/6</b></span>
+          <span>待签 <b>1</b></span>
+        </div>
+        <p style="margin-top:14px"><button class="btn-blue" data-go="run/${DATA.solution.id}">打开交付</button></p>
+      </article>
       <article class="card tile">
         <span class="tag gold">旗舰街区</span>
         <h3>${s.industry} · ${s.name}</h3>
@@ -176,22 +251,14 @@ function viewHome() {
         <div class="stats">
           <span>产品 <b>${s.coverage.products}</b></span>
           <span>工具 <b>${s.coverage.tools}</b></span>
-          <span>认领待审 <b>${s.claimsOpen}</b></span>
         </div>
-        <p style="margin-top:14px"><button class="btn-blue" data-go="scene/${s.id}">打开街区</button></p>
+        <p style="margin-top:14px"><button class="btn-line" data-go="scene/${s.id}">打开街区</button></p>
       </article>
       <article class="card tile">
-        <span class="tag">空态示例</span>
-        <h3>财富管理</h3>
-        <p>金融种子已有场景与工具，产品/人物正式条不足 5，按规则显示覆盖不足，禁止拿研发网红产品填坑。</p>
-        <div class="stats"><span>产品 <b>0</b></span><span>坐标密度 <b>—</b></span></div>
-        <p class="empty" style="padding:12px 0 0">覆盖不足</p>
-      </article>
-      <article class="card tile">
-        <span class="tag">方法</span>
-        <h3>影响力 v1 · 专业贡献 v1</h3>
-        <p>编辑快照 v0。付费精选目录与排名快照隔离，当前写入榜的精选条数为 0。</p>
-        <p style="margin-top:14px"><button class="btn-line" data-go="method">查看方法</button></p>
+        <span class="tag warn">改编拒绝</span>
+        <h3>财富管理不可硬上</h3>
+        <p>研发 AI Man 对 scn-fin-wealth-mgmt 为 low fit。会拒绝，才是专业场景自适应。</p>
+        <p style="margin-top:14px"><button class="btn-line" data-go="aiman">打开改编台</button></p>
       </article>
     </div>`;
 }
@@ -221,8 +288,10 @@ function viewScene() {
           ${DATA.assets.map((a) => `<p><span class="tag">${a.kind}</span> ${a.name}</p>`).join("")}
         </div>
         <div class="card" style="margin-top:12px">
-          <h3>工具（可调用）</h3>
-          ${DATA.tools.map((t) => `<p><button class="linkish" data-go="tool/${t.id}">${t.name}</button> · ${t.iface}</p>`).join("")}
+          <h3>场景解决方案</h3>
+          <p>${DATA.solution.name}</p>
+          <p style="color:var(--muted);font-size:13px">${DATA.solution.outcome}</p>
+          <p style="margin-top:10px"><button class="btn-blue" data-go="run/${DATA.solution.id}">启用交付</button></p>
         </div>
       </div>
     </div>`;
@@ -255,6 +324,114 @@ function viewFinder() {
       <thead><tr><th>#</th><th>产品</th><th>品牌</th><th>品类</th><th>带</th><th>适配</th><th>定价</th></tr></thead>
       <tbody>${list.map((p) => productRow(p, false)).join("") || `<tr><td colspan="7" class="empty">没有匹配。不会用其它场景产品填充。</td></tr>`}</tbody>
     </table>`;
+}
+
+function viewSolutions() {
+  const s = DATA.solution;
+  const m = DATA.aiMan;
+  return `
+    <h1 class="page">场景解决方案</h1>
+    <p class="sub">这是商品：一次专业场景交付。对标 Success.ai 的 Campaign，不是再做一个榜。</p>
+    <article class="card">
+      <span class="tag gold">已发布</span>
+      <h3>${s.name}</h3>
+      <p>场景 <button class="linkish" data-go="scene/${DATA.scene.id}">${DATA.scene.name}</button>
+      · AI Man <button class="linkish" data-go="aiman">${m.name}</button>
+      · 流程 wf-tech-sd-feature-dev</p>
+      <p>出口：${s.outcome}</p>
+      <p>人机门：${s.checkpoints.join("、")} · 模式 ${s.mode}</p>
+      <p style="margin-top:12px">
+        <button class="btn-blue" data-go="run/${s.id}">查看运行中的交付</button>
+        <button class="btn-line" data-go="aiman">改编台</button>
+      </p>
+    </article>
+    <article class="card" style="margin-top:14px">
+      <span class="tag">空态</span>
+      <h3>财富管理客户画像解决方案</h3>
+      <p>资产种子存在，但研发 AI Man 不得承接。需投顾主场 AI Man（aim-fin-wm-advisor）后才能上架。</p>
+      <p class="empty" style="padding:12px 0 0">不可用当前 AI Man 填充</p>
+    </article>`;
+}
+
+function viewAiMan() {
+  const m = DATA.aiMan;
+  const plan = DATA.adaptPlans[adaptKey];
+  return `
+    <h1 class="page">${m.name}</h1>
+    <div class="featured">数字专才 / 非真人。交付实例，不进入真人名人榜。主场 ${m.homeName} · ${m.mode}</div>
+    <p class="sub">${m.desc}</p>
+    <div class="coord">
+      <span class="tag gold">${m.home}</span>
+      <span class="tag">${m.agent}</span>
+      ${m.capabilities.map((c) => `<span class="tag">${c.id} ${c.level}</span>`).join("")}
+    </div>
+    <h3>改编台 · 专业场景自适应</h3>
+    <p class="sub">选目标场景。高适配才改编；低适配必须拒绝。禁止换皮继续。</p>
+    <div class="adapt-grid">
+      ${Object.entries(DATA.adaptPlans)
+        .map(
+          ([k, p]) => `<article class="card adapt-card ${adaptKey === k ? "picked" : ""}" data-adapt="${k}">
+            <h3>${p.label}</h3>
+            <p><span class="tag ${p.fit === "high" ? "ok" : "warn"}">fit ${p.fit}</span> ${p.scene}</p>
+            <p>${p.action}</p>
+          </article>`
+        )
+        .join("")}
+    </div>
+    <article class="card" style="margin-top:14px">
+      <h3>改编计划</h3>
+      <p>动作：<b>${plan.action}</b> · 适配 ${plan.fit}</p>
+      <p>${plan.detail}</p>
+      <p>工具：${plan.tools}</p>
+      ${
+        plan.allow
+          ? `<p style="margin-top:12px"><button class="btn-blue" data-go="run/${DATA.solution.id}">按此计划交付</button></p>`
+          : `<p class="tag warn">已拒绝自动交付</p>`
+      }
+    </article>`;
+}
+
+function viewRun() {
+  const s = DATA.solution;
+  const st = { done: "done", gate: "gate", queued: "", run: "run" };
+  return `
+    <h1 class="page">交付运行 · ${s.name}</h1>
+    <p class="sub">AI Man ${DATA.aiMan.name} 正在执行 wf-tech-sd-feature-dev。金色节点 = 人必须签，不能跳过。</p>
+    <div class="detail-grid">
+      <ul class="timeline">
+        ${DATA.runSteps
+          .map(
+            (step) => `<li>
+              <span class="dot ${st[step.status] || ""}"></span>
+              <b>${step.name}</b>
+              <div style="color:var(--muted);font-size:13px">${step.type}${step.gate ? " · 人机门" : ""} ${
+              step.tools.length ? "· " + step.tools.join(" ") : ""
+            }</div>
+              <div>${
+                step.status === "gate"
+                  ? '<span class="tag gold">待人确认</span> <button class="btn-blue" style="margin-left:8px">签收（演示）</button>'
+                  : step.status === "done"
+                    ? '<span class="tag ok">已完成</span>'
+                    : '<span class="tag">排队</span>'
+              }</div>
+            </li>`
+          )
+          .join("")}
+      </ul>
+      <div>
+        <article class="card">
+          <h3>出口条件</h3>
+          <p>${s.outcome}</p>
+          <p>${s.kpis.join(" · ")}</p>
+        </article>
+        <article class="card" style="margin-top:12px">
+          <h3>实现此方案的产品</h3>
+          <p><button class="linkish" data-go="product/prd-github-copilot">GitHub Copilot</button> ·
+          <button class="linkish" data-go="product/prd-anthropic-claude">Claude</button></p>
+          <p style="margin-top:10px"><button class="btn-line" data-go="aiman">需要换场景？去改编台</button></p>
+        </article>
+      </div>
+    </div>`;
 }
 
 function viewList(kind) {
@@ -458,7 +635,14 @@ function viewPricing() {
         <p>两个数字：席位 · 行业包</p>
         <ul><li>能力矩阵导出</li><li>场景短名单 API</li><li>私有映射（P2）</li></ul>
       </article>
-    </div>`;
+    </div>
+    <article class="card" style="margin-top:16px">
+      <span class="tag gold">R9 交付</span>
+      <h3>场景解决方案</h3>
+      <p>两个数字：<b>并发 AI Man</b> · <b>开通场景包</b>。买的是「软件研发功能交付，带 3 个人机门」，不是聊天机器人。低适配改编不加价硬上，直接拒绝。</p>
+      <p style="margin-top:10px"><button class="btn-blue" data-go="solutions">查看解决方案</button>
+      <button class="btn-line" data-go="aiman">改编规则</button></p>
+    </article>`;
 }
 
 function render() {
@@ -468,6 +652,9 @@ function render() {
   const map = {
     home: viewHome,
     finder: viewFinder,
+    solutions: viewSolutions,
+    aiman: viewAiMan,
+    run: viewRun,
     people: () => viewList("people"),
     brands: () => viewList("brands"),
     products: () => viewList("products"),
@@ -520,6 +707,12 @@ document.addEventListener("click", (e) => {
   const cl = e.target.closest("[data-claim]");
   if (cl) {
     claimFocus = cl.getAttribute("data-claim");
+    render();
+    return;
+  }
+  const ad = e.target.closest("[data-adapt]");
+  if (ad) {
+    adaptKey = ad.getAttribute("data-adapt");
     render();
   }
 });

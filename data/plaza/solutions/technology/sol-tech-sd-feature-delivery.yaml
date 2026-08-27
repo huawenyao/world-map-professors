@@ -1,0 +1,50 @@
+id: sol-tech-sd-feature-delivery
+name: 功能开发场景解决方案
+status: published
+scenario_ref: scn-tech-software-dev
+ai_man_ref: aim-tech-sd-feature
+workflow_ref: wf-tech-sd-feature-dev
+agent_ref: agt-tech-sd-coding
+
+outcome: |
+  需求已拆解的可合并功能分支，附测试与代码审查记录。
+  对照出口：代码已合并准备、CI 可通过、人工检查点已签。
+
+delivery_mode: human-gated
+human_checkpoints:
+  - step-01
+  - step-02
+  - step-05
+
+kpis:
+  - name: 自动化率
+    target: ">= 50%"
+  - name: 检查点跳过
+    target: "0"
+
+pricing:
+  model: engagement
+  meters:
+    - concurrent_ai_men
+    - scene_packs
+  notes: "按交付单元或月包并发；不出售名次。"
+
+adaptation_policy:
+  allow_adjacent: true
+  deny_low_fit_autonomous: true
+  notes: "改编到测试场景可重绑测试工具；改编到财富管理必须改派投顾主场 AI Man。"
+
+implements_products:
+  - prd-github-copilot
+  - prd-anthropic-claude
+
+plaza:
+  publish_to_plaza: true
+  featured_on_plaza: true
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

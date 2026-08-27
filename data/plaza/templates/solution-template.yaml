@@ -1,0 +1,35 @@
+# ========================================
+# 模板: 场景解决方案 SKU
+# ========================================
+
+id: sol-{industry}-{slug}
+name: ""
+status: draft
+scenario_ref: scn-tech-software-dev
+ai_man_ref: aim-tech-sd-feature
+workflow_ref: wf-tech-sd-feature-dev
+
+outcome: |
+  用一句话写出口条件，须能对照 workflow.exit_conditions。
+
+delivery_mode: human-gated
+human_checkpoints:
+  - step-01
+  - step-05
+
+pricing:
+  model: engagement           # engagement | monthly-scene-pack
+  meters:
+    - concurrent_ai_men
+    - scene_packs
+  notes: "名次不在价目表。"
+
+adaptation_policy:
+  allow_adjacent: true
+  deny_low_fit_autonomous: true
+
+plaza:
+  publish_to_plaza: true
+
+metadata:
+  schema_version: "1.0"

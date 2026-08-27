@@ -3,7 +3,7 @@
 > AI 时代的公共注意力与专业资产交易所  
 > 三榜捕获流量与公信力，两库沉淀可复用资产，底层由 world-professors 本体作为坐标系。
 
-**定位一句话**：不是又一个 AI 资讯站或工具导航，而是把「谁在引领、谁在被信任、什么在被使用、行业怎么被结构化、工具如何被调用」放进同一座广场。
+**定位一句话**：看见（五馆）之后，用 **场景解决方案 + AI Man** 在专业场景里把活交付完；换场景先算适配，再改编或拒绝。
 
 ## 与现有项目的关系
 
@@ -26,6 +26,8 @@
       (Who)       (Who owns)   (What)     (How/Where)   (With what)
            └───────────┴───────────┴─────┬─────┴───────────┘
                                          ▼
+                    场景解决方案服务 · AI Man（自适应交付）
+                                         ▼
                     world-professors 本体（行业/场景/流程/角色/能力/Agent）
 ```
 
@@ -39,7 +41,8 @@
 | [04 数据模型](04-data-model.md) | Person / Brand / Product / Ranking 与现有本体的衔接 |
 | [05 增长与运营](05-go-to-market.md) | GTM、内容冷启动、组织、合规 |
 | [06 Success.ai 对标](06-success-ai-reference.md) | 实际 Demo/工作台映射，以及不抄什么 |
-| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 工作台原型（软件研发样例街区） |
+| [07 场景解决方案 · AI Man](07-scenario-solution-ai-man.md) | 交付层：自适应数字专才、改编规则、R9 收入 |
+| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 工作台（含解决方案 / AI Man / 改编台） |
 
 规范工作流：`.spec-workflow/specs/digital-era-plaza/`  
 实体模板：`data/plaza/templates/`

@@ -268,7 +268,7 @@ poetry run black src/ tests/
 
 ### Phase 5: 数字时代广场
 - [x] 商业模式与产品规划（`docs/plaza/`）
-- [x] Person / Brand / Product 模板与旗舰场景样例
+- [x] 场景解决方案 + AI Man 样例与改编 Demo
 - [ ] Pydantic 模型、引用校验、场景聚合页
 - [ ] 认领流与双榜快照流水线
 

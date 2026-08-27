@@ -31,6 +31,8 @@ world-professors/
     ├── rankings/
     │   ├── methods/
     │   └── snapshots/
+    ├── ai-men/                  # AI Man 交付实例
+    ├── solutions/               # 场景解决方案 SKU
     ├── ads/                     # 精选位；禁止被排名模块读取
     └── templates/
 │

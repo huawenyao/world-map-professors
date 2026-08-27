@@ -188,8 +188,32 @@ table.data th { background: #f8fafc; color: #475569; font-weight: 600; }
 }
 .empty { color: var(--muted); padding: 24px; text-align: center; }
 
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li {
+  position: relative;
+  padding: 0 0 16px 22px;
+  border-left: 2px solid var(--line);
+  margin-left: 8px;
+}
+.timeline li:last-child { border-left-color: transparent; }
+.timeline .dot {
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+.timeline .dot.run { background: var(--blue); }
+.timeline .dot.done { background: var(--ok); }
+.timeline .dot.gate { background: var(--gold); }
+.adapt-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.adapt-card { cursor: pointer; border: 1px solid var(--line); }
+.adapt-card.picked { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.nav-btn.goldish { color: var(--gold-2); }
 @media (max-width: 960px) {
   .app { grid-template-columns: 1fr; }
   .side { flex-direction: row; flex-wrap: wrap; }
-  .kpis, .tiles, .price-grid, .detail-grid, .queue { grid-template-columns: 1fr; }
+  .kpis, .tiles, .price-grid, .detail-grid, .queue, .adapt-grid { grid-template-columns: 1fr; }
 }

@@ -11,10 +11,13 @@
 
 ## 本地打开
 
+本地：
+
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
 # 营销页 http://127.0.0.1:4173/
-# 工作台 http://127.0.0.1:4173/app.html
+# 工作台 http://127.0.0.1:4173/app.html#solutions
+# AI Man 改编台 http://127.0.0.1:4173/app.html#aiman
 ```
 
 或直接用浏览器打开 `index.html`（部分环境对 file:// 的 hash 路由也可用）。
