@@ -209,7 +209,7 @@ const DATA = {
 };
 
 const HELLO = {
-  home: "今晚写代码的话，街上有人等你。",
+  home: "灯还亮着。阿码在下面等你。",
   finder: "先说你卡在哪条街。",
   solutions: "你买的是把事做完，不是买一个人。",
   aiman: "阿码还在。审查这关，只能你来。",
@@ -223,6 +223,7 @@ const HELLO = {
   claims: "认领自己，或拿出证据说话。",
   method: "我们怎么排，说给你听。",
   pricing: "花钱请的是座位和活，不是名次。",
+  more: "牌子、手艺、认领，都在这条巷子里。",
   scene: "写代码这条街，今晚有人在。",
   product: "先看它到底帮你做哪一段。",
   brand: "背后是谁在认真做。",
@@ -253,24 +254,25 @@ function navActive(name) {
     const g = b.getAttribute("data-go");
     const map = {
       home: "home",
-      finder: "finder",
-      solutions: "solutions",
-      aiman: "aiman",
-      run: "solutions",
-      people: "people",
-      brands: "brands",
-      products: "products",
-      assets: "assets",
-      tools: "tools",
-      compare: "compare",
-      claims: "claims",
-      method: "method",
-      pricing: "pricing",
       scene: "home",
+      finder: "finder",
+      aiman: "aiman",
+      run: "aiman",
+      solutions: "aiman",
+      products: "products",
       product: "products",
-      brand: "brands",
-      person: "people",
-      tool: "tools",
+      compare: "products",
+      more: "more",
+      people: "more",
+      brands: "more",
+      assets: "more",
+      tools: "more",
+      claims: "more",
+      method: "more",
+      pricing: "more",
+      brand: "more",
+      person: "more",
+      tool: "more",
     };
     b.classList.toggle("active", map[name] === g);
   });
@@ -328,34 +330,50 @@ function viewHome() {
   const a = DATA.aiMan;
   const s = DATA.scene;
   return `
-    ${greet("嘿，今天想把哪件事做完？", "阿码还在等你点头。审查这关，只能你来。", a.name, a.hue)}
-    <div class="grid-2">
-      <article class="card talk">
-        <div class="who-row">${avatar(a.name, a.hue, "sm")}<strong>${a.name}</strong><span class="tag">你的编程伙伴</span></div>
-        <p class="quote">${a.quote}</p>
-        <div class="actions">
-          <button class="btn-blue" data-go="run/${DATA.solution.id}">去看看 TA 写到哪了</button>
-          <button class="btn-line" data-go="aiman">跟阿码打个招呼</button>
+    <div class="street">
+      <span class="lantern l1"></span>
+      <span class="lantern l2"></span>
+      <span class="lantern l3"></span>
+      <p class="kicker">写代码这条街 · 傍晚</p>
+      <h1 class="page">嘿，阿码还在灯下等你。</h1>
+      <p class="sub">审查这关，只能你来。街上还有人走过，也有一把空椅子。</p>
+    </div>
+    <div class="encounters">
+      <article class="encounter ama">
+        ${avatar(a.name, a.hue, "lg")}
+        <div>
+          <div class="who-row"><strong>${a.name}</strong><span class="tag">编程伙伴 · 不是真人</span></div>
+          <p class="quote">${a.quote}</p>
+          <div class="actions">
+            <button class="btn-blue" data-go="run/${DATA.solution.id}">去看看 TA 写到哪了</button>
+            <button class="btn-line" data-go="aiman">走到灯下打个招呼</button>
+          </div>
         </div>
       </article>
-      <article class="card">
-        <h3>街上最近在聊</h3>
-        <div class="feed" style="margin-top:12px">
-          ${DATA.people.map((p) => `
+      ${DATA.people.map((p) => `
+        <article class="encounter">
+          ${avatar(p.name, p.hue)}
+          <div>
             <div class="who-row">
-              ${avatar(p.name, p.hue, "sm")}
-              <div>
-                <strong>${p.name}</strong>
-                <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人" : "数字人格"}</span>
-                <p>${p.quote}</p>
-              </div>
-            </div>`).join("")}
-        </div>
-        <div class="actions">
-          <button class="btn-line" data-go="people">去街上走走</button>
-          <button class="btn-line" data-go="scene/${s.id}">走进${s.name}</button>
+              <strong>${p.name}</strong>
+              <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人 · 走过" : "数字人格 · 从仓库探头"}</span>
+            </div>
+            <p class="quote">${p.quote}</p>
+            <button class="linkish" data-go="person/${p.id}">听 ${p.name} 再说一句</button>
+          </div>
+        </article>`).join("")}
+      <article class="encounter empty-chair">
+        <span class="chair" aria-hidden="true"></span>
+        <div>
+          <div class="who-row"><strong>管钱那条街</strong><span class="tag warn">椅子还空着</span></div>
+          <p class="quote refuse">招一位会看风险的伙伴。写代码的人请不要坐过来充数。</p>
+          <p class="soft">没有「让阿码先顶上」的按钮。</p>
         </div>
       </article>
+    </div>
+    <div class="actions">
+      <button class="btn-line" data-go="scene/${s.id}">走进${s.name}</button>
+      <button class="btn-line" data-go="finder">换一条街</button>
     </div>`;
 }
 
@@ -430,45 +448,100 @@ function viewSolutions() {
     </article>`;
 }
 
-function viewAiMan() {
+function youSaid(key) {
+  return {
+    home: "今晚就写代码吧。",
+    qa: "写完顺便帮我测一测。",
+    wealth: "那你去给人管钱吧。",
+  }[key];
+}
+
+function amaMessages() {
   const m = DATA.aiMan;
   const plan = DATA.adaptPlans[adaptKey];
   return `
-    <div class="meet">
-      ${avatar(m.name, m.hue, "lg")}
-      <div>
-        <h1 class="page">嗨，我是${m.name}</h1>
-        <p class="sub">住在「${m.homeName}」这条街 · 不是真人，不上名人榜</p>
+    <div class="msg ai">${avatar("阿", m.hue, "sm")}<p class="quote">${m.quote}<br><span class="soft">我能帮你：${m.does.join("、")}。请你自己来：${m.yours.join("、")}。</span></p></div>
+    <div class="msg you">${avatar("你", 200, "sm")}<p class="quote">${youSaid(adaptKey)}</p></div>
+    <div class="msg ai">${avatar("阿", m.hue, "sm")}<p class="quote ${plan.allow ? "" : "refuse"}">${plan.detail}</p></div>`;
+}
+
+function amaCta() {
+  const plan = DATA.adaptPlans[adaptKey];
+  if (!plan.allow) {
+    return `<p class="soft">没有「勉强继续」的按钮。换一条更近的街，或回去找街。</p>
+            <button class="btn-line" data-go="finder">回去找街</button>`;
+  }
+  const label = adaptKey === "qa" ? "好，按测试的节奏来" : "那就按这个来";
+  return `<button class="btn-blue" data-go="run/${DATA.solution.id}">${label}</button>`;
+}
+
+function paintAmaChat() {
+  const thread = $("ama-thread");
+  const cta = $("ama-cta");
+  if (!thread || !cta) return false;
+  thread.innerHTML = amaMessages();
+  cta.innerHTML = amaCta();
+  document.querySelectorAll("[data-adapt]").forEach((b) => {
+    const on = b.getAttribute("data-adapt") === adaptKey;
+    b.classList.toggle("on", on);
+  });
+  return true;
+}
+
+function viewAiMan() {
+  const m = DATA.aiMan;
+  return `
+    <div class="chat-page">
+      <div class="meet">
+        ${avatar(m.name, m.hue, "lg")}
+        <div>
+          <h1 class="page">嗨，我是${m.name}</h1>
+          <p class="sub">住在「${m.homeName}」 · 不是真人，不上名人榜</p>
+        </div>
       </div>
-    </div>
-    <div class="grid-2">
-      <article class="card talk">
-        <p class="quote">${m.quote}</p>
-        <p><strong>我能帮你</strong>　${m.does.join("、")}</p>
-        <p><strong>请你自己来</strong>　${m.yours.join("、")} </p>
-        <p class="soft" style="margin-top:10px">${m.desc}</p>
-      </article>
-      <article class="card">
-        <h3>换个活试试？</h3>
-        <p>相邻的活我可以改改肩上的担子；太远的，我会直说不接。</p>
+      <div id="ama-thread" class="thread">${amaMessages()}</div>
+      <div id="ama-cta" class="actions">${amaCta()}</div>
+      <div class="composer">
+        <p class="soft">跟 TA 说今晚想干嘛</p>
         <div class="choice">
           ${Object.entries(DATA.adaptPlans)
             .map(
-              ([k, p]) => `<button class="choice-btn ${adaptKey === k ? "on" : ""} ${p.allow ? "" : "warn"}" data-adapt="${k}">${p.label}</button>`
+              ([k, p]) =>
+                `<button type="button" class="choice-btn ${adaptKey === k ? "on" : ""} ${p.allow ? "" : "warn"}" data-adapt="${k}">${p.label}</button>`
             )
             .join("")}
         </div>
-        <p class="quote ${plan.allow ? "" : "refuse"}">${plan.detail}</p>
-        <p><strong>${plan.action}</strong> · ${plan.scene}</p>
-        <div class="actions">
-          ${
-            plan.allow
-              ? `<button class="btn-blue" data-go="run/${DATA.solution.id}">${adaptKey === "qa" ? "好，按测试的节奏来" : "那就按这个来"}</button>`
-              : `<p class="soft">没有「勉强继续」的按钮。换一条更近的街，或回去找场景。</p>
-                 <button class="btn-line" data-go="finder">回去找场景</button>`
-          }
-        </div>
-      </article>
+      </div>
+    </div>`;
+}
+
+function viewMore() {
+  const spots = [
+    { go: "people", name: "街上的人", hue: 18, note: "先见到人。分身会自己说不是真人。" },
+    { go: "solutions", name: "把活交给 TA", hue: 14, note: "买的是把这期做完，不是买一个人。" },
+    { go: "brands", name: "牌子", hue: 28, note: "招牌不是货架。" },
+    { go: "assets", name: "手艺", hue: 200, note: "这条街吃饭的本事。" },
+    { go: "tools", name: "工具", hue: 48, note: "阿码手里伸出的那些。" },
+    { go: "compare", name: "比一比", hue: 32, note: "适不适合这条街，不是谁广告更大声。" },
+    { go: "claims", name: "这是我的", hue: 12, note: "认领自己。钱买不走名次。" },
+    { go: "method", name: "我们怎么排", hue: 160, note: "看得见的方法，才值得信。" },
+    { go: "pricing", name: "想一起", hue: 32, note: "请几位伙伴，交几桩活。" },
+  ];
+  return `
+    ${greet("巷子里还有这些", "不占街口。想慢慢逛，再进来。", "巷", 28)}
+    <div class="grid-2">
+      ${spots
+        .map(
+          (s) => `
+        <button class="person-card as-btn" type="button" data-go="${s.go}">
+          ${avatar(s.name, s.hue)}
+          <div>
+            <h3>${s.name}</h3>
+            <p>${s.note}</p>
+          </div>
+        </button>`
+        )
+        .join("")}
     </div>`;
 }
 
@@ -778,6 +851,7 @@ function viewPricing() {
 function render() {
   const { name, id } = parse();
   navActive(name);
+  document.body.dataset.page = name;
   const hello = $("hello");
   if (hello) hello.textContent = HELLO[name] || HELLO.home;
   const root = $("view");
@@ -786,6 +860,7 @@ function render() {
     finder: viewFinder,
     solutions: viewSolutions,
     aiman: viewAiMan,
+    more: viewMore,
     run: viewRun,
     people: () => viewList("people"),
     brands: () => viewList("brands"),
@@ -841,8 +916,9 @@ document.addEventListener("click", (e) => {
   }
   const ad = e.target.closest("[data-adapt]");
   if (ad) {
+    e.preventDefault();
     adaptKey = ad.getAttribute("data-adapt");
-    render();
+    if (!paintAmaChat()) render();
     return;
   }
   const mg = e.target.closest("[data-merge]");
