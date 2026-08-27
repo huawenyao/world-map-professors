@@ -1,0 +1,39 @@
+id: brd-anthropic
+name: Anthropic
+name_en: Anthropic
+org_type: lab
+region: us
+status: published
+
+description: |
+  基础模型实验室，Claude 系列模型常被用于代码生成、审查与长上下文工程任务。
+
+coordinates:
+  industries: [ind-technology]
+  scenarios: [scn-tech-software-dev]
+
+products: [prd-anthropic-claude]
+tools: [tool-code-generator, tool-code-reviewer]
+
+presence:
+  hq: "San Francisco"
+  founded_year: 2021
+  stage: operating
+
+sources:
+  - url: https://www.anthropic.com/company
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://docs.anthropic.com/en/docs/welcome
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

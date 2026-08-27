@@ -1,0 +1,19 @@
+# ========================================
+# 模板: 榜单快照 RankingSnapshot
+# ========================================
+
+id: rnk-s-{entity}-{scope}-{period}
+method_ref: rnk-m-influence-v1
+entity_type: product         # person | brand | product | tool
+scope:
+  type: scenario             # scenario | industry | global
+  ref: scn-tech-software-dev
+computed_at: "2026-08-01T00:00:00Z"
+editorial_v0: true           # P2 算法榜应改为 false
+entries:
+  - rank: 1
+    entity_ref: prd-example
+    band: S                  # S | A | B | C | D
+    notes: "编辑 v0：依据见该实体 sources"
+metadata:
+  schema_version: "1.0"

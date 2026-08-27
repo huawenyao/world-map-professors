@@ -1,0 +1,49 @@
+# ========================================
+# 模板: 广场人物 Person
+# ========================================
+
+id: psn-{industry}-{slug}
+name: ""
+name_en: ""
+persona_type: human          # human | digital-persona
+status: draft                # draft | published | claimed | archived
+
+headline: ""
+bio: |
+  基于公开资料的简介。禁止未证实的私人信息。
+
+# 数字人格必填
+# operator_brand_ref: brd-xxx
+# model_disclosure: ""
+
+affiliations:
+  - brand_ref: brd-example
+    role_title: ""
+    current: true
+
+coordinates:
+  industries: []
+  scenarios: []
+  capabilities:
+    - capability_id: cap-xxx
+      level: intermediate    # 仅当有公开依据
+      evidence: ""
+
+known_for_products: []
+contributed_assets: []
+
+sources:
+  - url: https://
+    type: official           # official | news | academic | repo | filing
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+  claimed_at: null
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

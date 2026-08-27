@@ -1,0 +1,52 @@
+# ========================================
+# 模板: AI Man（场景自适应数字专才）
+# ========================================
+
+id: aim-{industry}-{slug}
+name: ""
+name_en: ""
+kind: ai-man
+status: draft                  # draft | published | running
+
+# 与名人榜数字人格区分：这是交付实例
+persona_type: digital-professional
+disclosed_non_human: true
+
+home_scenario: scn-tech-software-dev
+agent_ref: agt-tech-sd-coding
+
+description: |
+  绑定主场场景的数字专才。换场景必须走改编台，禁止无坐标闲聊。
+
+delivery_mode: human-gated     # assisted | human-gated | autonomous
+
+capabilities:
+  - capability_id: cap-tech-001
+    level: expert
+
+tools:
+  - tool_ref: tool-code-generator
+    required: true
+
+executable_workflows:
+  - wf-tech-sd-feature-dev
+
+constraints:
+  - "不得跳过 human_checkpoints"
+  - "不得在低适配场景自动交付"
+
+escalation:
+  - condition: "confidence < 0.7"
+    action: request_review
+  - condition: "目标场景 fit = low"
+    action: refuse_or_human_only
+
+adaptation:
+  adjacent:
+    - scenario_ref: scn-tech-qa
+      expected_fit: high
+  forbidden_autonomous:
+    - scn-fin-wealth-mgmt
+
+metadata:
+  schema_version: "1.0"

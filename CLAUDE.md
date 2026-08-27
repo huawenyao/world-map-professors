@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目愿景
 
-**world-professors** 是一个 **AI时代的数字角色与能力维基百科**,以行业场景为目录树组织结构。
+**world-professors** 是 **数字时代广场** 的产业坐标系：AI 时代的数字角色、能力与 Agent 标准库，以行业场景为目录树。
+
+广场产品层覆盖五馆：**AI 名人榜、AI 品牌榜、AI 产品榜、AI 行业资产库、AI 工具库**。规划见 `docs/plaza/`。实现时遵守：场景主导航、名次不可买、YAML 单一事实源、`data/plaza/ads/` 不得写入排名快照。
 
 ### 核心定位
 这不是传统的行业分类研究,而是一个面向AI时代的**角色能力知识库**:

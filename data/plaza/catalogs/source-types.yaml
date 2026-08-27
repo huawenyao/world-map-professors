@@ -1,0 +1,13 @@
+id: plaza-source-types
+schema_version: "1.0"
+types:
+  - id: official
+    name: 官方站点或文档
+  - id: news
+    name: 独立新闻
+  - id: academic
+    name: 论文或预印本
+  - id: repo
+    name: 公开代码仓库
+  - id: filing
+    name: 监管或工商公开文件

@@ -105,7 +105,11 @@ Phase 6: 示例数据 (优先级: 中)
 Phase 7: 维基生成器 (优先级: 中)
     ↓
 Phase 8: 行业内容填充 (优先级: 持续)
+    ↓
+Phase 9: 数字时代广场 (产品层；规划已完成，实现依赖 4–7)
 ```
+
+广场不替代 4–7，它依赖校验、CLI、示例与维基生成。规划正文：[`docs/plaza/`](plaza/README.md)。
 
 ### 3.2 Phase 4: 验证服务 (预计 2-3 天)
 
@@ -349,7 +353,8 @@ world-professors/
 
 ### C. 关键文档
 
-- 产品愿景: `.spec-workflow/steering/product.md`
-- 技术架构: `.spec-workflow/steering/tech.md`
-- 项目结构: `.spec-workflow/steering/structure.md`
-- 数据模型规范: `.spec-workflow/specs/data-models-foundation/`
+- [产品愿景](.spec-workflow/steering/product.md)
+- [技术架构](.spec-workflow/steering/tech.md)
+- [项目结构](.spec-workflow/steering/structure.md)
+- [数据模型规范](.spec-workflow/specs/data-models-foundation/)
+- [数字时代广场](plaza/README.md)

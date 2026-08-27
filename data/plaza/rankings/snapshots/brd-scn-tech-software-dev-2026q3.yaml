@@ -1,0 +1,23 @@
+id: rnk-s-brd-scn-tech-software-dev-2026q3
+method_ref: rnk-m-contribution-v1
+entity_type: brand
+scope:
+  type: scenario
+  ref: scn-tech-software-dev
+computed_at: "2026-08-01T00:00:00Z"
+editorial_v0: true
+entries:
+  - rank: 1
+    entity_ref: brd-github
+    band: S
+    notes: "编辑 v0：工具与产品直接挂在编码工作流上。"
+  - rank: 2
+    entity_ref: brd-anthropic
+    band: A
+    notes: "编辑 v0：模型被代码生成/审查工具引用。"
+  - rank: 3
+    entity_ref: brd-openai
+    band: A
+    notes: "编辑 v0：代码生成工具供应商之一。"
+metadata:
+  schema_version: "1.0"

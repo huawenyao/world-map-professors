@@ -119,9 +119,14 @@ applicable_roles:
   - 编程助手Agent
   - DevOps工程师
 
+plaza:
+  asset_class: capability
+  publish_to_plaza: true
+  featured_on_plaza: false
+
 metadata:
   created_at: "2025-01-20T10:00:00"
-  updated_at: "2025-01-20T10:00:00"
+  updated_at: "2026-08-27T00:00:00"
   author: "World Professors Team"
-  version: "1.0"
+  version: "1.1"
   schema_version: "1.0"

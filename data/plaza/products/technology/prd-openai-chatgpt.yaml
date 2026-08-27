@@ -1,0 +1,44 @@
+id: prd-openai-chatgpt
+name: ChatGPT
+name_en: ChatGPT
+status: published
+category: search-answer
+user_type: [consumer, developer, business]
+brand_ref: brd-openai
+
+description: |
+  通用对话产品与 API 生态。在软件研发场景中常用于需求澄清、代码草稿、
+  测试思路与文档，适配度为 medium（非专用 IDE 助手）。
+
+pricing:
+  model: freemium
+  notes: "免费层 + Plus/Team/Enterprise；API 按用量。"
+
+coordinates:
+  industries: [ind-technology]
+  scenarios:
+    - scenario_ref: scn-tech-software-dev
+      fit: medium
+      enhances_roles: []
+      kpis: ["需求澄清速度", "文档初稿耗时"]
+
+implements_tools: [tool-code-generator]
+compliance_notes: "企业部署与数据训练选项以官方 Trust 文档为准。"
+
+sources:
+  - url: https://openai.com/chatgpt/overview/
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://platform.openai.com/docs/overview
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

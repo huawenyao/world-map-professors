@@ -9,6 +9,7 @@
 | `scenario-template.yaml` | 业务场景定义 | `data/taxonomy/scenarios/{industry}/` |
 | `role-template.yaml` | 数字角色定义 | `data/roles/by-industry/{industry}/` |
 | `capability-template.yaml` | 能力/技能定义 | `data/capabilities/core-skills/` |
+| 广场人物/品牌/产品/榜单 | 见 `data/plaza/templates/` | `data/plaza/` |
 
 ## 🚀 快速开始
 

@@ -1,0 +1,50 @@
+# 样例人物：用于演示「自然人」条目如何挂到软件研发场景。
+# 非真人排行，不得当作公开名人榜事实。
+
+id: psn-tech-sample-ai-engineer
+name: 示例·AI增强型软件工程师
+name_en: Sample AI-Enhanced Software Engineer
+persona_type: human
+status: published
+
+headline: 软件研发场景下的样例实践者画像（非真人）
+bio: |
+  本条为 Schema 与场景互链样例，描述一类在编码、审查、测试中使用
+  AI 编程助手的工程师，而非对任何真实个人的评价。
+
+affiliations:
+  - brand_ref: brd-github
+    role_title: 样例任职（演示字段）
+    current: false
+
+coordinates:
+  industries: [ind-technology]
+  scenarios: [scn-tech-software-dev]
+  capabilities:
+    - capability_id: cap-tech-001
+      level: advanced
+      evidence: "样例：对应能力库 programming.yaml，非正式个人认证"
+
+known_for_products: [prd-github-copilot]
+contributed_assets:
+  - scn-tech-software-dev
+
+sources:
+  - url: https://github.com/features/copilot
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://docs.github.com/en/copilot
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+  claimed_at: null
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
+  sample: true

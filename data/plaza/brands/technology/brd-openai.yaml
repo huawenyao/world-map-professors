@@ -1,0 +1,39 @@
+id: brd-openai
+name: OpenAI
+name_en: OpenAI
+org_type: lab
+region: us
+status: published
+
+description: |
+  基础模型实验室，ChatGPT 与 API 被广泛用于编程助手、文档生成与 Agent 编排。
+
+coordinates:
+  industries: [ind-technology]
+  scenarios: [scn-tech-software-dev]
+
+products: [prd-openai-chatgpt]
+tools: [tool-code-generator]
+
+presence:
+  hq: "San Francisco"
+  founded_year: 2015
+  stage: operating
+
+sources:
+  - url: https://openai.com/about/
+    type: official
+    retrieved_at: "2026-08-01"
+  - url: https://platform.openai.com/docs/overview
+    type: official
+    retrieved_at: "2026-08-01"
+
+claim:
+  claimed: false
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

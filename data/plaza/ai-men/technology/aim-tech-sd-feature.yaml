@@ -1,0 +1,65 @@
+id: aim-tech-sd-feature
+name: 研发交付 AI Man
+name_en: Software Delivery AI Man
+kind: ai-man
+status: published
+persona_type: digital-professional
+disclosed_non_human: true
+
+home_scenario: scn-tech-software-dev
+agent_ref: agt-tech-sd-coding
+
+description: |
+  软件研发主场的数字专才。按功能开发流程执行需求拆解、编码、测试与审查。
+  相邻的测试/审查场景可改编；财富管理等监管场景禁止自动交付。
+
+delivery_mode: human-gated
+
+capabilities:
+  - capability_id: cap-tech-001
+    level: expert
+    evidence: "绑定能力库 programming.yaml"
+  - capability_id: cap-ai-002
+    level: advanced
+
+tools:
+  - tool_ref: tool-code-generator
+    required: true
+  - tool_ref: tool-code-reviewer
+    required: true
+  - tool_ref: tool-test-generator
+    required: false
+
+executable_workflows:
+  - wf-tech-sd-feature-dev
+
+constraints:
+  - "不得跳过流程中的人工检查点"
+  - "合并主分支前必须有审查记录"
+  - "低适配场景不得宣称可独立交付"
+
+escalation:
+  - condition: "requires_human_confirmation = true"
+    action: wait_checkpoint
+  - condition: "目标场景 fit = low"
+    action: refuse_or_human_only
+
+adaptation:
+  adjacent:
+    - scenario_ref: scn-tech-qa
+      expected_fit: high
+      rebind_tools:
+        - tool-test-generator
+  forbidden_autonomous:
+    - scn-fin-wealth-mgmt
+
+plaza:
+  publish_to_plaza: true
+  featured_on_plaza: true
+
+metadata:
+  created_at: "2026-08-27T00:00:00"
+  updated_at: "2026-08-27T00:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
