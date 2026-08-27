@@ -1,23 +1,21 @@
 # 数字时代广场 · 可点击 Demo
 
-对标 Success.ai 的两层 Demo：
+一条有人的街，不是企业后台。
 
-| 文件 | 对标 | 用途 |
-|------|------|------|
-| `index.html` | https://demo.success.ai/demo | 营销 Demo：工作流口号、模块、对比表、打开工作台 |
-| `app.html` | https://app.success.ai | 工作台 OS：左导航、场景发现、五馆、认领队列、套餐 |
+| 文件 | 用途 |
+|------|------|
+| `index.html` | 门厅：先见到人，再把活交给谁 |
+| `app.html` | 广场里：问候、人物、货架、把活交给阿码 |
 
-数据来自仓库旗舰街区 **科技 / 软件研发**（GitHub Copilot、Claude、ChatGPT 及对应品牌/工具）。人物两条为 Schema 样例，页面上已标明。
+样例街区是 **科技 / 软件研发**（GitHub Copilot、Claude、ChatGPT）。人物两条为示意，页面上会标明不是真人排行。
 
 ## 本地打开
 
-本地：
-
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
-# 营销页 http://127.0.0.1:4173/
-# 工作台 http://127.0.0.1:4173/app.html#solutions
-# AI Man 改编台 http://127.0.0.1:4173/app.html#aiman
+# 门厅 http://127.0.0.1:4173/
+# 广场 http://127.0.0.1:4173/app.html#home
+# 阿码  http://127.0.0.1:4173/app.html#aiman
 ```
 
-或直接用浏览器打开 `index.html`（部分环境对 file:// 的 hash 路由也可用）。
+点「去给人管钱」时，阿码会拒绝，且没有继续自动交付的按钮。

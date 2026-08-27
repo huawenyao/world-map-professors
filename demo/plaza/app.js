@@ -3,18 +3,33 @@ const DATA = {
     id: "scn-tech-software-dev",
     name: "软件研发",
     industry: "科技互联网",
-    desc: "从需求到上线的研发闭环。广场样板街区：人物、品牌、产品、流程、Agent、工具挂在同一坐标上。",
-    coverage: { people: 2, brands: 3, products: 3, tools: 3, assets: 4 },
-    density: "100%",
-    claimsOpen: 2,
-    solutions: 1,
-    running: 1,
+    desc: "从想清楚要做什么，写到能上线。这条街上有人、有牌子，也有愿意把活做完的伙伴。",
   },
-  kpis: [
-    { label: "运行中的交付", value: "1", note: "功能开发解决方案" },
-    { label: "坐标密度", value: "100%", note: "均含 scenario_ref" },
-    { label: "待签检查点", value: "1", note: "代码审查人机门" },
-    { label: "改编拒绝", value: "1", note: "财富管理低适配" },
+  scenarios: [
+    {
+      id: "scn-tech-software-dev",
+      name: "软件研发",
+      industry: "写代码这条街",
+      blurb: "需求、编码、测试、审查。阿码就住在这儿。",
+      coverage: "home",
+      hue: 14,
+    },
+    {
+      id: "scn-tech-qa",
+      name: "测试和质量",
+      industry: "隔壁那条街",
+      blurb: "和写代码是邻居。阿码换把工具就能过来帮一把。",
+      coverage: "near",
+      hue: 32,
+    },
+    {
+      id: "scn-fin-wealth-mgmt",
+      name: "财富管理",
+      industry: "管钱那条街",
+      blurb: "给人管钱、做配置。我们还没走进去，也不拿写代码的人充数。",
+      coverage: "gap",
+      hue: 200,
+    },
   ],
   products: [
     {
@@ -26,11 +41,12 @@ const DATA = {
       fit: "high",
       band: "S",
       rank: 1,
-      user: "开发者",
-      pricing: "订阅",
-      kpis: ["编码吞吐", "样板代码耗时"],
+      user: "写代码的人",
+      pricing: "按月请",
+      hue: 210,
       tools: ["tool-code-generator"],
-      desc: "嵌入编辑器的编程助手。在本场景适配度为 high。",
+      desc: "就坐在你光标旁边，帮你把重复的那截写完。",
+      vibe: "像一个不说话的搭档",
       sources: 2,
     },
     {
@@ -42,11 +58,12 @@ const DATA = {
       fit: "high",
       band: "A",
       rank: 2,
-      user: "开发者 / 企业",
-      pricing: "免费+用量",
-      kpis: ["代码理解速度", "审查意见覆盖"],
+      user: "写代码的人，也有公司在用",
+      pricing: "能免费聊，用多用付",
+      hue: 28,
       tools: ["tool-code-generator", "tool-code-reviewer"],
-      desc: "长上下文代码阅读与审查辅助。场景适配 high。",
+      desc: "适合先把整份仓库读完，再慢慢跟你讨论。",
+      vibe: "话少、记得住上下文",
       sources: 2,
     },
     {
@@ -58,118 +75,168 @@ const DATA = {
       fit: "medium",
       band: "A",
       rank: 3,
-      user: "通用",
-      pricing: "免费+订阅",
-      kpis: ["需求澄清速度", "文档初稿耗时"],
+      user: "谁都能聊",
+      pricing: "能免费聊，想多聊再请",
+      hue: 150,
       tools: ["tool-code-generator"],
-      desc: "通用对话产品。软件场景适配 medium，不因热度压过专用助手。",
+      desc: "什么都能聊。写代码这条街上，TA 不该排第一。",
+      vibe: "熟，但不专",
       sources: 2,
     },
   ],
   brands: [
-    { id: "brd-github", name: "GitHub", type: "公司", band: "S", rank: 1, products: ["GitHub Copilot"], note: "工具与产品直接挂在编码工作流。" },
-    { id: "brd-anthropic", name: "Anthropic", type: "实验室", band: "A", rank: 2, products: ["Claude"], note: "模型被代码生成/审查工具引用。" },
-    { id: "brd-openai", name: "OpenAI", type: "实验室", band: "A", rank: 3, products: ["ChatGPT"], note: "代码生成工具供应商之一。" },
+    { id: "brd-github", name: "GitHub", type: "公司", band: "S", rank: 1, products: ["GitHub Copilot"], note: "程序员每天进进出出的那扇门。", hue: 210 },
+    { id: "brd-anthropic", name: "Anthropic", type: "实验室", band: "A", rank: 2, products: ["Claude"], note: "把 Claude 带到这条街的人。", hue: 28 },
+    { id: "brd-openai", name: "OpenAI", type: "实验室", band: "A", rank: 3, products: ["ChatGPT"], note: "几乎人人都聊过的那家。", hue: 150 },
   ],
   people: [
     {
       id: "psn-tech-sample-ai-engineer",
-      name: "示例·AI增强型软件工程师",
+      name: "阿凯",
       type: "human",
       sample: true,
-      headline: "样例实践者画像（非真人排行）",
+      hue: 18,
+      headline: "白天写需求，晚上把收尾交给伙伴。",
+      quote: "我不是来刷榜的。我只是想早点把这期做完。",
     },
     {
       id: "psn-tech-sample-coding-persona",
-      name: "示例·仓库编程分身",
+      name: "小仓",
       type: "digital-persona",
       sample: true,
-      headline: "数字人格样例，已披露运营方 Anthropic / Claude",
+      hue: 200,
+      headline: "仓库里的编程分身。不是人，会事先说清楚。",
+      quote: "我住在仓库里。你 @ 我的时候，我才出现。",
     },
   ],
   tools: [
-    { id: "tool-code-generator", name: "代码生成器", iface: "function-call", steps: "生成代码 / 重构", plaza: true },
-    { id: "tool-code-reviewer", name: "AI代码审查工具", iface: "function-call", steps: "审查", plaza: true },
-    { id: "tool-test-generator", name: "测试用例生成器", iface: "function-call", steps: "单测生成", plaza: true },
+    { id: "tool-code-generator", name: "代码生成器", note: "阿码写第一稿时伸出的那只手。", steps: "起草、改一改" },
+    { id: "tool-code-reviewer", name: "看代码的镜子", note: "合并前，TA 先帮你盯一眼。", steps: "审查" },
+    { id: "tool-test-generator", name: "补测试的小工", note: "你睡了，TA 还在给边界情况写例子。", steps: "补测试" },
   ],
   assets: [
-    { id: "scn-tech-software-dev", kind: "场景", name: "软件研发" },
-    { id: "wf-tech-sd-feature-dev", kind: "流程", name: "功能开发流程" },
-    { id: "agt-tech-sd-coding", kind: "Agent", name: "编程助手Agent" },
-    { id: "cap-tech-001", kind: "能力", name: "编程能力" },
+    { id: "scn-tech-software-dev", kind: "这条街", name: "软件研发", note: "人、牌子、产品都挂在这儿，才算走进来了。" },
+    { id: "wf-tech-sd-feature-dev", kind: "怎么做完", name: "把一个功能做完", note: "从听懂你要什么，到你点头合并。" },
+    { id: "agt-tech-sd-coding", kind: "谁来做", name: "编程伙伴", note: "阿码的底子。不是真人，也不上名人榜。" },
+    { id: "cap-tech-001", kind: "手艺", name: "写代码", note: "这条街吃饭的本事。" },
   ],
   claims: [
-    { id: "c1", status: "pending", entity: "prd-github-copilot", who: "GitHub 官方申请（演示）", ask: "确认场景适配 high，补充企业合规摘录" },
-    { id: "c2", status: "pending", entity: "prd-anthropic-claude", who: "Anthropic 文档站", ask: "把审查工具挂载写进产品页" },
-    { id: "c3", status: "claimed", entity: "brd-openai", who: "开放收录", ask: "尚未认领，仅公开资料" },
-    { id: "c4", status: "rejected", entity: "prd-spam", who: "未知域名", ask: "要求总榜第一（已拒：名次不可买）" },
+    { id: "c1", status: "pending", entity: "GitHub Copilot", who: "GitHub 的人来认领（示意）", ask: "这是我们的产品。请把企业里怎么用写清楚。", tone: "认领" },
+    { id: "c2", status: "pending", entity: "Claude", who: "Anthropic 文档站", ask: "审查这只手，请写进产品介绍里。", tone: "纠正" },
+    { id: "c3", status: "claimed", entity: "OpenAI", who: "开放收录", ask: "还没人认领，我们只写公开能查到的。", tone: "开放" },
+    { id: "c4", status: "rejected", entity: "想买第一名的来信", who: "一个陌生域名", ask: "给我们总榜第一。", tone: "被退回" },
   ],
   aiMan: {
     id: "aim-tech-sd-feature",
-    name: "研发交付 AI Man",
+    name: "阿码",
     home: "scn-tech-software-dev",
     homeName: "软件研发",
-    agent: "agt-tech-sd-coding",
-    mode: "human-gated",
-    desc: "主场是软件研发。按功能开发流程跑完编码、测试、审查。换场景必须走改编台。",
-    capabilities: [
-      { id: "cap-tech-001", name: "编程能力", level: "expert" },
-      { id: "cap-ai-002", name: "代码理解与生成", level: "advanced" },
-    ],
-    tools: ["tool-code-generator", "tool-code-reviewer", "tool-test-generator"],
+    hue: 14,
+    quote: "审查这关，还得你点头。我不会替你按下合并。",
+    desc: "我在写代码这条街。功能我能写完，测试我能补上。你要是让我去给人理财，我会拒绝——那不是我的活。",
+    does: ["听懂你要什么", "把功能写完", "补上测试", "审查前提醒你"],
+    wont: ["替你按合并", "假装会理财", "不打招呼就上线"],
   },
   solution: {
     id: "sol-tech-sd-feature-delivery",
-    name: "功能开发场景解决方案",
-    outcome: "可合并功能分支 + 测试 + 审查记录",
-    mode: "human-gated",
-    checkpoints: ["需求理解", "方案设计", "代码审查"],
-    kpis: ["自动化率 ≥ 50%", "检查点跳过 = 0"],
+    name: "把这个功能做完",
+    promise: "你买的不是一个人格，是「把这期做完」这件事。",
+    outcome: "一串你能合并的改动，测试和审查都在旁边。",
+    checkpoints: ["先听懂你要什么", "方案你过一眼", "审查你点头"],
   },
   runSteps: [
-    { id: "step-01", name: "需求理解与拆解", type: "assisted", status: "done", gate: true, tools: [] },
-    { id: "step-02", name: "方案设计", type: "assisted", status: "done", gate: true, tools: [] },
-    { id: "step-03", name: "编码实现", type: "assisted", status: "done", gate: false, tools: ["tool-code-generator"] },
-    { id: "step-04", name: "测试生成", type: "automated", status: "done", gate: false, tools: ["tool-test-generator"] },
-    { id: "step-05", name: "代码审查", type: "assisted", status: "gate", gate: true, tools: ["tool-code-reviewer"] },
-    { id: "step-06", name: "合并与部署", type: "automated", status: "queued", gate: false, tools: [] },
+    { id: "step-01", name: "听懂你要什么", status: "done", gate: true, said: "需求我拆好了，你过一眼。" },
+    { id: "step-02", name: "方案你过一眼", status: "done", gate: true, said: "三步走，不动支付那块。" },
+    { id: "step-03", name: "把代码写上", status: "done", gate: false, said: "第一稿在。重复的那截我代劳了。" },
+    { id: "step-04", name: "补上测试", status: "done", gate: false, said: "边界情况我也写了例子。" },
+    { id: "step-05", name: "审查，等你点头", status: "gate", gate: true, said: "意见贴在旁边。合并这关，只能你来。" },
+    { id: "step-06", name: "合并、上线", status: "queued", gate: false, said: "你点头之后，我再动。" },
+  ],
+  thread: [
+    { who: "ai", text: "需求我听懂了：把登录态带到新接口。拆成三步，你过一眼？" },
+    { who: "you", text: "行。注意别动支付那块。" },
+    { who: "ai", text: "代码写完了，测试也补上。审查意见在旁边。合并这关，还得你点头。" },
   ],
   adaptPlans: {
     home: {
-      label: "主场 · 软件研发",
-      scene: "scn-tech-software-dev",
+      label: "今晚就写代码",
+      scene: "软件研发",
       fit: "high",
-      action: "直接交付",
-      detail: "流程 wf-tech-sd-feature-dev 全覆盖。三个人机门保留。",
-      tools: "代码生成 / 审查 / 测试生成",
+      action: "我熟，直接干",
+      detail: "需求、编码、测试、审查，这条路我走过。三处仍要你点头。",
       allow: true,
     },
     qa: {
-      label: "相邻 · 测试与质量",
-      scene: "scn-tech-qa（相邻，演示）",
+      label: "顺便帮你测一测",
+      scene: "测试和质量",
       fit: "high",
-      action: "自动改编",
-      detail: "能力可迁移。重绑 tool-test-generator 为必选，加测试步骤门。",
-      tools: "测试生成升为 required；审查保留",
+      action: "换一把手上的工具就行",
+      detail: "和写代码是邻居。我会把测试拿在最前面，关键处还是会喊你。",
       allow: true,
     },
     wealth: {
-      label: "跨域 · 财富管理",
-      scene: "scn-fin-wealth-mgmt",
+      label: "去给人管钱",
+      scene: "财富管理",
       fit: "low",
-      action: "拒绝自动交付",
-      detail: "缺失 cap-fin-003 风险评估等金融能力。监管场景禁止研发 AI Man 硬上。请改派投顾主场 AI Man，或仅允许人工专家主导。",
-      tools: "市场数据 API 未授权给该 AI Man",
+      action: "这活我不能接",
+      detail: "我没有风险评估这门手艺，也不该对别人的钱做主。请找投顾街上的伙伴——我不会假装我行。",
       allow: false,
     },
   },
+  plans: [
+    {
+      id: "free",
+      name: "先逛逛",
+      price: "免费",
+      for: "进来看看街上有谁。",
+      items: ["遇见人和伙伴", "货架和工具随便看", "名次不在价目表上"],
+    },
+    {
+      id: "pro",
+      name: "认领自己",
+      price: "年费",
+      for: "这牌子、这产品是我的。",
+      items: ["更正介绍", "挂上「这是我」", "推荐位另标，不改名次"],
+    },
+    {
+      id: "seat",
+      name: "请一位伙伴",
+      price: "按席位",
+      for: "让阿码这类人把活做完。",
+      items: ["请几位，交几桩活", "关键处仍要你点头", "不擅长的领域会拒绝"],
+    },
+  ],
+};
+
+const HELLO = {
+  home: "今晚写代码的话，街上有人等你。",
+  finder: "先说你卡在哪条街。",
+  solutions: "你买的是把事做完，不是买一个人。",
+  aiman: "阿码还在。审查这关，只能你来。",
+  run: "TA 起草，你拍板。",
+  people: "先见到人。数字人格会自己说：我不是真人。",
+  brands: "招牌不是货架。",
+  products: "今晚你手头会用到的东西。",
+  assets: "这条街吃饭的手艺。",
+  tools: "阿码手里实际伸出的那些。",
+  compare: "放在一起看，别被广告带跑。",
+  claims: "认领自己，或拿出证据说话。",
+  method: "我们怎么排，说给你听。",
+  pricing: "花钱请的是座位和活，不是名次。",
+  scene: "写代码这条街，今晚有人在。",
+  product: "先看它到底帮你做哪一段。",
+  brand: "背后是谁在认真做。",
+  person: "先听 TA 自己说。",
+  tool: "干活的家伙，不是明星。",
 };
 
 const $ = (id) => document.getElementById(id);
 let compareSet = new Set(["prd-github-copilot", "prd-anthropic-claude"]);
 let claimFocus = "c1";
-let finder = { category: "all", fit: "all", q: "" };
+let finder = { q: "" };
+let productCat = "all";
 let adaptKey = "home";
+let mergeNote = "";
 
 function go(hash) {
   location.hash = hash.startsWith("#") ? hash : "#" + hash;
@@ -209,147 +276,157 @@ function navActive(name) {
   });
 }
 
-function kpis() {
-  return `<div class="kpis">${DATA.kpis
-    .map((k) => `<div class="kpi"><span>${k.label}</span><b>${k.value}</b><span>${k.note}</span></div>`)
-    .join("")}</div>`;
+function avatar(name, hue, size) {
+  const ch = String(name || "?").slice(0, 1);
+  return `<span class="avatar ${size || ""}" style="--h:${hue || 14}">${ch}</span>`;
 }
 
-function productRow(p, withCheck) {
-  return `<tr>
-    <td class="rank">${p.rank}</td>
-    <td><button class="linkish" data-go="product/${p.id}">${p.name}</button><div style="color:var(--muted);font-size:12px">${p.desc}</div></td>
-    <td><button class="linkish" data-go="brand/${p.brandId}">${p.brand}</button></td>
-    <td><span class="tag">${p.category}</span></td>
-    <td><span class="band ${p.band}">${p.band}</span></td>
-    <td><span class="tag ${p.fit === "high" ? "ok" : ""}">${p.fit}</span></td>
-    <td>${withCheck ? `<input type="checkbox" data-cmp="${p.id}" ${compareSet.has(p.id) ? "checked" : ""}/>` : p.pricing}</td>
-  </tr>`;
+function greet(title, sub, who, hue) {
+  return `
+    <div class="meet">
+      ${avatar(who || title, hue, "lg")}
+      <div>
+        <h1 class="page">${title}</h1>
+        <p class="sub">${sub}</p>
+      </div>
+    </div>`;
+}
+
+function q() {
+  return (finder.q || $("q")?.value || "").trim();
+}
+
+function matchQ(parts) {
+  const needle = q();
+  if (!needle) return true;
+  return parts.join(" ").includes(needle);
+}
+
+function coverageChip(c) {
+  if (c === "home") return `<span class="tag ok">我们熟</span>`;
+  if (c === "near") return `<span class="tag gold">隔壁也能帮</span>`;
+  return `<span class="tag warn">还没走进去</span>`;
+}
+
+function productCard(p, extra = "") {
+  return `
+    <article class="person-card product-card">
+      ${avatar(p.name, p.hue)}
+      <div>
+        <div class="who-row">
+          <h3><button class="linkish" data-go="product/${p.id}">${p.name}</button></h3>
+          <span class="tag">${p.category}</span>
+        </div>
+        <p class="lead">${p.vibe}</p>
+        <p>${p.desc}</p>
+        ${extra}
+      </div>
+    </article>`;
 }
 
 function viewHome() {
+  const a = DATA.aiMan;
   const s = DATA.scene;
   return `
-    <h1 class="page">工作台</h1>
-    <p class="sub">选型在五馆。交付在解决方案里跑——对标 Campaigns 正在发送，而不是再贴一张榜。</p>
-    ${kpis()}
-    <div class="tiles">
-      <article class="card tile">
-        <span class="tag gold">运行中</span>
-        <h3>${DATA.solution.name}</h3>
-        <p>AI Man：${DATA.aiMan.name} · 模式 ${DATA.solution.mode} · 卡在「代码审查」人机门。</p>
-        <div class="stats">
-          <span>步骤 <b>4/6</b></span>
-          <span>待签 <b>1</b></span>
+    ${greet("嘿，今天想把哪件事做完？", "阿码还在等你点头。审查这关，只能你来。", a.name, a.hue)}
+    <div class="grid-2">
+      <article class="card talk">
+        <div class="who-row">${avatar(a.name, a.hue, "sm")}<strong>${a.name}</strong><span class="tag">你的编程伙伴</span></div>
+        <p class="quote">${a.quote}</p>
+        <div class="actions">
+          <button class="btn-blue" data-go="run/${DATA.solution.id}">去看看 TA 写到哪了</button>
+          <button class="btn-line" data-go="aiman">跟阿码打个招呼</button>
         </div>
-        <p style="margin-top:14px"><button class="btn-blue" data-go="run/${DATA.solution.id}">打开交付</button></p>
       </article>
-      <article class="card tile">
-        <span class="tag gold">旗舰街区</span>
-        <h3>${s.industry} · ${s.name}</h3>
-        <p>${s.desc}</p>
-        <div class="stats">
-          <span>产品 <b>${s.coverage.products}</b></span>
-          <span>工具 <b>${s.coverage.tools}</b></span>
+      <article class="card">
+        <h3>街上最近在聊</h3>
+        <div class="feed" style="margin-top:12px">
+          ${DATA.people.map((p) => `
+            <div class="who-row">
+              ${avatar(p.name, p.hue, "sm")}
+              <div>
+                <strong>${p.name}</strong>
+                <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人" : "数字人格"}</span>
+                <p>${p.quote}</p>
+              </div>
+            </div>`).join("")}
         </div>
-        <p style="margin-top:14px"><button class="btn-line" data-go="scene/${s.id}">打开街区</button></p>
+        <div class="actions">
+          <button class="btn-line" data-go="people">去街上走走</button>
+          <button class="btn-line" data-go="scene/${s.id}">走进${s.name}</button>
+        </div>
       </article>
-      <article class="card tile">
-        <span class="tag warn">改编拒绝</span>
-        <h3>财富管理不可硬上</h3>
-        <p>研发 AI Man 对 scn-fin-wealth-mgmt 为 low fit。会拒绝，才是专业场景自适应。</p>
-        <p style="margin-top:14px"><button class="btn-line" data-go="aiman">打开改编台</button></p>
-      </article>
+    </div>`;
+}
+
+function viewFinder() {
+  const list = DATA.scenarios.filter((s) => matchQ([s.name, s.industry, s.blurb]));
+  return `
+    ${greet("你眼下卡在哪一步？", "先说清场景。场景对了，人、产品和伙伴才对得上。", "场", 200)}
+    <div class="stack">
+      ${list.map((s) => `
+        <article class="person-card">
+          ${avatar(s.name, s.hue)}
+          <div class="grow">
+            <div class="who-row"><h3>${s.name}</h3>${coverageChip(s.coverage)}</div>
+            <p class="lead">${s.industry}</p>
+            <p>${s.blurb}</p>
+            <div class="actions">
+              ${s.coverage === "gap"
+                ? `<span class="soft">空着就空着。我们不拿写代码的人来充管钱的活。</span>`
+                : `<button class="btn-blue" data-go="${s.coverage === "home" ? "scene/" + s.id : "aiman"}">${s.coverage === "home" ? "就是这个" : "问问阿码能不能帮"}</button>`}
+            </div>
+          </div>
+        </article>`).join("") || `<div class="empty">没找到这条街。我们不编一条给你。</div>`}
     </div>`;
 }
 
 function viewScene() {
   const s = DATA.scene;
   return `
-    <h1 class="page">${s.industry} · ${s.name}</h1>
-    <p class="sub">${s.desc}</p>
-    <div class="coord">
-      <span class="tag gold">${s.id}</span>
-      <span class="tag">流程 wf-tech-sd-feature-dev</span>
-      <span class="tag">Agent agt-tech-sd-coding</span>
-    </div>
-    <div class="detail-grid">
+    ${greet(s.name, s.desc, "街", 14)}
+    <div class="grid-2">
       <div>
-        <h3>产品短名单（影响力编辑 v0）</h3>
-        <table class="data">
-          <thead><tr><th>#</th><th>产品</th><th>品牌</th><th>品类</th><th>带</th><th>适配</th><th>加入对比</th></tr></thead>
-          <tbody>${DATA.products.map((p) => productRow(p, true)).join("")}</tbody>
-        </table>
-        <p style="margin-top:10px"><button class="btn-blue" data-go="compare">去对比台</button></p>
+        <h3 class="block-title">今晚用什么</h3>
+        ${DATA.products.map((p) => productCard(p, `<p class="soft">${p.fit === "high" ? "这条街很合适。" : "熟，但不是专为这里。"}</p>`)).join("")}
+        <div class="actions"><button class="btn-line" data-go="compare">放在一起比一比</button></div>
       </div>
       <div>
-        <div class="card">
-          <h3>资产</h3>
+        <article class="card talk">
+          <div class="who-row">${avatar("阿", 14, "sm")}<strong>把这个功能做完</strong></div>
+          <p class="quote">${DATA.solution.promise}</p>
+          <p>${DATA.solution.outcome}</p>
+          <div class="actions">
+            <button class="btn-blue" data-go="run/${DATA.solution.id}">让阿码开工</button>
+            <button class="btn-line" data-go="aiman">先认识阿码</button>
+          </div>
+        </article>
+        <article class="card" style="margin-top:14px">
+          <h3>这条街的手艺</h3>
           ${DATA.assets.map((a) => `<p><span class="tag">${a.kind}</span> ${a.name}</p>`).join("")}
-        </div>
-        <div class="card" style="margin-top:12px">
-          <h3>场景解决方案</h3>
-          <p>${DATA.solution.name}</p>
-          <p style="color:var(--muted);font-size:13px">${DATA.solution.outcome}</p>
-          <p style="margin-top:10px"><button class="btn-blue" data-go="run/${DATA.solution.id}">启用交付</button></p>
-        </div>
+        </article>
       </div>
     </div>`;
-}
-
-function viewFinder() {
-  const list = DATA.products.filter((p) => {
-    if (finder.category !== "all" && p.category !== finder.category) return false;
-    if (finder.fit !== "all" && p.fit !== finder.fit) return false;
-    const q = (finder.q || $("q").value || "").trim();
-    if (q && !`${p.name}${p.brand}${p.category}`.includes(q)) return false;
-    return true;
-  });
-  return `
-    <h1 class="page">场景发现</h1>
-    <p class="sub">对标 Lead Finder：先滤场景与适配，再看实体。当前范围锁定样例街区「软件研发」。</p>
-    <div class="filters">
-      <select id="f-cat">
-        <option value="all">全部品类</option>
-        <option ${finder.category === "编程助手" ? "selected" : ""}>编程助手</option>
-        <option ${finder.category === "搜索与问答" ? "selected" : ""}>搜索与问答</option>
-      </select>
-      <select id="f-fit">
-        <option value="all">全部适配</option>
-        <option value="high" ${finder.fit === "high" ? "selected" : ""}>high</option>
-        <option value="medium" ${finder.fit === "medium" ? "selected" : ""}>medium</option>
-      </select>
-    </div>
-    <table class="data">
-      <thead><tr><th>#</th><th>产品</th><th>品牌</th><th>品类</th><th>带</th><th>适配</th><th>定价</th></tr></thead>
-      <tbody>${list.map((p) => productRow(p, false)).join("") || `<tr><td colspan="7" class="empty">没有匹配。不会用其它场景产品填充。</td></tr>`}</tbody>
-    </table>`;
 }
 
 function viewSolutions() {
   const s = DATA.solution;
   const m = DATA.aiMan;
   return `
-    <h1 class="page">场景解决方案</h1>
-    <p class="sub">这是商品：一次专业场景交付。对标 Success.ai 的 Campaign，不是再做一个榜。</p>
-    <article class="card">
-      <span class="tag gold">已发布</span>
-      <h3>${s.name}</h3>
-      <p>场景 <button class="linkish" data-go="scene/${DATA.scene.id}">${DATA.scene.name}</button>
-      · AI Man <button class="linkish" data-go="aiman">${m.name}</button>
-      · 流程 wf-tech-sd-feature-dev</p>
-      <p>出口：${s.outcome}</p>
-      <p>人机门：${s.checkpoints.join("、")} · 模式 ${s.mode}</p>
-      <p style="margin-top:12px">
-        <button class="btn-blue" data-go="run/${s.id}">查看运行中的交付</button>
-        <button class="btn-line" data-go="aiman">改编台</button>
-      </p>
+    ${greet("把这件事交给谁？", s.promise, "活", 14)}
+    <article class="card talk featured-soft">
+      <div class="who-row">${avatar(m.name, m.hue)}<div><h3>${s.name}</h3><p class="soft">阿码来做日常；合并之前，一定问你。</p></div></div>
+      <p class="lead" style="margin-top:12px">${s.outcome}</p>
+      <p>三道门还是你来开：${s.checkpoints.join(" · ")}</p>
+      <div class="actions">
+        <button class="btn-blue" data-go="aiman">先认识阿码</button>
+        <button class="btn-line" data-go="run/${s.id}">好，让 TA 开工</button>
+      </div>
     </article>
     <article class="card" style="margin-top:14px">
-      <span class="tag">空态</span>
-      <h3>财富管理客户画像解决方案</h3>
-      <p>资产种子存在，但研发 AI Man 不得承接。需投顾主场 AI Man（aim-fin-wm-advisor）后才能上架。</p>
-      <p class="empty" style="padding:12px 0 0">不可用当前 AI Man 填充</p>
+      <div class="who-row">${avatar("钱", 200, "sm")}<h3>给人管钱？这条还空着</h3></div>
+      <p>写代码的伙伴不能硬上。等投顾街上有人住进来，再把活交出去。</p>
+      <p class="empty" style="padding:12px 0 0">没有「勉强继续」的按钮。</p>
     </article>`;
 }
 
@@ -357,78 +434,92 @@ function viewAiMan() {
   const m = DATA.aiMan;
   const plan = DATA.adaptPlans[adaptKey];
   return `
-    <h1 class="page">${m.name}</h1>
-    <div class="featured">数字专才 / 非真人。交付实例，不进入真人名人榜。主场 ${m.homeName} · ${m.mode}</div>
-    <p class="sub">${m.desc}</p>
-    <div class="coord">
-      <span class="tag gold">${m.home}</span>
-      <span class="tag">${m.agent}</span>
-      ${m.capabilities.map((c) => `<span class="tag">${c.id} ${c.level}</span>`).join("")}
+    <div class="meet">
+      ${avatar(m.name, m.hue, "lg")}
+      <div>
+        <h1 class="page">嗨，我是${m.name}</h1>
+        <p class="sub">住在「${m.homeName}」这条街 · 不是真人，不上名人榜</p>
+      </div>
     </div>
-    <h3>改编台 · 专业场景自适应</h3>
-    <p class="sub">选目标场景。高适配才改编；低适配必须拒绝。禁止换皮继续。</p>
-    <div class="adapt-grid">
-      ${Object.entries(DATA.adaptPlans)
-        .map(
-          ([k, p]) => `<article class="card adapt-card ${adaptKey === k ? "picked" : ""}" data-adapt="${k}">
-            <h3>${p.label}</h3>
-            <p><span class="tag ${p.fit === "high" ? "ok" : "warn"}">fit ${p.fit}</span> ${p.scene}</p>
-            <p>${p.action}</p>
-          </article>`
-        )
-        .join("")}
-    </div>
-    <article class="card" style="margin-top:14px">
-      <h3>改编计划</h3>
-      <p>动作：<b>${plan.action}</b> · 适配 ${plan.fit}</p>
-      <p>${plan.detail}</p>
-      <p>工具：${plan.tools}</p>
-      ${
-        plan.allow
-          ? `<p style="margin-top:12px"><button class="btn-blue" data-go="run/${DATA.solution.id}">按此计划交付</button></p>`
-          : `<p class="tag warn">已拒绝自动交付</p>`
-      }
-    </article>`;
+    <div class="grid-2">
+      <article class="card talk">
+        <p class="quote">${m.quote}</p>
+        <p><strong>我能帮你</strong>　${m.does.join("、")}</p>
+        <p><strong>请你自己来</strong>　${m.wont.join("、")}</p>
+        <p class="soft" style="margin-top:10px">${m.desc}</p>
+      </article>
+      <article class="card">
+        <h3>换个活试试？</h3>
+        <p>相邻的活我可以改改肩上的担子；太远的，我会直说不接。</p>
+        <div class="choice">
+          ${Object.entries(DATA.adaptPlans)
+            .map(
+              ([k, p]) => `<button class="choice-btn ${adaptKey === k ? "on" : ""} ${p.allow ? "" : "warn"}" data-adapt="${k}">${p.label}</button>`
+            )
+            .join("")}
+        </div>
+        <p class="quote ${plan.allow ? "" : "refuse"}">${plan.detail}</p>
+        <p><strong>${plan.action}</strong> · ${plan.scene}</p>
+        <div class="actions">
+          ${
+            plan.allow
+              ? `<button class="btn-blue" data-go="run/${DATA.solution.id}">${adaptKey === "qa" ? "好，按测试的节奏来" : "那就按这个来"}</button>`
+              : `<p class="soft">没有「勉强继续」的按钮。换一条更近的街，或回去找场景。</p>
+                 <button class="btn-line" data-go="finder">回去找场景</button>`
+          }
+        </div>
+      </article>
+    </div>`;
 }
 
 function viewRun() {
-  const s = DATA.solution;
   const st = { done: "done", gate: "gate", queued: "", run: "run" };
   return `
-    <h1 class="page">交付运行 · ${s.name}</h1>
-    <p class="sub">AI Man ${DATA.aiMan.name} 正在执行 wf-tech-sd-feature-dev。金色节点 = 人必须签，不能跳过。</p>
+    ${greet("阿码正在写", "TA 起草，你拍板。没点头之前，这活不算完。", "阿", 14)}
     <div class="detail-grid">
-      <ul class="timeline">
-        ${DATA.runSteps
+      <div class="thread">
+        ${DATA.thread
           .map(
-            (step) => `<li>
-              <span class="dot ${st[step.status] || ""}"></span>
-              <b>${step.name}</b>
-              <div style="color:var(--muted);font-size:13px">${step.type}${step.gate ? " · 人机门" : ""} ${
-              step.tools.length ? "· " + step.tools.join(" ") : ""
-            }</div>
-              <div>${
-                step.status === "gate"
-                  ? '<span class="tag gold">待人确认</span> <button class="btn-blue" style="margin-left:8px">签收（演示）</button>'
-                  : step.status === "done"
-                    ? '<span class="tag ok">已完成</span>'
-                    : '<span class="tag">排队</span>'
-              }</div>
-            </li>`
+            (t) => `
+          <div class="msg ${t.who}">
+            ${t.who === "ai" ? avatar("阿", 14, "sm") : avatar("你", 200, "sm")}
+            <p class="quote">${t.text}</p>
+          </div>`
           )
           .join("")}
-      </ul>
-      <div>
-        <article class="card">
-          <h3>出口条件</h3>
-          <p>${s.outcome}</p>
-          <p>${s.kpis.join(" · ")}</p>
+        <article class="card talk">
+          <p>合并这扇门还开着。点头或驳回，都是你的。</p>
+          <div class="actions">
+            <button class="btn-blue" type="button" data-merge="ok">点头，合并吧</button>
+            <button class="btn-line" type="button" data-merge="no">先驳回，我有话要说</button>
+          </div>
+          ${mergeNote ? `<p class="quote" style="margin-top:12px">${mergeNote}</p>` : ""}
         </article>
-        <article class="card" style="margin-top:12px">
-          <h3>实现此方案的产品</h3>
-          <p><button class="linkish" data-go="product/prd-github-copilot">GitHub Copilot</button> ·
-          <button class="linkish" data-go="product/prd-anthropic-claude">Claude</button></p>
-          <p style="margin-top:10px"><button class="btn-line" data-go="aiman">需要换场景？去改编台</button></p>
+      </div>
+      <div>
+        <h3 class="block-title">做到哪了</h3>
+        <ul class="timeline">
+          ${DATA.runSteps
+            .map(
+              (step) => `<li>
+                <span class="dot ${st[step.status] || ""}"></span>
+                <b>${step.name}</b>
+                <div class="soft">${step.said}</div>
+                <div>${
+                  step.status === "gate"
+                    ? '<span class="tag gold">等你点头</span>'
+                    : step.status === "done"
+                      ? '<span class="tag ok">做过了</span>'
+                      : '<span class="tag">还没到</span>'
+                }</div>
+              </li>`
+            )
+            .join("")}
+        </ul>
+        <article class="card" style="margin-top:8px">
+          <p>手头用的是 <button class="linkish" data-go="product/prd-github-copilot">Copilot</button> 和
+          <button class="linkish" data-go="product/prd-anthropic-claude">Claude</button>。</p>
+          <p style="margin-top:10px"><button class="btn-line" data-go="aiman">活不对？去跟阿码说</button></p>
         </article>
       </div>
     </div>`;
@@ -436,126 +527,176 @@ function viewRun() {
 
 function viewList(kind) {
   if (kind === "products") {
-    return `<h1 class="page">产品榜 · 软件研发</h1>
-      <p class="sub">双榜中的影响力编辑 v0。ChatGPT 热度更高，但适配 medium，故排在专用助手之后。</p>
-      <table class="data"><thead><tr><th>#</th><th>产品</th><th>品牌</th><th>品类</th><th>带</th><th>适配</th><th>定价</th></tr></thead>
-      <tbody>${DATA.products.map((p) => productRow(p, false)).join("")}</tbody></table>`;
+    const list = DATA.products.filter((p) => {
+      if (productCat !== "all" && p.category !== productCat) return false;
+      return matchQ([p.name, p.brand, p.category, p.desc, p.vibe]);
+    });
+    return `
+      ${greet("今晚用什么", "选对品类，货架才干净。写代码的桌上，不该把什么都能聊的排第一。", "货", 32)}
+      <div class="filters">
+        <button class="chip-btn ${productCat === "all" ? "on" : ""}" data-cat="all">全部</button>
+        <button class="chip-btn ${productCat === "编程助手" ? "on" : ""}" data-cat="编程助手">写代码用的</button>
+        <button class="chip-btn ${productCat === "搜索与问答" ? "on" : ""}" data-cat="搜索与问答">随便聊聊的</button>
+      </div>
+      <div class="grid-2">
+        ${list.map((p) => productCard(p, `
+          <div class="actions">
+            <label class="soft"><input type="checkbox" data-cmp="${p.id}" ${compareSet.has(p.id) ? "checked" : ""}/> 放进比一比</label>
+          </div>`)).join("") || `<div class="empty">这格货架还空着。我们不拿别的东西充数。</div>`}
+      </div>`;
   }
   if (kind === "brands") {
-    return `<h1 class="page">品牌榜 · 专业贡献 v0</h1>
-      <table class="data"><thead><tr><th>#</th><th>品牌</th><th>类型</th><th>带</th><th>产品</th><th>依据</th></tr></thead>
-      <tbody>${DATA.brands
-        .map(
-          (b) => `<tr><td class="rank">${b.rank}</td><td><button class="linkish" data-go="brand/${b.id}">${b.name}</button></td>
-          <td>${b.type}</td><td><span class="band ${b.band}">${b.band}</span></td><td>${b.products.join("、")}</td><td>${b.note}</td></tr>`
-        )
-        .join("")}</tbody></table>`;
+    const list = DATA.brands.filter((b) => matchQ([b.name, b.note, b.type]));
+    return `
+      ${greet("街上的招牌", "谁还在认真做这件事。招牌不是货架。", "牌", 28)}
+      <div class="grid-2">
+        ${list.map((b) => `
+          <article class="person-card">
+            ${avatar(b.name, b.hue)}
+            <div>
+              <h3><button class="linkish" data-go="brand/${b.id}">${b.name}</button></h3>
+              <p class="lead">${b.note}</p>
+              <p>桌上放着 ${b.products.join("、")}</p>
+            </div>
+          </article>`).join("")}
+      </div>`;
   }
   if (kind === "people") {
-    return `<h1 class="page">名人榜</h1>
-      <p class="sub">样例条目，非正式真人排行。数字人格强制标记。</p>
-      <table class="data"><thead><tr><th>名称</th><th>类型</th><th>说明</th></tr></thead>
-      <tbody>${DATA.people
-        .map(
-          (p) => `<tr><td><button class="linkish" data-go="person/${p.id}">${p.name}</button></td>
-          <td>${p.type === "digital-persona" ? '<span class="tag warn">数字人格</span>' : '<span class="tag">自然人</span>'}
-          ${p.sample ? '<span class="tag">样例</span>' : ""}</td><td>${p.headline}</td></tr>`
-        )
-        .join("")}</tbody></table>`;
+    const list = DATA.people.filter((p) => matchQ([p.name, p.headline, p.quote]));
+    return `
+      ${greet("街上的人", "先见到人。数字人格会老实告诉你：TA 不是真人。这两位是示意，不是真人排行。", "人", 18)}
+      <div class="grid-2">
+        ${list.map((p) => `
+          <article class="person-card">
+            ${avatar(p.name, p.hue)}
+            <div>
+              <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人" : "数字人格 · 不是真人"}</span>
+              <h3><button class="linkish" data-go="person/${p.id}">${p.name}</button></h3>
+              <p class="quote">${p.quote}</p>
+              <p>${p.headline}</p>
+            </div>
+          </article>`).join("") || `<div class="empty">街上这会儿没人应。我们不编一位给你。</div>`}
+      </div>`;
   }
   if (kind === "tools") {
-    return `<h1 class="page">工具库</h1>
-      <p class="sub">接口类型可过滤。全部已 publish_to_plaza。</p>
-      <table class="data"><thead><tr><th>工具</th><th>接口</th><th>步骤</th></tr></thead>
-      <tbody>${DATA.tools
-        .map(
-          (t) => `<tr><td><button class="linkish" data-go="tool/${t.id}">${t.name}</button></td>
-          <td><span class="tag">${t.iface}</span></td><td>${t.steps}</td></tr>`
-        )
-        .join("")}</tbody></table>`;
+    const list = DATA.tools.filter((t) => matchQ([t.name, t.note, t.steps]));
+    return `
+      ${greet("工具箱", "干活的家伙。工具不是明星产品。", "器", 48)}
+      <div class="grid-2">
+        ${list.map((t) => `
+          <article class="card">
+            <h3><button class="linkish" data-go="tool/${t.id}">${t.name}</button></h3>
+            <p class="lead">${t.note}</p>
+            <p>${t.steps}</p>
+          </article>`).join("")}
+      </div>`;
   }
-  return `<h1 class="page">行业资产库</h1>
-    <p class="sub">同一 YAML 事实源，不另起 CMS。</p>
-    <table class="data"><thead><tr><th>类型</th><th>名称</th><th>ID</th></tr></thead>
-    <tbody>${DATA.assets.map((a) => `<tr><td><span class="tag">${a.kind}</span></td><td>${a.name}</td><td>${a.id}</td></tr>`).join("")}</tbody></table>`;
+  const assets = DATA.assets.filter((a) => matchQ([a.name, a.kind, a.note]));
+  return `
+    ${greet("广场背后的地图", "坐标系，不是排行。地图不会给你打分。", "图", 200)}
+    <div class="grid-2">
+      ${assets.map((a) => `
+        <article class="card">
+          <span class="tag">${a.kind}</span>
+          <h3>${a.name}</h3>
+          <p>${a.note}</p>
+        </article>`).join("")}
+    </div>`;
 }
 
 function viewProduct(id) {
   const p = DATA.products.find((x) => x.id === id) || DATA.products[0];
   return `
-    <h1 class="page">${p.name}</h1>
-    <p class="sub">${p.desc}</p>
-    <div class="coord">
-      <span class="tag gold">scn-tech-software-dev</span>
-      <span class="tag">品牌 ${p.brand}</span>
-      <span class="tag">适配 ${p.fit}</span>
-      <span class="band ${p.band}">影响力 ${p.band}</span>
+    <div class="meet">
+      ${avatar(p.name, p.hue, "lg")}
+      <div>
+        <h1 class="page">${p.name}</h1>
+        <p class="sub">${p.vibe}</p>
+      </div>
     </div>
-    <div class="detail-grid">
-      <div class="card">
-        <h3>场景适配表</h3>
-        <p>软件研发 · 增强编码/审查 · KPI：${p.kpis.join("、")}</p>
-        <h3 style="margin-top:16px">实现的工具</h3>
-        ${p.tools.map((t) => `<p><button class="linkish" data-go="tool/${t}">${t}</button></p>`).join("")}
-        <p style="margin-top:16px"><button class="btn-line" data-cmp-toggle="${p.id}">${compareSet.has(p.id) ? "已加入对比" : "加入对比"}</button>
-        <button class="btn-blue" data-go="claims">申请认领</button></p>
-      </div>
-      <div class="card">
-        <h3>来源</h3>
-        <p>${p.sources} 条官方来源（演示）。正式发布需可点开。</p>
-        <h3 style="margin-top:16px">定价</h3>
-        <p>${p.pricing} · ${p.user}</p>
-      </div>
+    <p class="quote">${p.desc}</p>
+    <div class="grid-2">
+      <article class="card">
+        <h3>在这条街上</h3>
+        <p>${p.fit === "high" ? "很合适。写代码的人会把它放在手边。" : "谁都聊得来，但不是这条街的第一把交椅。"}</p>
+        <p style="margin-top:10px">牌子是 <button class="linkish" data-go="brand/${p.brandId}">${p.brand}</button> · ${p.pricing}</p>
+        <div class="actions">
+          <button class="btn-line" data-cmp-toggle="${p.id}">${compareSet.has(p.id) ? "已放进比一比" : "放进比一比"}</button>
+          <button class="btn-blue" data-go="claims">这是我的 / 写错了</button>
+        </div>
+      </article>
+      <article class="card">
+        <h3>伸出来的手</h3>
+        ${p.tools.map((t) => {
+          const tool = DATA.tools.find((x) => x.id === t);
+          return `<p><button class="linkish" data-go="tool/${t}">${tool ? tool.name : t}</button></p>`;
+        }).join("")}
+      </article>
     </div>`;
 }
 
 function viewBrand(id) {
   const b = DATA.brands.find((x) => x.id === id) || DATA.brands[0];
   const ps = DATA.products.filter((p) => p.brandId === b.id);
-  return `<h1 class="page">${b.name}</h1>
-    <p class="sub">${b.note}</p>
-    <div class="coord"><span class="band ${b.band}">贡献 ${b.band}</span><span class="tag">${b.type}</span></div>
-    <h3>产品组合</h3>
-    <table class="data"><tbody>${ps.map((p) => productRow(p, false)).join("")}</tbody></table>`;
+  return `
+    <div class="meet">
+      ${avatar(b.name, b.hue, "lg")}
+      <div>
+        <h1 class="page">${b.name}</h1>
+        <p class="sub">${b.note}</p>
+      </div>
+    </div>
+    <h3 class="block-title">桌上放着</h3>
+    <div class="grid-2">${ps.map((p) => productCard(p)).join("")}</div>`;
 }
 
 function viewPerson(id) {
   const p = DATA.people.find((x) => x.id === id) || DATA.people[0];
-  return `<h1 class="page">${p.name}</h1>
-    ${p.type === "digital-persona" ? '<div class="featured">非自然人 · 运营方 / 模型已披露。不进入真人影响力榜。</div>' : ""}
-    ${p.sample ? '<span class="tag">Schema 样例，非正式名人榜事实</span>' : ""}
-    <p class="sub">${p.headline}</p>
-    <div class="coord"><span class="tag gold">scn-tech-software-dev</span><span class="tag">cap-tech-001</span></div>`;
+  return `
+    <div class="meet">
+      ${avatar(p.name, p.hue, "lg")}
+      <div>
+        <h1 class="page">${p.name}</h1>
+        <p class="sub">${p.headline}</p>
+      </div>
+    </div>
+    <p class="quote">${p.quote}</p>
+    ${p.type === "digital-persona" ? '<p class="featured">我不是真人。请别把我放进真人那一排。</p>' : '<p class="soft">真人。示意条目，不是排行榜上的名次。</p>'}`;
 }
 
 function viewTool(id) {
   const t = DATA.tools.find((x) => x.id === id) || DATA.tools[0];
   const used = DATA.products.filter((p) => p.tools.includes(t.id));
-  return `<h1 class="page">${t.name}</h1>
-    <p class="sub">接口 ${t.iface} · 步骤 ${t.steps} · 已发布到广场</p>
-    <h3>被哪些产品实现</h3>
-    <table class="data"><tbody>${used.map((p) => productRow(p, false)).join("") || "<tr><td>无</td></tr>"}</tbody></table>`;
+  return `
+    ${greet(t.name, t.note, t.name, 48)}
+    <p>用来：${t.steps}</p>
+    <h3 class="block-title">谁在用</h3>
+    <div class="grid-2">${used.map((p) => productCard(p)).join("") || `<div class="empty">还没人用这只手。</div>`}</div>`;
 }
 
 function viewCompare() {
   const rows = DATA.products.filter((p) => compareSet.has(p.id));
-  const dims = ["场景", "适配", "品类", "定价", "工具", "来源数"];
+  if (!rows.length) {
+    return `${greet("比一比", "先从货架上勾两样来。", "比", 32)}<div class="empty">桌上还空着。去货架勾两样过来。</div>`;
+  }
   return `
-    <h1 class="page">对比台</h1>
-    <p class="sub">对标 Success.ai 的 Features &amp; ROI 表，但维度是场景适配，不是发信量。精选广告不会出现在此表。</p>
-    <div class="featured">本区为有机对比。付费精选位另有虚线样式，且不能改名次。</div>
-    <table class="cmp">
-      <thead><tr><th>维度</th>${rows.map((p) => `<th>${p.name}</th>`).join("")}</tr></thead>
-      <tbody>
-        <tr><td>场景</td>${rows.map(() => "<td>软件研发</td>").join("")}</tr>
-        <tr><td>适配</td>${rows.map((p) => `<td>${p.fit}</td>`).join("")}</tr>
-        <tr><td>品类</td>${rows.map((p) => `<td>${p.category}</td>`).join("")}</tr>
-        <tr><td>定价</td>${rows.map((p) => `<td>${p.pricing}</td>`).join("")}</tr>
-        <tr><td>工具</td>${rows.map((p) => `<td>${p.tools.join("<br>")}</td>`).join("")}</tr>
-        <tr><td>影响力带</td>${rows.map((p) => `<td><span class="band ${p.band}">${p.band}</span></td>`).join("")}</tr>
-      </tbody>
-    </table>
-    <p class="sub" style="margin-top:12px">勾选产品榜中的「加入对比」可改列。当前：${[...compareSet].join("、") || "无"}</p>`;
+    ${greet("放在一起看看", "比的是适不适合这条街，不是谁广告更大声。推荐位不会出现在这张桌上。", "比", 32)}
+    <div class="compare-row">
+      ${rows
+        .map(
+          (p) => `
+        <article class="card">
+          ${avatar(p.name, p.hue)}
+          <h3>${p.name}</h3>
+          <p class="lead">${p.vibe}</p>
+          <p>${p.fit === "high" ? "这条街，合适。" : "熟，但不专。"}</p>
+          <p>${p.category}</p>
+          <p>${p.pricing}</p>
+        </article>`
+        )
+        .join("")}
+    </div>
+    <p class="footnote">广告只出现在「推荐位」，不会改谁排前面。</p>`;
 }
 
 function viewClaims() {
@@ -565,89 +706,80 @@ function viewClaims() {
     rejected: DATA.claims.filter((c) => c.status === "rejected"),
   };
   const cur = DATA.claims.find((c) => c.id === claimFocus) || DATA.claims[0];
-  const col = (title, arr, key) => `
-    <div class="q-col">
-      <h3>${title} (${arr.length})</h3>
-      ${arr
-        .map(
-          (c) => `<div class="q-item ${c.id === cur.id ? "active" : ""}" data-claim="${c.id}">
-            <b>${c.entity}</b><div style="color:var(--muted);font-size:12px">${c.who}</div></div>`
-        )
-        .join("")}
-    </div>`;
+  const letter = (c) => `
+    <button class="letter ${c.id === cur.id ? "on" : ""}" data-claim="${c.id}" type="button">
+      <b>${c.entity}</b>
+      <span>${c.who}</span>
+    </button>`;
   return `
-    <h1 class="page">认领队列</h1>
-    <p class="sub">对标 InboxHub：Sent / Inbox / Unread 换成 待审 / 已认证 / 驳回。认证不等于改名次。</p>
+    ${greet("这是我 / 这说错了", "认领自己，或拿出证据说话。钱买不走名次。", "我", 200)}
     <div class="queue">
-      ${col("待审", groups.pending)}
-      ${col("已认证 / 开放收录", groups.claimed)}
       <div class="q-col">
-        <h3>工单详情</h3>
-        <p><span class="tag">${cur.status}</span> ${cur.entity}</p>
-        <p>${cur.who}</p>
-        <p>${cur.ask}</p>
-        ${cur.status === "rejected" ? '<p class="tag warn">拒绝理由：名次不可买</p>' : ""}
-        <p style="margin-top:16px"><button class="btn-line">通过（演示）</button> <button class="btn-line">驳回（演示）</button></p>
-        <h3 style="margin-top:20px">驳回箱 (${groups.rejected.length})</h3>
-        ${groups.rejected.map((c) => `<div class="q-item" data-claim="${c.id}">${c.entity}<div style="font-size:12px;color:var(--muted)">${c.ask}</div></div>`).join("")}
+        <h3>还在看的信</h3>
+        ${groups.pending.map(letter).join("")}
       </div>
+      <div class="q-col">
+        <h3>已经认领 / 开放着</h3>
+        ${groups.claimed.map(letter).join("")}
+      </div>
+      <article class="card talk">
+        <span class="tag ${cur.status === "rejected" ? "warn" : "ok"}">${cur.tone}</span>
+        <h3 style="margin-top:10px">${cur.entity}</h3>
+        <p class="quote">${cur.ask}</p>
+        <p class="soft">${cur.who}</p>
+        ${cur.status === "rejected" ? '<p class="featured">退回了。名次不卖。</p>' : ""}
+        <div class="actions">
+          <button class="btn-line" type="button">好，记下了（示意）</button>
+          <button class="btn-line" type="button">这说得不对（示意）</button>
+        </div>
+        <h3 style="margin-top:20px">退回去的</h3>
+        ${groups.rejected.map(letter).join("")}
+      </article>
     </div>`;
 }
 
 function viewMethod() {
   return `
-    <h1 class="page">方法与信任</h1>
-    <p class="sub">对标 Analytics：公开窗口与剔除规则，而不是虚荣 PV。</p>
+    ${greet("我们怎么排", "看得见的方法，才值得信。花钱的位置另标，进不了分数。", "尺", 32)}
     <div class="grid-2">
       <article class="card">
-        <h3>影响力方法 v1</h3>
-        <p>窗口 90 天。信号：独立引用 0.4 · 公开采用 0.3 · 场景相关 0.3。排除付费曝光与自报 GMV。</p>
+        <h3>谁在被看见</h3>
+        <p>看三个月里，有多少人认真提到、真正用上，以及是不是这条街上的事。自己报的流水、买来的曝光，都不算。</p>
       </article>
       <article class="card">
-        <h3>专业贡献方法 v1</h3>
-        <p>窗口 180 天。信号：标准库引用 0.4 · 可复核产物 0.35 · 场景适配 0.25。</p>
+        <h3>谁在把事做完</h3>
+        <p>看半年里，有没有经得起核对的东西留在街上，以及是不是帮你做完了眼前这桩。</p>
       </article>
     </div>
-    <div class="featured" style="margin-top:16px">广告目录 data/plaza/ads/ 不得写入 RankingSnapshot。本 Demo 精选写入名次 = 0。</div>`;
+    <p class="featured" style="margin-top:16px">推荐位可以买。名次不行。这张桌子上，没有「付费即第一」。</p>`;
 }
 
 function viewPricing() {
   return `
-    <h1 class="page">套餐</h1>
-    <p class="sub">对标 Success.ai「三个套餐，两个数字」：全平台功能都在，差的是量与深度，不按席把团队拆碎。名次不在价目表里。</p>
+    ${greet("你请几位伙伴，交几桩活", "逛广场免费。花钱请的是座位和活，不是名次。", "席", 32)}
     <div class="price-grid">
-      <article class="card price">
-        <h3>广场访客</h3>
-        <div class="num">¥0</div>
-        <p>两个数字：浏览无限 · 对比 0 次导出</p>
-        <ul><li>场景页与有机榜</li><li>方法说明</li><li>无认领工单</li></ul>
-      </article>
-      <article class="card price">
-        <h3>厂商认证</h3>
-        <div class="num">年费</div>
-        <p>两个数字：产品数 · 精选曝光槽（可选）</p>
-        <ul><li>官方描述与纠错</li><li>认证标</li><li>精选须标注，不进分数</li></ul>
-        <button class="btn-blue" data-go="claims">去认领队列</button>
-      </article>
-      <article class="card price">
-        <h3>企业坐标</h3>
-        <div class="num">年费</div>
-        <p>两个数字：席位 · 行业包</p>
-        <ul><li>能力矩阵导出</li><li>场景短名单 API</li><li>私有映射（P2）</li></ul>
-      </article>
+      ${DATA.plans
+        .map(
+          (p) => `
+        <article class="card plan ${p.id === "seat" ? "featured-soft" : ""}">
+          <h3>${p.name}</h3>
+          <div class="num">${p.price}</div>
+          <p class="lead">${p.for}</p>
+          <ul>${p.items.map((i) => `<li>${i}</li>`).join("")}</ul>
+          ${p.id === "pro" ? `<button class="btn-blue" data-go="claims">去认领</button>` : ""}
+          ${p.id === "seat" ? `<button class="btn-blue" data-go="solutions">看看能交什么活</button>` : ""}
+        </article>`
+        )
+        .join("")}
     </div>
-    <article class="card" style="margin-top:16px">
-      <span class="tag gold">R9 交付</span>
-      <h3>场景解决方案</h3>
-      <p>两个数字：<b>并发 AI Man</b> · <b>开通场景包</b>。买的是「软件研发功能交付，带 3 个人机门」，不是聊天机器人。低适配改编不加价硬上，直接拒绝。</p>
-      <p style="margin-top:10px"><button class="btn-blue" data-go="solutions">查看解决方案</button>
-      <button class="btn-line" data-go="aiman">改编规则</button></p>
-    </article>`;
+    <p class="footnote">名次不卖。广告只出现在「推荐位」，不会改街上谁排前面。</p>`;
 }
 
 function render() {
   const { name, id } = parse();
   navActive(name);
+  const hello = $("hello");
+  if (hello) hello.textContent = HELLO[name] || HELLO.home;
   const root = $("view");
   const map = {
     home: viewHome,
@@ -671,15 +803,6 @@ function render() {
     tool: () => viewTool(id),
   };
   root.innerHTML = (map[name] || viewHome)();
-
-  root.querySelector("#f-cat")?.addEventListener("change", (e) => {
-    finder.category = e.target.value;
-    render();
-  });
-  root.querySelector("#f-fit")?.addEventListener("change", (e) => {
-    finder.fit = e.target.value;
-    render();
-  });
 }
 
 document.addEventListener("click", (e) => {
@@ -687,6 +810,12 @@ document.addEventListener("click", (e) => {
   if (goBtn) {
     e.preventDefault();
     go(goBtn.getAttribute("data-go"));
+    return;
+  }
+  const cat = e.target.closest("[data-cat]");
+  if (cat) {
+    productCat = cat.getAttribute("data-cat");
+    render();
     return;
   }
   const cmp = e.target.closest("[data-cmp]");
@@ -714,12 +843,22 @@ document.addEventListener("click", (e) => {
   if (ad) {
     adaptKey = ad.getAttribute("data-adapt");
     render();
+    return;
+  }
+  const mg = e.target.closest("[data-merge]");
+  if (mg) {
+    mergeNote =
+      mg.getAttribute("data-merge") === "ok"
+        ? "好。那我去合并。你不点头，我不动。"
+        : "行，我先停着。你说哪要改，我再写一稿。";
+    render();
   }
 });
 
 $("q").addEventListener("input", () => {
   finder.q = $("q").value;
-  if (parse().name === "finder") render();
+  const n = parse().name;
+  if (["finder", "people", "products", "brands", "tools", "assets"].includes(n)) render();
 });
 
 window.addEventListener("hashchange", render);
