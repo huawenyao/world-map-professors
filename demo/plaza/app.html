@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>广场工作台 · Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">广场 OS <span>DEMO</span></div>
+      <button class="nav-btn" data-go="home">工作台</button>
+      <button class="nav-btn" data-go="finder">场景发现</button>
+      <button class="nav-btn" data-go="people">名人榜</button>
+      <button class="nav-btn" data-go="brands">品牌榜</button>
+      <button class="nav-btn" data-go="products">产品榜</button>
+      <button class="nav-btn" data-go="assets">行业资产库</button>
+      <button class="nav-btn" data-go="tools">工具库</button>
+      <button class="nav-btn" data-go="compare">对比台</button>
+      <button class="nav-btn" data-go="claims">认领队列</button>
+      <button class="nav-btn" data-go="method">方法</button>
+      <button class="nav-btn" data-go="pricing">套餐</button>
+      <p class="hint">左导航对标 Success.ai：Finder / Campaigns / Inbox / Analytics。业务是场景坐标，不是冷邮件。</p>
+    </aside>
+    <section class="main">
+      <header class="top">
+        <span class="scene-chip" id="sceneChip">场景：软件研发</span>
+        <input id="q" type="search" placeholder="搜索产品、品牌、工具、能力…" />
+        <a class="btn-line" href="index.html">营销 Demo</a>
+        <button class="btn-blue" data-go="claims">认领</button>
+      </header>
+      <div class="content" id="view"></div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

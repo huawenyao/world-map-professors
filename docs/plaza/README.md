@@ -38,6 +38,8 @@
 | [03 产品规划](03-product-plan.md) | 信息架构、用户旅程、五馆功能、MVP |
 | [04 数据模型](04-data-model.md) | Person / Brand / Product / Ranking 与现有本体的衔接 |
 | [05 增长与运营](05-go-to-market.md) | GTM、内容冷启动、组织、合规 |
+| [06 Success.ai 对标](06-success-ai-reference.md) | 实际 Demo/工作台映射，以及不抄什么 |
+| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 工作台原型（软件研发样例街区） |
 
 规范工作流：`.spec-workflow/specs/digital-era-plaza/`  
 实体模板：`data/plaza/templates/`

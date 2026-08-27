@@ -31,6 +31,11 @@
   - Purpose: 仓库主叙事与广场对齐
   - _Requirements: Alignment_
 
+- [x] 6b. 对标 Success.ai 实际 Demo，落地可点击工作台原型
+  - Files: `docs/plaza/06-success-ai-reference.md`, `demo/plaza/`
+  - Purpose: 产品形态从百科页改为 Finder / 场景卡 / 认领队列 / 三档套餐
+  - _Requirements: 1, 2, 3, 7_
+
 - [ ] 7. 实现 Pydantic 模型与 JSON Schema（实现阶段）
   - Files: `src/world_professors/models/plaza.py`, `schemas/plaza-*.json`
   - Purpose: 与现有 Scenario/Role 校验一致

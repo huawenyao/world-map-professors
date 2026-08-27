@@ -23,7 +23,8 @@
 | 📊 **能力标准化** | 可量化、可评估的能力等级体系 |
 | 🏛️ **广场五馆** | 名人 / 品牌 / 产品 / 行业资产 / 工具，全部挂在场景上 |
 
-规划全文：[docs/plaza](docs/plaza/README.md)（愿景、商业模式、产品、数据模型、GTM）
+规划全文：[docs/plaza](docs/plaza/README.md)（愿景、商业模式、产品、数据模型、GTM）  
+可点击 Demo：[demo/plaza](demo/plaza/README.md)（对标 Success.ai 工作台语法）
 
 **使用场景**：当你需要构建一个"金融投顾Agent"时，直接查询标准库获取：
 - 该场景的标准工作流程是什么？
