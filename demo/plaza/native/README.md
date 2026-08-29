@@ -2,7 +2,7 @@
 
 B2B 工作场景：**开发者生态联合方案**。
 
-Agent 用工具链推进（parse_brief → search → evaluate → draft → deliver），三处人机门。财富管理 brief 会 `refuse`，没有继续自动交付。
+界面按 Success.ai Campaign 运行页：三计数瓷砖 + 人话活动流 + 战役产物卡。Agent 用工具链推进（parse_brief → search → evaluate → draft → deliver），三处人机门。财富管理 brief 会 `refuse`，没有继续自动交付。
 
 与 Plaza OS 同一静态服：
 

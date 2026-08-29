@@ -11,39 +11,49 @@
   <div class="native">
     <aside class="sidenav">
       <a class="logo" href="../index.html">Plaza <span>OS</span></a>
-      <div class="nav-label">AI 原生</div>
-      <span class="nav-item active">作战室</span>
+      <div class="nav-label">AI Operator</div>
+      <span class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M8 7h8l-1 13H9z"/><path d="M9 11h6"/></svg>
+        作战室
+      </span>
       <a class="nav-item" href="../app.html#home">工作台</a>
       <a class="nav-item" href="../app.html#people">找人</a>
       <a class="nav-item" href="../app.html#orgs">找企业</a>
       <a class="nav-item" href="../app.html#campaigns">合作项目</a>
+      <a class="nav-item" href="../app.html#inbox">收件箱</a>
       <div class="nav-label">场景</div>
-      <p class="nav-note">B2B · 软件研发<br />找人 + 找企业 + 交付</p>
+      <p class="nav-note">B2B · 软件研发<br />Find → Evaluate → Deliver</p>
     </aside>
     <div class="native-main">
       <header class="native-top">
         <div>
-          <div class="kicker" style="color:#b45309">AI-native run</div>
+          <div class="kicker" style="color:#b45309">Campaign run</div>
           <h1>开发者生态联合方案</h1>
-          <p>需求方 brief → Agent 调库存工具 → 人机门签收。不是聊天套壳。</p>
+          <p>需求方 brief 进作战室。Agent 调库存工具，三处人机门签收。不是聊天套壳。</p>
         </div>
         <div class="run-status" id="run-status">待命</div>
       </header>
       <section class="brief-bar">
         <textarea id="brief" rows="3">我们是科技企业生态团队。需要在「软件研发」场景：1）找可建联的实践者/数字专才；2）找 GitHub 类企业做联合方案；3）评估后发建联；4）启动功能交付。不要买名次，不要冷邮件群发。</textarea>
         <div class="brief-actions">
-          <button class="btn-blue" id="btn-run" type="button">启动 Agent</button>
+          <button class="btn-blue" id="btn-run" type="button">启动战役</button>
           <button class="btn-line" id="btn-wealth" type="button">对照：财富管理达人投放</button>
         </div>
       </section>
+      <div class="hub-tiles run-kpis">
+        <div class="hub-tile"><span>工具</span><b id="kpi-tools">0</b></div>
+        <div class="hub-tile"><span>人机门</span><b id="kpi-gates">0 / 3</b></div>
+        <div class="hub-tile"><span>产物</span><b id="kpi-arts">0</b></div>
+      </div>
       <div class="native-grid">
         <section class="trace card">
-          <h3>运行时 · 工具调用</h3>
+          <h3>活动流</h3>
+          <p class="muted">对标 Campaign 运行记录，不倒 JSON。</p>
           <div id="trace" class="trace-list"></div>
           <div id="gate" class="gate-box" hidden></div>
         </section>
         <section class="arts">
-          <h3>产物</h3>
+          <h3>战役产物</h3>
           <div id="arts"></div>
         </section>
       </div>

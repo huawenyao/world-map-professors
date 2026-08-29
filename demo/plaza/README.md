@@ -1,8 +1,8 @@
 # 数字时代广场 · 需求方工作台 Demo
 
-设计语法对标 Success.ai（左导航 OS、Lead Finder、Campaign 瓷砖、InboxHub）。  
+设计语法对标 Success.ai：近黑营销页 + 柠檬黄 CTA、左导航 OS、Lead Finder 表、Campaign 三数字、InboxHub 三瓷砖。  
 能力对标新榜海汇选号评估 + 小豆芽任务/收件闭环。  
-**不做**灯笼街景，也**不做**多账号矩阵分发。
+**不做**灯笼街景，也**不做**多账号矩阵分发 / 冷邮件。
 
 | 文件 | 用途 |
 |------|------|

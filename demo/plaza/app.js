@@ -153,37 +153,49 @@ function allPeople() {
   return [...DATA.people, ...DATA.specialists];
 }
 
+function metrics(c) {
+  return `<div class="metric-row">
+    <div class="metric"><span>建联</span><b>${c.sent}</b></div>
+    <div class="metric"><span>待处理</span><b>${c.wait}</b></div>
+    <div class="metric"><span>回复</span><b>${c.replies}</b></div>
+  </div>`;
+}
+
+function campCard(c, opts = {}) {
+  const goTo = opts.go || (c.go === "deliver" ? "deliver" : c.go === "orgs" ? "inbox" : c.go);
+  const label = opts.label || "进入";
+  const blockedText = opts.blockedText || "无「用研发达人充数」按钮";
+  return `<article class="camp-card">
+    <span class="tag ${c.blocked ? "bad" : c.status === "交付中" ? "gold" : "ok"}">${c.status}</span>
+    <h3>${c.name}</h3>
+    <p class="muted">${c.kind} · 供给 ${c.supply} · ${c.scene}</p>
+    ${metrics(c)}
+    <div class="actions">
+      ${c.blocked
+        ? `<span class="muted">${blockedText}</span>`
+        : `<button class="btn-blue" data-go="${goTo}">${label}</button>`}
+    </div>
+  </article>`;
+}
+
 function viewHome() {
   const running = DATA.campaigns.filter((c) => !c.blocked).length;
   return `
     <h1 class="page">需求方工作台</h1>
-    <p class="sub">先找供给，再评估链接。五馆是库存；合作项目才是成交单元。</p>
+    <p class="sub">Find · Evaluate · Link · Deliver。五馆是库存；合作项目才是成交单元。</p>
     <div class="kpis">
-      <div class="kpi"><span>可检索达人 / 专才</span><b>3</b><span>含 1 名数字专才（非达人榜）</span></div>
-      <div class="kpi"><span>可合作企业</span><b>3</b><span>软件研发场景</span></div>
-      <div class="kpi"><span>进行中项目</span><b>${running}</b><span>1 条覆盖不足已拒绝</span></div>
-      <div class="kpi"><span>待签检查点</span><b>1</b><span>代码审查人机门</span></div>
+      <div class="kpi"><span>浏览</span><b>无限</b><span>找人 / 找企业只读不限</span></div>
+      <div class="kpi"><span>建联额度</span><b>12</b><span>本档演示额度，名次不在价目</span></div>
+      <div class="kpi"><span>交付席位</span><b>1</b><span>数字专才并发 · 人机门仍开</span></div>
+      <div class="kpi"><span>进行中战役</span><b>${running}</b><span>1 条覆盖不足已拒绝</span></div>
     </div>
-    <div class="tiles">
-      <article class="card">
-        <span class="tag gold">AI 原生</span>
-        <h3>开发者生态联合方案</h3>
-        <p>作战室：Brief → 工具调用 → 人机门。找人 + 找企业 + 交付。</p>
-        <div class="actions"><a class="btn-blue" href="native/index.html">打开作战室</a></div>
-      </article>
-      ${DATA.campaigns.map((c) => `
-        <article class="card">
-          <span class="tag ${c.blocked ? "bad" : c.status === "交付中" ? "gold" : "ok"}">${c.status}</span>
-          <h3>${c.name}</h3>
-          <p>${c.kind} · 供给 ${c.supply} · ${c.scene}</p>
-          <p style="margin-top:8px">建联 ${c.sent} · 待处理 ${c.wait} · 回复 ${c.replies}</p>
-          <div class="actions">
-            ${c.blocked
-              ? `<span class="muted">无「用研发达人充数」按钮</span>`
-              : `<button class="btn-blue" data-go="${c.go}">打开</button>`}
-          </div>
-        </article>`).join("")}
-    </div>`;
+    <article class="card" style="margin-bottom:14px">
+      <span class="tag gold">AI Operator</span>
+      <h3>开发者生态联合方案</h3>
+      <p>作战室对标 Campaign 运行页：Brief → 工具活动流 → 人机门。不是聊天套壳。</p>
+      <div class="actions"><a class="btn-blue" href="native/index.html">打开作战室</a></div>
+    </article>
+    <div class="camp-grid">${DATA.campaigns.map((c) => campCard(c, { go: c.go, label: "打开", blockedText: "无「用研发达人充数」按钮" })).join("")}</div>`;
 }
 
 function viewPeople() {
@@ -312,21 +324,8 @@ function viewShortlist() {
 function viewCampaigns() {
   return `
     <h1 class="page">合作项目</h1>
-    <p class="sub">对标 Campaigns 瓷砖 + 小豆芽任务中心：一个项目 = 一次供给调用，而不是一张榜。</p>
-    <div class="tiles">
-      ${DATA.campaigns.map((c) => `
-        <article class="card">
-          <span class="tag ${c.blocked ? "bad" : "gold"}">${c.status}</span>
-          <h3>${c.name}</h3>
-          <p>${c.kind} · ${c.scene} · 供给 ${c.supply}</p>
-          <p style="margin-top:8px">发出 ${c.sent} · 待处理 ${c.wait} · 回复 ${c.replies}</p>
-          <div class="actions">
-            ${c.blocked
-              ? `<span class="muted">已拒绝自动交付</span>`
-              : `<button class="btn-blue" data-go="${c.go === "deliver" ? "deliver" : c.go === "orgs" ? "inbox" : c.go}">进入</button>`}
-          </div>
-        </article>`).join("")}
-    </div>`;
+    <p class="sub">对标 Success.ai Campaigns：状态 + 建联 / 待处理 / 回复 三数字。一个项目 = 一次供给调用。</p>
+    <div class="camp-grid">${DATA.campaigns.map((c) => campCard(c, { blockedText: "已拒绝自动交付" })).join("")}</div>`;
 }
 
 function viewDeliver() {
@@ -362,25 +361,25 @@ function viewInbox() {
     reject: DATA.inbox.filter((i) => i.col === "reject"),
   };
   const cur = DATA.inbox.find((i) => i.id === inboxId) || DATA.inbox[0];
-  const col = (title, arr) => `
-    <div class="q-col">
-      <h3>${title} (${arr.length})</h3>
-      ${arr.map((i) => `<button class="q-item ${i.id === cur.id ? "active" : ""}" data-inbox="${i.id}"><b>${i.title}</b><div class="muted">${i.who}</div></button>`).join("")}
-    </div>`;
+  const list = [...groups.link, ...groups.claim, ...groups.reject];
   return `
     <h1 class="page">收件箱</h1>
-    <p class="sub">对标 InboxHub：建联 / 认领 / 驳回。认证不等于改名次。</p>
-    <div class="queue">
-      ${col("建联", groups.link)}
-      ${col("认领 / 开放", groups.claim)}
-      <div class="q-col">
-        <h3>详情</h3>
-        <p><span class="tag">${cur.col === "reject" ? "已驳回" : cur.col === "link" ? "建联" : "认领"}</span> ${cur.title}</p>
-        <p>${cur.who}</p>
-        <p>${cur.body}</p>
-        ${cur.col === "reject" ? '<p class="tag bad">拒绝理由：名次不可买</p>' : ""}
-        <h3 style="margin-top:16px">驳回箱 (${groups.reject.length})</h3>
-        ${groups.reject.map((i) => `<button class="q-item" data-inbox="${i.id}">${i.title}</button>`).join("")}
+    <p class="sub">对标 InboxHub：顶部三计数 + 列表 + 详情。认证不等于改名次。</p>
+    <div class="hub-tiles">
+      <div class="hub-tile"><span>建联 Sent</span><b>${groups.link.length}</b></div>
+      <div class="hub-tile"><span>认领 Inbox</span><b>${groups.claim.length}</b></div>
+      <div class="hub-tile"><span>驳回</span><b>${groups.reject.length}</b></div>
+    </div>
+    <div class="hub-split">
+      <div class="hub-list">
+        ${list.map((i) => `<button class="q-item ${i.id === cur.id ? "active" : ""}" data-inbox="${i.id}"><b>${i.title}</b><div class="muted">${i.who}</div></button>`).join("")}
+      </div>
+      <div class="hub-detail">
+        <p><span class="tag ${cur.col === "reject" ? "bad" : cur.col === "link" ? "ok" : ""}">${cur.col === "reject" ? "已驳回" : cur.col === "link" ? "建联" : "认领"}</span></p>
+        <h3 style="margin:10px 0 8px">${cur.title}</h3>
+        <p class="muted">${cur.who}</p>
+        <p style="margin-top:12px">${cur.body}</p>
+        ${cur.col === "reject" ? '<p class="featured" style="margin-top:14px">拒绝理由：名次不可买。付费只买曝光位。</p>' : ""}
       </div>
     </div>`;
 }
