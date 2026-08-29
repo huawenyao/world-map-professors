@@ -3,25 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>广场 · 今晚有人在</title>
+  <title>广场 OS · 需求方工作台</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <a class="logo" href="index.html">广场</a>
-      <div class="hello" id="hello">灯还亮着。阿码在下面等你。</div>
-      <input id="q" type="search" placeholder="找人、找伙伴、找今晚能用的工具…" />
-      <a class="btn-line" href="index.html">回门厅</a>
-    </header>
-    <nav class="dock" aria-label="广场">
-      <button class="nav-btn" data-go="home"><i>街</i>广场</button>
-      <button class="nav-btn" data-go="finder"><i>灯</i>找街</button>
-      <button class="nav-btn goldish" data-go="aiman"><i>阿</i>阿码</button>
-      <button class="nav-btn" data-go="products"><i>货</i>货架</button>
-      <button class="nav-btn" data-go="more"><i>·</i>巷子</button>
-    </nav>
-    <div class="content" id="view"></div>
+    <aside class="sidenav">
+      <a class="logo" href="index.html">Plaza <span>OS</span></a>
+      <div class="nav-label">需求</div>
+      <button class="nav-item" data-go="home">工作台</button>
+      <button class="nav-item" data-go="people">找人</button>
+      <button class="nav-item" data-go="orgs">找企业</button>
+      <button class="nav-item" data-go="eval">评估</button>
+      <button class="nav-item" data-go="shortlist">短名单</button>
+      <button class="nav-item gold" data-go="campaigns">合作项目</button>
+      <button class="nav-item gold" data-go="deliver">交付</button>
+      <button class="nav-item" data-go="inbox">收件箱</button>
+      <div class="nav-label">供给库存</div>
+      <button class="nav-item" data-go="supply-people">人</button>
+      <button class="nav-item" data-go="supply-brands">品牌</button>
+      <button class="nav-item" data-go="supply-products">产品</button>
+      <button class="nav-item" data-go="supply-assets">资产</button>
+      <button class="nav-item" data-go="supply-tools">工具</button>
+      <div class="nav-label">信任</div>
+      <button class="nav-item" data-go="method">方法</button>
+      <button class="nav-item" data-go="pricing">套餐</button>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <input id="q" type="search" placeholder="按场景、姓名、品牌检索供给…" />
+        <a class="btn-line" href="index.html">营销页</a>
+      </header>
+      <div class="view" id="view"></div>
+    </div>
   </div>
   <script src="app.js"></script>
 </body>

@@ -1,21 +1,19 @@
-# 数字时代广场 · 可点击 Demo
+# 数字时代广场 · 需求方工作台 Demo
 
-一条有人的街，不是企业后台。
+设计语法对标 Success.ai（左导航 OS、Lead Finder、Campaign 瓷砖、InboxHub）。  
+能力对标新榜海汇选号评估 + 小豆芽任务/收件闭环。  
+**不做**灯笼街景，也**不做**多账号矩阵分发。
 
 | 文件 | 用途 |
 |------|------|
-| `index.html` | 门厅：先见到人，再把活交给谁 |
-| `app.html` | 广场里：问候、人物、货架、把活交给阿码 |
+| `index.html` | 营销页：Find · Evaluate · Link · Deliver |
+| `app.html` | 需求方工作台 |
 
-样例街区是 **科技 / 软件研发**（GitHub Copilot、Claude、ChatGPT）。人物两条为示意，页面上会标明不是真人排行。
-
-## 本地打开
+主路径：找人 / 找企业 → 评估 → 短名单 → 合作项目 → 交付签收。财富管理显示覆盖不足，研发供给不得充数。
 
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
-# 门厅 http://127.0.0.1:4173/
-# 广场 http://127.0.0.1:4173/app.html#home
-# 阿码  http://127.0.0.1:4173/app.html#aiman
+# http://127.0.0.1:4173/
+# http://127.0.0.1:4173/app.html#people
+# http://127.0.0.1:4173/app.html#orgs
 ```
-
-点「去给人管钱」时，阿码会在对话里拒绝，且没有继续自动交付的按钮。底部五个入口：广场 / 找街 / 阿码 / 货架 / 巷子。
