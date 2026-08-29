@@ -11,6 +11,8 @@
 
 主路径：找人 / 找企业 → 评估 → 短名单 → 合作项目 → 交付签收。财富管理显示覆盖不足，研发供给不得充数。
 
+AI 原生作战室：`native/index.html`（Brief → 工具调用 → 人机门）。
+
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
 # http://127.0.0.1:4173/

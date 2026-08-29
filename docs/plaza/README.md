@@ -45,7 +45,8 @@
 | [06 Success.ai 对标](06-success-ai-reference.md) | 实际 Demo/工作台映射，以及不抄什么 |
 | [07 场景解决方案 · AI Man](07-scenario-solution-ai-man.md) | 交付层：自适应数字专才、改编规则、R9 收入 |
 | [08 需求方生态](08-demand-side-ecosystem.md) | Success.ai 工作台 + 小豆芽/海汇能力映射：找人、找企业、评估链接、交付 |
-| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 需求方工作台 |
+| [09 AI 原生工作场景](09-ai-native-work-scenario.md) | B2B 作战室：工具调用、人机门、拒单 |
+| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 需求方工作台 + 作战室 |
 
 规范工作流：`.spec-workflow/specs/digital-era-plaza/`  
 实体模板：`data/plaza/templates/`

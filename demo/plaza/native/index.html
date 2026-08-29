@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>作战室 · 开发者生态联合方案</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="native">
+    <aside class="sidenav">
+      <a class="logo" href="../index.html">Plaza <span>OS</span></a>
+      <div class="nav-label">AI 原生</div>
+      <span class="nav-item active">作战室</span>
+      <a class="nav-item" href="../app.html#home">工作台</a>
+      <a class="nav-item" href="../app.html#people">找人</a>
+      <a class="nav-item" href="../app.html#orgs">找企业</a>
+      <a class="nav-item" href="../app.html#campaigns">合作项目</a>
+      <div class="nav-label">场景</div>
+      <p class="nav-note">B2B · 软件研发<br />找人 + 找企业 + 交付</p>
+    </aside>
+    <div class="native-main">
+      <header class="native-top">
+        <div>
+          <div class="kicker" style="color:#b45309">AI-native run</div>
+          <h1>开发者生态联合方案</h1>
+          <p>需求方 brief → Agent 调库存工具 → 人机门签收。不是聊天套壳。</p>
+        </div>
+        <div class="run-status" id="run-status">待命</div>
+      </header>
+      <section class="brief-bar">
+        <textarea id="brief" rows="3">我们是科技企业生态团队。需要在「软件研发」场景：1）找可建联的实践者/数字专才；2）找 GitHub 类企业做联合方案；3）评估后发建联；4）启动功能交付。不要买名次，不要冷邮件群发。</textarea>
+        <div class="brief-actions">
+          <button class="btn-blue" id="btn-run" type="button">启动 Agent</button>
+          <button class="btn-line" id="btn-wealth" type="button">对照：财富管理达人投放</button>
+        </div>
+      </section>
+      <div class="native-grid">
+        <section class="trace card">
+          <h3>运行时 · 工具调用</h3>
+          <div id="trace" class="trace-list"></div>
+          <div id="gate" class="gate-box" hidden></div>
+        </section>
+        <section class="arts">
+          <h3>产物</h3>
+          <div id="arts"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="catalog.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

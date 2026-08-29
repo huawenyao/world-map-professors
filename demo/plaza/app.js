@@ -165,6 +165,12 @@ function viewHome() {
       <div class="kpi"><span>待签检查点</span><b>1</b><span>代码审查人机门</span></div>
     </div>
     <div class="tiles">
+      <article class="card">
+        <span class="tag gold">AI 原生</span>
+        <h3>开发者生态联合方案</h3>
+        <p>作战室：Brief → 工具调用 → 人机门。找人 + 找企业 + 交付。</p>
+        <div class="actions"><a class="btn-blue" href="native/index.html">打开作战室</a></div>
+      </article>
       ${DATA.campaigns.map((c) => `
         <article class="card">
           <span class="tag ${c.blocked ? "bad" : c.status === "交付中" ? "gold" : "ok"}">${c.status}</span>
