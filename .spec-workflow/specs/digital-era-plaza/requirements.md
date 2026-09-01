@@ -107,6 +107,30 @@
 4. WHEN 对 AI Man 选择低适配或禁改编场景 THEN 系统 SHALL 拒绝自动交付，并说明缺失能力，不得静默换皮继续。
 5. WHEN 展示 AI Man THEN 系统 SHALL 强制非真人/数字专才标识，且该实体 SHALL NOT 进入真人名人榜。
 
+### Requirement 10: 需求方资源入口
+
+**User Story:** 作为品牌或企业合作负责人，我想按场景找人、找企业，先评估再建联，以便把平台库存变成可交付的合作，而不是逛榜。
+
+#### Acceptance Criteria
+
+1. WHEN 用户打开工作台 THEN 系统 SHALL 提供「找人」「找企业」作为主导航，并展示进行中的合作项目。
+2. WHEN 用户在找人中过滤场景 THEN 系统 SHALL 列出该场景下的实践者/达人/数字专才，数字人格必须标记非真人；AI Man SHALL NOT 混入真人达人榜。
+3. WHEN 用户在找企业中过滤场景 THEN 系统 SHALL 列出可合作品牌/机构；无覆盖时 SHALL 显示覆盖不足，不得用其他行业企业填充。
+4. WHEN 用户打开评估 THEN 系统 SHALL 展示场景适配、专业贡献、可交付与匹配理由，且 SHALL NOT 用粉丝数作为正式名次。
+5. WHEN 用户将资源加入短名单并创建合作项目 THEN 系统 SHALL 进入链接或交付状态；低适配场景 SHALL 拒绝自动交付。
+
+### Requirement 11: App Store 交互语法（人与企业）
+
+**User Story:** 作为资源需求方，我想像在 App Store 选 App 一样浏览和打开个人与企业，以便先看清是谁、适不适合，再决定建联或合作。
+
+#### Acceptance Criteria
+
+1. WHEN 用户打开广场 THEN 系统 SHALL 提供「今日 / 人 / 企业 / 搜索 / 资料库」主导航，资源单元为人或企业，而不是应用程序。
+2. WHEN 用户打开个人或企业详情 THEN 系统 SHALL 展示图标、名称、副标题、Get、预览切片、说明、评估与信息表；数字人格与 AI Man SHALL 强制非真人标识，且 SHALL NOT 出现在真人示意榜。
+3. WHEN 用户点击 Get THEN 系统 SHALL 将资源加入资料库（建联/合作/调用），且 SHALL NOT 改变名次。
+4. WHEN 用户进入财富管理分类或搜索无覆盖词 THEN 系统 SHALL 显示覆盖不足空态，SHALL NOT 用软件研发个人或企业填充。
+5. WHEN 展示排行货架 THEN 系统 SHALL 标注样例或非正式排行；付费精选若出现 SHALL 与有机货架可区分。
+
 ## Non-Functional Requirements
 
 ### Architecture

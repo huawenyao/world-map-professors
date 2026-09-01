@@ -2,107 +2,36 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>数字时代广场</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Plaza Store</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="m-nav">
-    <div class="brand">广场 <span>有人在</span></div>
-    <nav>
-      <a href="#deliver">找个伴</a>
-      <a href="#modules">逛五馆</a>
-      <a href="app.html#home">进广场</a>
-      <a class="btn-gold" href="app.html#home" style="margin-left:18px;padding:8px 16px;">今晚去看看</a>
+  <div class="shell">
+    <main class="canvas" id="view"></main>
+    <nav class="tabbar" aria-label="Plaza Store">
+      <button class="tab" data-go="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+        今日
+      </button>
+      <button class="tab" data-go="people">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.2"/><path d="M15 19a4.4 4.4 0 0 1 5-4.2"/></svg>
+        人
+      </button>
+      <button class="tab" data-go="orgs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V8l6-3 6 3v12"/><path d="M10 20v-6h4v6M16 11h4v9h-4"/></svg>
+        企业
+      </button>
+      <button class="tab" data-go="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="m20 20-3.5-3.5"/></svg>
+        搜索
+      </button>
+      <button class="tab" data-go="library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="7" height="7" rx="1.5"/><rect x="13" y="5" width="7" height="7" rx="1.5"/><rect x="4" y="14" width="7" height="5" rx="1.5"/><rect x="13" y="14" width="7" height="5" rx="1.5"/></svg>
+        资料库
+      </button>
     </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-faces faces">
-      <span class="avatar" style="--h:18">码</span>
-      <span class="avatar" style="--h:32">凯</span>
-      <span class="avatar" style="--h:200">仓</span>
-      <span class="avatar" style="--h:48">C</span>
-    </div>
-    <div class="kicker">不是后台，是一条有人的街</div>
-    <h1>先见到人，再把活交给谁</h1>
-    <p>写代码、管钱、看病——每条街上都有真人、品牌，也有愿意把事做完的 AI 伙伴。TA 会在关键处等你点头；不擅长的领域，会直说不行。</p>
-    <div class="cta-row">
-      <a class="btn-gold" href="app.html#home">进广场遇见阿码</a>
-      <a class="btn-line" href="app.html#aiman">听 TA 自己说</a>
-    </div>
-    <div class="quotes-strip">
-      <article class="card">
-        <div class="who-row"><span class="avatar sm" style="--h:14">阿</span><strong>阿码</strong></div>
-        <p>审查这关，还得你点头。我不会替你按下合并。</p>
-      </article>
-      <article class="card">
-        <div class="who-row"><span class="avatar sm" style="--h:18">凯</span><strong>阿凯</strong></div>
-        <p>我不是来刷榜的。我只是想早点把这期做完。</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="flow">
-    <div class="kicker">今晚怎么逛</div>
-    <h2>遇见，聊聊，交给 TA，你来点头</h2>
-    <p class="sub">不用记英文流程。就像在街上找人帮忙。</p>
-    <div class="steps">
-      <article class="card">
-        <div class="step-n">1</div>
-        <h3>你在哪条街</h3>
-        <p>软件研发、财富管理……先说清自己正在做的事。</p>
-      </article>
-      <article class="card">
-        <div class="step-n">2</div>
-        <h3>看看谁在</h3>
-        <p>街上的人、常用的产品、能上手的工具，一张图里。</p>
-      </article>
-      <article class="card">
-        <div class="step-n">3</div>
-        <h3>把活交给 TA</h3>
-        <p>阿码这类 AI 伙伴按步骤做完，而不是丢给你一份工具清单。</p>
-      </article>
-      <article class="card">
-        <div class="step-n">4</div>
-        <h3>关键处你点头</h3>
-        <p>审查、合并、对客户说话——这些门，还是人来开。</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="deliver">
-    <div class="kicker">那个会做事的人</div>
-    <h2>AI 伙伴，不是聊天框</h2>
-    <p class="sub">阿码会写功能、补测试、停在审查等你。你要是让 TA 去管别人的钱，TA 会拒绝——这才像一个靠谱的同事。</p>
-    <div class="grid-3">
-      <article class="card"><h3>「我来写」</h3><p>主场是软件研发。需求拆完、代码写完、测试补上。</p></article>
-      <article class="card"><h3>「测试我也能帮」</h3><p>相邻的活可以接着干，换一把手上的工具就行。</p></article>
-      <article class="card"><h3>「管钱这事我不行」</h3><p>缺金融判断时会停。不装万能，才有人感。</p></article>
-    </div>
-    <p style="margin-top:22px"><a class="btn-blue" href="app.html#run/sol-tech-sd-feature-delivery">看看阿码做到哪了</a></p>
-  </section>
-
-  <section class="section" id="modules">
-    <div class="kicker">街上的五座馆</div>
-    <h2>人、牌子、产品、手艺、工具</h2>
-    <div class="grid-5">
-      <article class="card"><h3>人</h3><p>谁在这条街上被看见。真人与分身会分开站。</p></article>
-      <article class="card"><h3>牌子</h3><p>背后的公司，不靠估值吓人。</p></article>
-      <article class="card"><h3>产品</h3><p>这个东西到底帮你做哪一段。</p></article>
-      <article class="card"><h3>手艺</h3><p>流程、能力、怎么一步步做完。</p></article>
-      <article class="card"><h3>工具</h3><p>TA 手里实际调用的那些。</p></article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="kicker">今晚的街</div>
-    <h2>先从写代码这条逛起</h2>
-    <p class="sub">GitHub Copilot、Claude、ChatGPT 都在。阿码站在街口等你确认审查。</p>
-    <a class="btn-blue" href="app.html#scene/scn-tech-software-dev">走进软件研发</a>
-    <a class="btn-line" href="app.html#people" style="margin-left:8px">先看街上的人</a>
-  </section>
-
-  <footer class="m-foot">数字时代广场 · 样例街区，人物为示意，不是真人排行</footer>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>

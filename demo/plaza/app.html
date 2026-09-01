@@ -2,27 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>广场 · 今晚有人在</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta http-equiv="refresh" content="0; url=index.html#/library" />
+  <title>转到 Plaza Store</title>
+  <script>location.replace("index.html" + (location.hash && location.hash !== "#" ? location.hash : "#/library"));</script>
 </head>
-<body>
-  <div class="app">
-    <header class="topbar">
-      <a class="logo" href="index.html">广场</a>
-      <div class="hello" id="hello">灯还亮着。阿码在下面等你。</div>
-      <input id="q" type="search" placeholder="找人、找伙伴、找今晚能用的工具…" />
-      <a class="btn-line" href="index.html">回门厅</a>
-    </header>
-    <nav class="dock" aria-label="广场">
-      <button class="nav-btn" data-go="home"><i>街</i>广场</button>
-      <button class="nav-btn" data-go="finder"><i>灯</i>找街</button>
-      <button class="nav-btn goldish" data-go="aiman"><i>阿</i>阿码</button>
-      <button class="nav-btn" data-go="products"><i>货</i>货架</button>
-      <button class="nav-btn" data-go="more"><i>·</i>巷子</button>
-    </nav>
-    <div class="content" id="view"></div>
-  </div>
-  <script src="app.js"></script>
-</body>
+<body>正在转到 Plaza Store…</body>
 </html>

@@ -1,21 +1,20 @@
-# 数字时代广场 · 可点击 Demo
+# Plaza Store
 
-一条有人的街，不是企业后台。
+交互对标 **Apple App Store**。货架上不是 App，而是**个人**和**企业**。
 
-| 文件 | 用途 |
+| 路径 | 对标 |
 |------|------|
-| `index.html` | 门厅：先见到人，再把活交给谁 |
-| `app.html` | 广场里：问候、人物、货架、把活交给阿码 |
+| `index.html#/today` | Today 编辑专题 |
+| `#/people` | Games/Apps：人的货架、真人示意榜、数字人格隔离 |
+| `#/orgs` | 企业货架 |
+| `#/search` | Search |
+| `#/library` | 已加入 / 进行中 / 通知 |
+| `#/resource/{id}` | 资源详情页（Get、预览、评估、信息） |
+| `native/` | 数字专才的交付活动（In-App Event） |
 
-样例街区是 **科技 / 软件研发**（GitHub Copilot、Claude、ChatGPT）。人物两条为示意，页面上会标明不是真人排行。
-
-## 本地打开
+硬约束：名次不可买；数字人格不进真人榜；财富管理覆盖不足不得用研发供给填充。
 
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
-# 门厅 http://127.0.0.1:4173/
-# 广场 http://127.0.0.1:4173/app.html#home
-# 阿码  http://127.0.0.1:4173/app.html#aiman
+# http://127.0.0.1:4173/
 ```
-
-点「去给人管钱」时，阿码会在对话里拒绝，且没有继续自动交付的按钮。底部五个入口：广场 / 找街 / 阿码 / 货架 / 巷子。

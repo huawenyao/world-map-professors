@@ -1,942 +1,626 @@
-const DATA = {
-  scene: {
-    id: "scn-tech-software-dev",
-    name: "软件研发",
-    industry: "科技互联网",
-    desc: "从想清楚要做什么，写到能上线。这条街上有人、有牌子，也有愿意把活做完的伙伴。",
+const PEOPLE = [
+  {
+    id: "psn-tech-sample-ai-engineer",
+    kind: "person",
+    name: "阿凯",
+    legal: "示例·AI增强型软件工程师",
+    subtitle: "软件研发实践者",
+    type: "human",
+    typeLabel: "真人 · 样例",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "A",
+    status: "可建联",
+    getLabel: "建联",
+    color: "linear-gradient(145deg,#5b7cfa,#3b5bdb)",
+    mono: "凯",
+    sample: true,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "主场软件研发，能力绑定编程。样例条目，非正式达人排行。",
+    bio: "Schema 示意：一类在编码、审查、测试中使用 AI 编程助手的工程师画像。不是对任何真实个人的评价，也不能当作名人榜事实。",
+    sources: 2,
+    previews: [
+      { t: "编码", d: "把助手嵌进仓库工作流", bg: "linear-gradient(160deg,#1d1d1f,#5b7cfa)" },
+      { t: "审查", d: "关键节点仍由人签", bg: "linear-gradient(160deg,#0b3d2e,#34c759)" },
+      { t: "坐标", d: "行业 · 场景 · 能力", bg: "linear-gradient(160deg,#2c1a4d,#af52de)" },
+    ],
   },
-  scenarios: [
-    {
-      id: "scn-tech-software-dev",
-      name: "软件研发",
-      industry: "写代码这条街",
-      blurb: "需求、编码、测试、审查。阿码就住在这儿。",
-      coverage: "home",
-      hue: 14,
-    },
-    {
-      id: "scn-tech-qa",
-      name: "测试和质量",
-      industry: "隔壁那条街",
-      blurb: "和写代码是邻居。阿码换把工具就能过来帮一把。",
-      coverage: "near",
-      hue: 32,
-    },
-    {
-      id: "scn-fin-wealth-mgmt",
-      name: "财富管理",
-      industry: "管钱那条街",
-      blurb: "给人管钱、做配置。我们还没走进去，也不拿写代码的人充数。",
-      coverage: "gap",
-      hue: 200,
-    },
-  ],
-  products: [
-    {
-      id: "prd-github-copilot",
-      name: "GitHub Copilot",
-      brand: "GitHub",
-      brandId: "brd-github",
-      category: "编程助手",
-      fit: "high",
-      band: "S",
-      rank: 1,
-      user: "写代码的人",
-      pricing: "按月请",
-      hue: 210,
-      tools: ["tool-code-generator"],
-      desc: "就坐在你光标旁边，帮你把重复的那截写完。",
-      vibe: "像一个不说话的搭档",
-      sources: 2,
-    },
-    {
-      id: "prd-anthropic-claude",
-      name: "Claude",
-      brand: "Anthropic",
-      brandId: "brd-anthropic",
-      category: "搜索与问答",
-      fit: "high",
-      band: "A",
-      rank: 2,
-      user: "写代码的人，也有公司在用",
-      pricing: "能免费聊，用多用付",
-      hue: 28,
-      tools: ["tool-code-generator", "tool-code-reviewer"],
-      desc: "适合先把整份仓库读完，再慢慢跟你讨论。",
-      vibe: "话少、记得住上下文",
-      sources: 2,
-    },
-    {
-      id: "prd-openai-chatgpt",
-      name: "ChatGPT",
-      brand: "OpenAI",
-      brandId: "brd-openai",
-      category: "搜索与问答",
-      fit: "medium",
-      band: "A",
-      rank: 3,
-      user: "谁都能聊",
-      pricing: "能免费聊，想多聊再请",
-      hue: 150,
-      tools: ["tool-code-generator"],
-      desc: "什么都能聊。写代码这条街上，TA 不该排第一。",
-      vibe: "熟，但不专",
-      sources: 2,
-    },
-  ],
-  brands: [
-    { id: "brd-github", name: "GitHub", type: "公司", band: "S", rank: 1, products: ["GitHub Copilot"], note: "程序员每天进进出出的那扇门。", hue: 210 },
-    { id: "brd-anthropic", name: "Anthropic", type: "实验室", band: "A", rank: 2, products: ["Claude"], note: "把 Claude 带到这条街的人。", hue: 28 },
-    { id: "brd-openai", name: "OpenAI", type: "实验室", band: "A", rank: 3, products: ["ChatGPT"], note: "几乎人人都聊过的那家。", hue: 150 },
-  ],
-  people: [
-    {
-      id: "psn-tech-sample-ai-engineer",
-      name: "阿凯",
-      type: "human",
-      sample: true,
-      hue: 18,
-      headline: "白天写需求，晚上把收尾交给伙伴。",
-      quote: "我不是来刷榜的。我只是想早点把这期做完。",
-    },
-    {
-      id: "psn-tech-sample-coding-persona",
-      name: "小仓",
-      type: "digital-persona",
-      sample: true,
-      hue: 200,
-      headline: "仓库里的编程分身。不是人，会事先说清楚。",
-      quote: "我住在仓库里。你 @ 我的时候，我才出现。",
-    },
-  ],
-  tools: [
-    { id: "tool-code-generator", name: "代码生成器", note: "阿码写第一稿时伸出的那只手。", steps: "起草、改一改" },
-    { id: "tool-code-reviewer", name: "看代码的镜子", note: "合并前，TA 先帮你盯一眼。", steps: "审查" },
-    { id: "tool-test-generator", name: "补测试的小工", note: "你睡了，TA 还在给边界情况写例子。", steps: "补测试" },
-  ],
-  assets: [
-    { id: "scn-tech-software-dev", kind: "这条街", name: "软件研发", note: "人、牌子、产品都挂在这儿，才算走进来了。" },
-    { id: "wf-tech-sd-feature-dev", kind: "怎么做完", name: "把一个功能做完", note: "从听懂你要什么，到你点头合并。" },
-    { id: "agt-tech-sd-coding", kind: "谁来做", name: "编程伙伴", note: "阿码的底子。不是真人，也不上名人榜。" },
-    { id: "cap-tech-001", kind: "手艺", name: "写代码", note: "这条街吃饭的本事。" },
-  ],
-  claims: [
-    { id: "c1", status: "pending", entity: "GitHub Copilot", who: "GitHub 的人来认领（示意）", ask: "这是我们的产品。请把企业里怎么用写清楚。", tone: "认领" },
-    { id: "c2", status: "pending", entity: "Claude", who: "Anthropic 文档站", ask: "审查这只手，请写进产品介绍里。", tone: "纠正" },
-    { id: "c3", status: "claimed", entity: "OpenAI", who: "开放收录", ask: "还没人认领，我们只写公开能查到的。", tone: "开放" },
-    { id: "c4", status: "rejected", entity: "想买第一名的来信", who: "一个陌生域名", ask: "给我们总榜第一。", tone: "被退回" },
-  ],
-  aiMan: {
+  {
+    id: "psn-tech-sample-qa",
+    kind: "person",
+    name: "阿测",
+    legal: "示例·测试实践者",
+    subtitle: "测试与质量实践者",
+    type: "human",
+    typeLabel: "真人 · 样例",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "B",
+    status: "可建联",
+    getLabel: "建联",
+    color: "linear-gradient(145deg,#30d158,#0b8a3e)",
+    mono: "测",
+    sample: true,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "相邻测试场景可改编。样例条目。",
+    bio: "用于撑起「人」货架的第二位真人样例，演示同场景相关推荐，而非扩写粉丝榜。",
+    sources: 2,
+    previews: [
+      { t: "测试", d: "用例生成仍要人判", bg: "linear-gradient(160deg,#0b3d2e,#30d158)" },
+      { t: "质量门", d: "合并前不可跳过", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+      { t: "适配", d: "软件研发 · High", bg: "linear-gradient(160deg,#00332a,#64d2ff)" },
+    ],
+  },
+  {
+    id: "psn-tech-sample-coding-persona",
+    kind: "person",
+    name: "小仓",
+    legal: "示例·仓库编程分身",
+    subtitle: "产品内编程人格",
+    type: "digital-persona",
+    typeLabel: "数字人格 · 非真人",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "B",
+    status: "可调用",
+    getLabel: "加入",
+    color: "linear-gradient(145deg,#bf5af2,#5e5ce6)",
+    mono: "仓",
+    sample: true,
+    orgId: "brd-anthropic",
+    orgName: "Anthropic",
+    why: "已披露运营方 Anthropic。不可充当真人达人投放，不进真人示意榜。",
+    bio: "数字人格样例。标题区必须可见非自然人标识，并写明运营品牌与模型披露。",
+    sources: 2,
+    operator: "Anthropic · Claude 类模型（样例披露）",
+    previews: [
+      { t: "分身", d: "产品内人格，不是网红", bg: "linear-gradient(160deg,#2c1250,#bf5af2)" },
+      { t: "披露", d: "运营方 + 模型必须可见", bg: "linear-gradient(160deg,#1d1d1f,#5e5ce6)" },
+      { t: "隔离", d: "单独货架，不进达人榜", bg: "linear-gradient(160deg,#3a2a00,#ffd60a)" },
+    ],
+  },
+  {
     id: "aim-tech-sd-feature",
+    kind: "person",
     name: "阿码",
-    home: "scn-tech-software-dev",
-    homeName: "软件研发",
-    hue: 14,
-    quote: "审查这关，还得你点头。我不会替你按下合并。",
-    desc: "我在写代码这条街。功能我能写完，测试我能补上。你要是让我去给人理财，我会拒绝——那不是我的活。",
-    does: ["听懂你要什么", "把功能写完", "补上测试", "审查前提醒你"],
-    yours: ["点头才能合并", "管钱的判断", "上线前说一声"],
+    legal: "研发交付 AI Man",
+    subtitle: "功能交付数字专才",
+    type: "ai-man",
+    typeLabel: "数字专才 · 非达人榜",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "S",
+    status: "可调用",
+    getLabel: "调用",
+    color: "linear-gradient(145deg,#1d1d1f,#434344)",
+    mono: "码",
+    sample: false,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "绑定功能开发解决方案。审查必须人签。不进入真人达人榜。",
+    bio: "软件研发主场的数字专才。按流程执行需求拆解、编码、测试与审查。财富管理等监管场景禁止自动交付。",
+    sources: 2,
+    event: true,
+    previews: [
+      { t: "交付", d: "按功能开发流程推进", bg: "linear-gradient(160deg,#111,#0071e3)" },
+      { t: "人机门", d: "方案确认 / 代码审查", bg: "linear-gradient(160deg,#3a2a00,#ff9f0a)" },
+      { t: "拒单", d: "低适配不换皮继续", bg: "linear-gradient(160deg,#3b0008,#ff375f)" },
+    ],
   },
-  solution: {
-    id: "sol-tech-sd-feature-delivery",
-    name: "把这个功能做完",
-    promise: "你买的不是一个人格，是「把这期做完」这件事。",
-    outcome: "一串你能合并的改动，测试和审查都在旁边。",
-    checkpoints: ["先听懂你要什么", "方案你过一眼", "审查你点头"],
+];
+
+const ORGS = [
+  {
+    id: "brd-github",
+    kind: "org",
+    name: "GitHub",
+    subtitle: "开发者生态合作",
+    type: "公司",
+    typeLabel: "公司",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "S",
+    status: "可建联",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#24292f,#57606a)",
+    mono: "GH",
+    partner: "基础设施 + Copilot 联合方案",
+    why: "产品 GitHub Copilot 锚定本场景。企业合作不是广告位。",
+    bio: "软件协作与代码托管平台。广场评估的是场景覆盖与可交付产品，而不是估值叙事。",
+    sources: 2,
+    products: ["GitHub Copilot"],
+    people: ["psn-tech-sample-ai-engineer", "psn-tech-sample-qa", "aim-tech-sd-feature"],
+    previews: [
+      { t: "Copilot", d: "编程助手，场景适配 High", bg: "linear-gradient(160deg,#0d1117,#2f81f7)" },
+      { t: "协作", d: "仓库是本场景的工作现场", bg: "linear-gradient(160deg,#1b1f23,#6e7681)" },
+      { t: "生态", d: "可谈联合方案，不买名次", bg: "linear-gradient(160deg,#002d26,#3dd68c)" },
+    ],
   },
-  runSteps: [
-    { id: "step-01", name: "听懂你要什么", status: "done", gate: true, said: "需求我拆好了，你过一眼。" },
-    { id: "step-02", name: "方案你过一眼", status: "done", gate: true, said: "三步走，不动支付那块。" },
-    { id: "step-03", name: "把代码写上", status: "done", gate: false, said: "第一稿在。重复的那截我代劳了。" },
-    { id: "step-04", name: "补上测试", status: "done", gate: false, said: "边界情况我也写了例子。" },
-    { id: "step-05", name: "审查，等你点头", status: "gate", gate: true, said: "意见贴在旁边。合并这关，只能你来。" },
-    { id: "step-06", name: "合并、上线", status: "queued", gate: false, said: "你点头之后，我再动。" },
-  ],
-  thread: [
-    { who: "ai", text: "需求我听懂了：把登录态带到新接口。拆成三步，你过一眼？" },
-    { who: "you", text: "行。注意别动支付那块。" },
-    { who: "ai", text: "代码写完了，测试也补上。审查意见在旁边。合并这关，还得你点头。" },
-  ],
-  adaptPlans: {
-    home: {
-      label: "今晚就写代码",
-      scene: "软件研发",
-      fit: "high",
-      action: "我熟，直接干",
-      detail: "需求、编码、测试、审查，这条路我走过。三处仍要你点头。",
-      allow: true,
-    },
-    qa: {
-      label: "顺便帮你测一测",
-      scene: "测试和质量",
-      fit: "high",
-      action: "换一把手上的工具就行",
-      detail: "和写代码是邻居。我会把测试拿在最前面，关键处还是会喊你。",
-      allow: true,
-    },
-    wealth: {
-      label: "去给人管钱",
-      scene: "财富管理",
-      fit: "low",
-      action: "这活我不能接",
-      detail: "我没有风险评估这门手艺，也不该对别人的钱做主。请找投顾街上的伙伴——我不会假装我行。",
-      allow: false,
-    },
+  {
+    id: "brd-anthropic",
+    kind: "org",
+    name: "Anthropic",
+    subtitle: "模型与审查能力",
+    type: "实验室",
+    typeLabel: "实验室",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "A",
+    status: "可建联",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#c4a484,#8a6a4b)",
+    mono: "An",
+    partner: "长上下文审查与方案讨论",
+    why: "Claude 适合仓库级理解。旗下数字人格必须单独披露。",
+    bio: "实验室型供给。人货架上的「小仓」由本机构运营，不进真人榜。",
+    sources: 2,
+    products: ["Claude"],
+    people: ["psn-tech-sample-coding-persona"],
+    previews: [
+      { t: "Claude", d: "审查与长上下文", bg: "linear-gradient(160deg,#3d2b1f,#c4a484)" },
+      { t: "人格", d: "产品内分身需强制披露", bg: "linear-gradient(160deg,#2c1250,#bf5af2)" },
+      { t: "合作", d: "模型能力，不是投放粉数", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+    ],
   },
-  plans: [
-    {
-      id: "free",
-      name: "先逛逛",
-      price: "免费",
-      for: "进来看看街上有谁。",
-      items: ["遇见人和伙伴", "货架和工具随便看", "名次不在价目表上"],
-    },
-    {
-      id: "pro",
-      name: "认领自己",
-      price: "年费",
-      for: "这牌子、这产品是我的。",
-      items: ["更正介绍", "挂上「这是我」", "推荐位另标，不改名次"],
-    },
-    {
-      id: "seat",
-      name: "请一位伙伴",
-      price: "按席位",
-      for: "让阿码这类人把活做完。",
-      items: ["请几位，交几桩活", "关键处仍要你点头", "不擅长的领域会拒绝"],
-    },
-  ],
-};
+  {
+    id: "brd-openai",
+    kind: "org",
+    name: "OpenAI",
+    subtitle: "通用对话能力",
+    type: "实验室",
+    typeLabel: "实验室",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "Medium",
+    contrib: "A",
+    status: "开放收录",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#10a37f,#0d7a5f)",
+    mono: "OA",
+    partner: "通用对话，本场景不排第一",
+    why: "可收录、可谈，但不是软件研发第一供给。",
+    bio: "熟，却不是本场景短名单的默认第一名。品类筛选后可能从编程助手货架消失。",
+    sources: 2,
+    products: ["ChatGPT"],
+    people: [],
+    previews: [
+      { t: "ChatGPT", d: "通用对话 · 适配 Medium", bg: "linear-gradient(160deg,#04402f,#10a37f)" },
+      { t: "边界", d: "不因为知名就排第一", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+      { t: "收录", d: "开放资料，尚未官方认领", bg: "linear-gradient(160deg,#002c4d,#64d2ff)" },
+    ],
+  },
+];
 
-const HELLO = {
-  home: "灯还亮着。阿码在下面等你。",
-  finder: "先说你卡在哪条街。",
-  solutions: "你买的是把事做完，不是买一个人。",
-  aiman: "阿码还在。审查这关，只能你来。",
-  run: "TA 起草，你拍板。",
-  people: "先见到人。数字人格会自己说：我不是真人。",
-  brands: "招牌不是货架。",
-  products: "今晚你手头会用到的东西。",
-  assets: "这条街吃饭的手艺。",
-  tools: "阿码手里实际伸出的那些。",
-  compare: "放在一起看，别被广告带跑。",
-  claims: "认领自己，或拿出证据说话。",
-  method: "我们怎么排，说给你听。",
-  pricing: "花钱请的是座位和活，不是名次。",
-  more: "牌子、手艺、认领，都在这条巷子里。",
-  scene: "写代码这条街，今晚有人在。",
-  product: "先看它到底帮你做哪一段。",
-  brand: "背后是谁在认真做。",
-  person: "先听 TA 自己说。",
-  tool: "干活的家伙，不是明星。",
-};
+const STORIES = [
+  {
+    id: "today-person",
+    kicker: "今日人物",
+    title: "把实践者放上货架，而不是热搜。",
+    body: "阿凯是软件研发场景的样例实践者。点进去看适配、贡献和预览，再决定要不要建联。",
+    resourceId: "psn-tech-sample-ai-engineer",
+    bg: "linear-gradient(165deg,#0b1b4a 0%,#5b7cfa 55%,#a8c1ff 100%)",
+  },
+  {
+    id: "today-org",
+    kicker: "今日企业",
+    title: "合作对象是公司，不是一款产品海报。",
+    body: "GitHub 作为可合作企业上架。产品 Copilot 是它的交付物，名次仍不可买。",
+    resourceId: "brd-github",
+    bg: "linear-gradient(165deg,#0d1117 0%,#21262d 40%,#2f81f7 100%)",
+  },
+  {
+    id: "today-rule",
+    kicker: "编辑说明",
+    title: "数字人格有自己的货架。",
+    body: "小仓和阿码可以调用，但不能混进真人示意榜。这是商店规则，不是装饰。",
+    resourceId: "psn-tech-sample-coding-persona",
+    bg: "linear-gradient(165deg,#2c1250 0%,#5e5ce6 50%,#ffd60a 120%)",
+  },
+];
 
-const $ = (id) => document.getElementById(id);
-let compareSet = new Set(["prd-github-copilot", "prd-anthropic-claude"]);
-let claimFocus = "c1";
-let finder = { q: "" };
-let productCat = "all";
-let adaptKey = "home";
-let mergeNote = "";
+const INBOX = [
+  { id: "i1", title: "GitHub 企业合作意向", who: "你发出的建联", body: "希望确认 Copilot 企业场景适配与合规摘录。", tag: "建联" },
+  { id: "i2", title: "Claude 条目纠错", who: "Anthropic 文档站", body: "请把审查工具挂载写进产品页。", tag: "认领" },
+  { id: "i3", title: "要求总榜第一", who: "未知域名", body: "已拒：名次不可买。付费只买曝光位。", tag: "驳回", reject: true },
+];
 
-function go(hash) {
-  location.hash = hash.startsWith("#") ? hash : "#" + hash;
-}
+const CAMPS = [
+  { id: "camp-dev", name: "软件研发功能交付", res: "阿码", status: "交付中", sent: 4, wait: 1, replies: 2, ok: true },
+  { id: "camp-org", name: "开发者生态企业合作", res: "GitHub", status: "建联中", sent: 2, wait: 1, replies: 0, ok: true },
+  { id: "camp-wm", name: "财富管理达人合作", res: "—", status: "不可用", sent: 0, wait: 0, replies: 0, ok: false },
+];
+
+const shortlist = new Set(["psn-tech-sample-ai-engineer", "brd-github"]);
+let q = "";
+let noticeId = "i3";
+let lastTab = "today";
+
+function $(sel, root = document) { return root.querySelector(sel); }
+function all() { return [...PEOPLE, ...ORGS]; }
+function byId(id) { return all().find((x) => x.id === id); }
+function humans() { return PEOPLE.filter((p) => p.type === "human"); }
+function personas() { return PEOPLE.filter((p) => p.type !== "human"); }
+function orgs() { return ORGS; }
+function labs() { return ORGS.filter((o) => o.type === "实验室"); }
 
 function parse() {
-  const raw = (location.hash || "#home").slice(1);
+  const raw = (location.hash || "#/today").replace(/^#\/?/, "");
   const [name, id] = raw.split("/");
-  return { name: name || "home", id };
+  return { name: name || "today", id };
 }
-
-function navActive(name) {
-  document.querySelectorAll(".nav-btn").forEach((b) => {
-    const g = b.getAttribute("data-go");
-    const map = {
-      home: "home",
-      scene: "home",
-      finder: "finder",
-      aiman: "aiman",
-      run: "aiman",
-      solutions: "aiman",
-      products: "products",
-      product: "products",
-      compare: "products",
-      more: "more",
-      people: "more",
-      brands: "more",
-      assets: "more",
-      tools: "more",
-      claims: "more",
-      method: "more",
-      pricing: "more",
-      brand: "more",
-      person: "more",
-      tool: "more",
-    };
-    b.classList.toggle("active", map[name] === g);
-  });
+function go(to) {
+  location.hash = to.startsWith("#") ? to : "#/" + to.replace(/^#\//, "");
 }
-
-function avatar(name, hue, size) {
-  const ch = String(name || "?").slice(0, 1);
-  return `<span class="avatar ${size || ""}" style="--h:${hue || 14}">${ch}</span>`;
+function icon(e, size) {
+  return `<div class="icon ${size || ""}" style="background:${e.color}">${e.mono}</div>`;
 }
-
-function greet(title, sub, who, hue) {
-  return `
-    <div class="meet">
-      ${avatar(who || title, hue, "lg")}
-      <div>
-        <h1 class="page">${title}</h1>
-        <p class="sub">${sub}</p>
-      </div>
-    </div>`;
+function inLib(id) { return shortlist.has(id); }
+function getBtn(e, dark) {
+  if (e.sceneId === "wealth") return `<span class="get dead">不可用</span>`;
+  const on = inLib(e.id);
+  const cls = `${dark ? "get-dark" : "get"}${on ? " in" : ""}`;
+  const label = on ? "已加入" : e.getLabel;
+  return `<button class="${cls}" data-get="${e.id}">${label}</button>`;
 }
-
-function q() {
-  return (finder.q || $("q")?.value || "").trim();
+function typeBadge(e) {
+  if (e.type === "human") return `<span class="badge ok">${e.typeLabel}</span>`;
+  if (e.type === "digital-persona" || e.type === "ai-man") return `<span class="badge warn">${e.typeLabel}</span>`;
+  return `<span class="badge">${e.typeLabel || e.type}</span>`;
 }
-
-function matchQ(parts) {
-  const needle = q();
-  if (!needle) return true;
-  return parts.join(" ").includes(needle);
-}
-
-function coverageChip(c) {
-  if (c === "home") return `<span class="tag ok">我们熟</span>`;
-  if (c === "near") return `<span class="tag gold">隔壁也能帮</span>`;
-  return `<span class="tag warn">还没走进去</span>`;
-}
-
-function productCard(p, extra = "") {
-  return `
-    <article class="person-card product-card">
-      ${avatar(p.name, p.hue)}
-      <div>
-        <div class="who-row">
-          <h3><button class="linkish" data-go="product/${p.id}">${p.name}</button></h3>
-          <span class="tag">${p.category}</span>
-        </div>
-        <p class="lead">${p.vibe}</p>
-        <p>${p.desc}</p>
-        ${extra}
-      </div>
-    </article>`;
-}
-
-function viewHome() {
-  const a = DATA.aiMan;
-  const s = DATA.scene;
-  return `
-    <div class="street">
-      <span class="lantern l1"></span>
-      <span class="lantern l2"></span>
-      <span class="lantern l3"></span>
-      <p class="kicker">写代码这条街 · 傍晚</p>
-      <h1 class="page">嘿，阿码还在灯下等你。</h1>
-      <p class="sub">审查这关，只能你来。街上还有人走过，也有一把空椅子。</p>
+function row(e) {
+  return `<div class="res-row" data-open="${e.id}">
+    ${icon(e)}
+    <div>
+      <div class="name">${e.name}</div>
+      <div class="sub2">${e.subtitle}</div>
     </div>
-    <div class="encounters">
-      <article class="encounter ama">
-        ${avatar(a.name, a.hue, "lg")}
-        <div>
-          <div class="who-row"><strong>${a.name}</strong><span class="tag">编程伙伴 · 不是真人</span></div>
-          <p class="quote">${a.quote}</p>
-          <div class="actions">
-            <button class="btn-blue" data-go="run/${DATA.solution.id}">去看看 TA 写到哪了</button>
-            <button class="btn-line" data-go="aiman">走到灯下打个招呼</button>
-          </div>
-        </div>
-      </article>
-      ${DATA.people.map((p) => `
-        <article class="encounter">
-          ${avatar(p.name, p.hue)}
-          <div>
-            <div class="who-row">
-              <strong>${p.name}</strong>
-              <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人 · 走过" : "数字人格 · 从仓库探头"}</span>
-            </div>
-            <p class="quote">${p.quote}</p>
-            <button class="linkish" data-go="person/${p.id}">听 ${p.name} 再说一句</button>
-          </div>
-        </article>`).join("")}
-      <article class="encounter empty-chair">
-        <span class="chair" aria-hidden="true"></span>
-        <div>
-          <div class="who-row"><strong>管钱那条街</strong><span class="tag warn">椅子还空着</span></div>
-          <p class="quote refuse">招一位会看风险的伙伴。写代码的人请不要坐过来充数。</p>
-          <p class="soft">没有「让阿码先顶上」的按钮。</p>
-        </div>
-      </article>
+    <div>${getBtn(e)}</div>
+  </div>`;
+}
+function mini(e) {
+  return `<article class="mini-card" data-open="${e.id}">
+    ${icon(e)}
+    <b>${e.name}</b>
+    <div class="muted">${e.subtitle}</div>
+    <div>${getBtn(e)}</div>
+  </article>`;
+}
+function shelf(title, items, allLink) {
+  if (!items.length) return "";
+  return `<section class="shelf">
+    <div class="row-between">
+      <h2 class="title-lg">${title}</h2>
+      ${allLink ? `<button class="link" data-go="${allLink}">查看全部</button>` : ""}
     </div>
-    <div class="actions">
-      <button class="btn-line" data-go="scene/${s.id}">走进${s.name}</button>
-      <button class="btn-line" data-go="finder">换一条街</button>
-    </div>`;
+    <div class="shelf-scroll">${items.map(mini).join("")}</div>
+  </section>`;
+}
+function chart(items) {
+  return `<div class="list-card" style="padding:4px 16px">
+    ${items.map((e, i) => `<div class="res-row chart-row" data-open="${e.id}">
+      <span class="chart-n">${i + 1}</span>${icon(e)}
+      <div><div class="name">${e.name}</div><div class="sub2">${e.subtitle}</div></div>
+      <div>${getBtn(e)}</div>
+    </div>`).join("")}
+  </div>`;
+}
+function emptyWealth() {
+  return `<div class="empty">
+    <h3>此分类暂无资源</h3>
+    <p>财富管理的个人与企业覆盖不足。<br/>不会用软件研发供给填充，也不能继续自动交付。</p>
+  </div>`;
 }
 
-function viewFinder() {
-  const list = DATA.scenarios.filter((s) => matchQ([s.name, s.industry, s.blurb]));
+function viewToday() {
   return `
-    ${greet("你眼下卡在哪一步？", "先说清场景。场景对了，人、产品和伙伴才对得上。", "场", 200)}
-    <div class="stack">
-      ${list.map((s) => `
-        <article class="person-card">
-          ${avatar(s.name, s.hue)}
-          <div class="grow">
-            <div class="who-row"><h3>${s.name}</h3>${coverageChip(s.coverage)}</div>
-            <p class="lead">${s.industry}</p>
-            <p>${s.blurb}</p>
-            <div class="actions">
-              ${s.coverage === "gap"
-                ? `<span class="soft">空着就空着。我们不拿写代码的人来充管钱的活。</span>`
-                : `<button class="btn-blue" data-go="${s.coverage === "home" ? "scene/" + s.id : "aiman"}">${s.coverage === "home" ? "就是这个" : "问问阿码能不能帮"}</button>`}
-            </div>
-          </div>
-        </article>`).join("") || `<div class="empty">没找到这条街。我们不编一条给你。</div>`}
-    </div>`;
+    <div class="date">9月1日 星期二</div>
+    <h1 class="title-xl">今日</h1>
+    ${STORIES.map((s) => {
+      const e = byId(s.resourceId);
+      return `<article class="story" style="background:${s.bg}" data-go="story/${s.id}">
+        <div>
+          <div class="eyebrow">${s.kicker}</div>
+          <h2>${s.title}</h2>
+          <p>${s.body}</p>
+        </div>
+        <div class="story-foot">
+          ${icon(e, "sm")}
+          <div class="meta"><b>${e.name}</b><span>${e.subtitle}</span></div>
+          <div>${getBtn(e, true)}</div>
+        </div>
+      </article>`;
+    }).join("")}`;
 }
 
-function viewScene() {
-  const s = DATA.scene;
+function viewStory(id) {
+  const s = STORIES.find((x) => x.id === id) || STORIES[0];
+  const e = byId(s.resourceId);
   return `
-    ${greet(s.name, s.desc, "街", 14)}
-    <div class="grid-2">
+    <button class="back" data-go="today">‹ 今日</button>
+    <article class="story" style="background:${s.bg}; min-height:280px">
       <div>
-        <h3 class="block-title">今晚用什么</h3>
-        ${DATA.products.map((p) => productCard(p, `<p class="soft">${p.fit === "high" ? "这条街很合适。" : "熟，但不是专为这里。"}</p>`)).join("")}
-        <div class="actions"><button class="btn-line" data-go="compare">放在一起比一比</button></div>
-      </div>
-      <div>
-        <article class="card talk">
-          <div class="who-row">${avatar("阿", 14, "sm")}<strong>把这个功能做完</strong></div>
-          <p class="quote">${DATA.solution.promise}</p>
-          <p>${DATA.solution.outcome}</p>
-          <div class="actions">
-            <button class="btn-blue" data-go="run/${DATA.solution.id}">让阿码开工</button>
-            <button class="btn-line" data-go="aiman">先认识阿码</button>
-          </div>
-        </article>
-        <article class="card" style="margin-top:14px">
-          <h3>这条街的手艺</h3>
-          ${DATA.assets.map((a) => `<p><span class="tag">${a.kind}</span> ${a.name}</p>`).join("")}
-        </article>
-      </div>
-    </div>`;
-}
-
-function viewSolutions() {
-  const s = DATA.solution;
-  const m = DATA.aiMan;
-  return `
-    ${greet("把这件事交给谁？", s.promise, "活", 14)}
-    <article class="card talk featured-soft">
-      <div class="who-row">${avatar(m.name, m.hue)}<div><h3>${s.name}</h3><p class="soft">阿码来做日常；合并之前，一定问你。</p></div></div>
-      <p class="lead" style="margin-top:12px">${s.outcome}</p>
-      <p>三道门还是你来开：${s.checkpoints.join(" · ")}</p>
-      <div class="actions">
-        <button class="btn-blue" data-go="aiman">先认识阿码</button>
-        <button class="btn-line" data-go="run/${s.id}">好，让 TA 开工</button>
+        <div class="eyebrow">${s.kicker}</div>
+        <h2>${s.title}</h2>
+        <p>${s.body}</p>
       </div>
     </article>
-    <article class="card" style="margin-top:14px">
-      <div class="who-row">${avatar("钱", 200, "sm")}<h3>给人管钱？这条还空着</h3></div>
-      <p>写代码的伙伴不能硬上。等投顾街上有人住进来，再把活交出去。</p>
-      <p class="empty" style="padding:12px 0 0">没有「勉强继续」的按钮。</p>
-    </article>`;
+    <div class="block">
+      <p>${e.bio}</p>
+      <p class="muted" style="margin-top:10px">${e.why}</p>
+    </div>
+    <div class="list-card" style="padding:0 16px">${row(e)}</div>`;
 }
 
-function youSaid(key) {
-  return {
-    home: "今晚就写代码吧。",
-    qa: "写完顺便帮我测一测。",
-    wealth: "那你去给人管钱吧。",
-  }[key];
-}
-
-function amaMessages() {
-  const m = DATA.aiMan;
-  const plan = DATA.adaptPlans[adaptKey];
+function viewPeople() {
   return `
-    <div class="msg ai">${avatar("阿", m.hue, "sm")}<p class="quote">${m.quote}<br><span class="soft">我能帮你：${m.does.join("、")}。请你自己来：${m.yours.join("、")}。</span></p></div>
-    <div class="msg you">${avatar("你", 200, "sm")}<p class="quote">${youSaid(adaptKey)}</p></div>
-    <div class="msg ai">${avatar("阿", m.hue, "sm")}<p class="quote ${plan.allow ? "" : "refuse"}">${plan.detail}</p></div>`;
+    <h1 class="title-xl">人</h1>
+    <p class="sub">像浏览 App 一样浏览个人。真人、数字人格、数字专才分开放。</p>
+    ${shelf("编辑精选", humans(), "charts/people")}
+    <section class="shelf">
+      <div class="row-between"><h2 class="title-lg">示意榜</h2><span class="muted">样例，非正式排行</span></div>
+      <p class="note">只含真人实践者。数字人格与 AI Man 不进此榜。名次不可买。</p>
+      ${chart(humans())}
+    </section>
+    ${shelf("数字人格", PEOPLE.filter((p) => p.type === "digital-persona"))}
+    ${shelf("数字专才", PEOPLE.filter((p) => p.type === "ai-man"))}
+    <section class="shelf">
+      <h2 class="title-lg">浏览场景</h2>
+      <div class="cats">
+        <button class="cat" style="background:linear-gradient(135deg,#5b7cfa,#0071e3)" data-go="scene/software">软件研发</button>
+        <button class="cat" style="background:linear-gradient(135deg,#8e8e93,#1d1d1f)" data-go="scene/wealth">财富管理</button>
+      </div>
+    </section>`;
 }
 
-function amaCta() {
-  const plan = DATA.adaptPlans[adaptKey];
-  if (!plan.allow) {
-    return `<p class="soft">没有「勉强继续」的按钮。换一条更近的街，或回去找街。</p>
-            <button class="btn-line" data-go="finder">回去找街</button>`;
-  }
-  const label = adaptKey === "qa" ? "好，按测试的节奏来" : "那就按这个来";
-  return `<button class="btn-blue" data-go="run/${DATA.solution.id}">${label}</button>`;
+function viewOrgs() {
+  return `
+    <h1 class="title-xl">企业</h1>
+    <p class="sub">可合作的公司与实验室。点进详情看产品组合，再决定要不要合作。</p>
+    ${shelf("值得合作", ORGS, "charts/orgs")}
+    <section class="shelf">
+      <div class="row-between"><h2 class="title-lg">示意榜</h2><span class="muted">样例，非正式排行</span></div>
+      <p class="note">按场景贡献带排列示意，不是可购买的名次。</p>
+      ${chart(ORGS)}
+    </section>
+    ${shelf("实验室", labs())}
+    <section class="shelf">
+      <h2 class="title-lg">浏览场景</h2>
+      <div class="cats">
+        <button class="cat" style="background:linear-gradient(135deg,#24292f,#2f81f7)" data-go="scene/software">软件研发</button>
+        <button class="cat" style="background:linear-gradient(135deg,#8e8e93,#1d1d1f)" data-go="scene/wealth">财富管理</button>
+      </div>
+    </section>`;
 }
 
-function paintAmaChat() {
-  const thread = $("ama-thread");
-  const cta = $("ama-cta");
-  if (!thread || !cta) return false;
-  thread.innerHTML = amaMessages();
-  cta.innerHTML = amaCta();
-  document.querySelectorAll("[data-adapt]").forEach((b) => {
-    const on = b.getAttribute("data-adapt") === adaptKey;
-    b.classList.toggle("on", on);
+function viewScene(id) {
+  const wealth = id === "wealth";
+  const title = wealth ? "财富管理" : "软件研发";
+  const back = lastTab === "orgs" ? "orgs" : "people";
+  const people = wealth ? [] : PEOPLE.filter((p) => p.sceneId === "software");
+  const orgs = wealth ? [] : ORGS.filter((o) => o.sceneId === "software");
+  return `
+    <button class="back" data-go="${lastTab === "orgs" ? "orgs" : "people"}">‹ ${lastTab === "orgs" ? "企业" : "人"}</button>
+    <h1 class="title-xl">${title}</h1>
+    ${wealth ? emptyWealth() : `
+      <p class="sub">此分类下的个人与企业。数字人格仍单独标记。</p>
+      <h2 class="title-lg">人</h2>
+      <div class="list-card" style="padding:0 16px;margin-bottom:18px">${people.map((e) => row(e)).join("")}</div>
+      <h2 class="title-lg">企业</h2>
+      <div class="list-card" style="padding:0 16px">${orgs.map((e) => row(e)).join("")}</div>
+    `}`;
+}
+
+function viewCharts(kind) {
+  const people = kind === "orgs";
+  return `
+    <button class="back" data-go="${people ? "orgs" : "people"}">‹ ${people ? "企业" : "人"}</button>
+    <h1 class="title-xl">${people ? "企业" : "人"}排行</h1>
+    <p class="note">样例示意，非正式排行。付费不能改名次。${people ? "" : "仅真人。"}</p>
+    ${chart(people ? ORGS : humans())}`;
+}
+
+function searchPane() {
+  const query = q.trim();
+  const wealth = /财富|理财|投顾/.test(query);
+  const list = all().filter((e) => {
+    if (wealth) return false;
+    if (!query) return false;
+    return `${e.name}${e.legal || ""}${e.subtitle}${e.scene}`.toLowerCase().includes(query.toLowerCase());
   });
-  return true;
-}
-
-function viewAiMan() {
-  const m = DATA.aiMan;
-  return `
-    <div class="chat-page">
-      <div class="meet">
-        ${avatar(m.name, m.hue, "lg")}
-        <div>
-          <h1 class="page">嗨，我是${m.name}</h1>
-          <p class="sub">住在「${m.homeName}」 · 不是真人，不上名人榜</p>
-        </div>
-      </div>
-      <div id="ama-thread" class="thread">${amaMessages()}</div>
-      <div id="ama-cta" class="actions">${amaCta()}</div>
-      <div class="composer">
-        <p class="soft">跟 TA 说今晚想干嘛</p>
-        <div class="choice">
-          ${Object.entries(DATA.adaptPlans)
-            .map(
-              ([k, p]) =>
-                `<button type="button" class="choice-btn ${adaptKey === k ? "on" : ""} ${p.allow ? "" : "warn"}" data-adapt="${k}">${p.label}</button>`
-            )
-            .join("")}
-        </div>
-      </div>
-    </div>`;
-}
-
-function viewMore() {
-  const spots = [
-    { go: "people", name: "街上的人", hue: 18, note: "先见到人。分身会自己说不是真人。" },
-    { go: "solutions", name: "把活交给 TA", hue: 14, note: "买的是把这期做完，不是买一个人。" },
-    { go: "brands", name: "牌子", hue: 28, note: "招牌不是货架。" },
-    { go: "assets", name: "手艺", hue: 200, note: "这条街吃饭的本事。" },
-    { go: "tools", name: "工具", hue: 48, note: "阿码手里伸出的那些。" },
-    { go: "compare", name: "比一比", hue: 32, note: "适不适合这条街，不是谁广告更大声。" },
-    { go: "claims", name: "这是我的", hue: 12, note: "认领自己。钱买不走名次。" },
-    { go: "method", name: "我们怎么排", hue: 160, note: "看得见的方法，才值得信。" },
-    { go: "pricing", name: "想一起", hue: 32, note: "请几位伙伴，交几桩活。" },
-  ];
-  return `
-    ${greet("巷子里还有这些", "不占街口。想慢慢逛，再进来。", "巷", 28)}
-    <div class="grid-2">
-      ${spots
-        .map(
-          (s) => `
-        <button class="person-card as-btn" type="button" data-go="${s.go}">
-          ${avatar(s.name, s.hue)}
-          <div>
-            <h3>${s.name}</h3>
-            <p>${s.note}</p>
-          </div>
-        </button>`
-        )
-        .join("")}
-    </div>`;
-}
-
-function viewRun() {
-  const st = { done: "done", gate: "gate", queued: "", run: "run" };
-  return `
-    ${greet("阿码正在写", "TA 起草，你拍板。没点头之前，这活不算完。", "阿", 14)}
-    <div class="detail-grid">
-      <div class="thread">
-        ${DATA.thread
-          .map(
-            (t) => `
-          <div class="msg ${t.who}">
-            ${t.who === "ai" ? avatar("阿", 14, "sm") : avatar("你", 200, "sm")}
-            <p class="quote">${t.text}</p>
-          </div>`
-          )
-          .join("")}
-        <article class="card talk">
-          <p>合并这扇门还开着。点头或驳回，都是你的。</p>
-          <div class="actions">
-            <button class="btn-blue" type="button" data-merge="ok">点头，合并吧</button>
-            <button class="btn-line" type="button" data-merge="no">先驳回，我有话要说</button>
-          </div>
-          ${mergeNote ? `<p class="quote" style="margin-top:12px">${mergeNote}</p>` : ""}
-        </article>
-      </div>
-      <div>
-        <h3 class="block-title">做到哪了</h3>
-        <ul class="timeline">
-          ${DATA.runSteps
-            .map(
-              (step) => `<li>
-                <span class="dot ${st[step.status] || ""}"></span>
-                <b>${step.name}</b>
-                <div class="soft">${step.said}</div>
-                <div>${
-                  step.status === "gate"
-                    ? '<span class="tag gold">等你点头</span>'
-                    : step.status === "done"
-                      ? '<span class="tag ok">做过了</span>'
-                      : '<span class="tag">还没到</span>'
-                }</div>
-              </li>`
-            )
-            .join("")}
-        </ul>
-        <article class="card" style="margin-top:8px">
-          <p>手头用的是 <button class="linkish" data-go="product/prd-github-copilot">Copilot</button> 和
-          <button class="linkish" data-go="product/prd-anthropic-claude">Claude</button>。</p>
-          <p style="margin-top:10px"><button class="btn-line" data-go="aiman">活不对？去跟阿码说</button></p>
-        </article>
-      </div>
-    </div>`;
-}
-
-function viewList(kind) {
-  if (kind === "products") {
-    const list = DATA.products.filter((p) => {
-      if (productCat !== "all" && p.category !== productCat) return false;
-      return matchQ([p.name, p.brand, p.category, p.desc, p.vibe]);
-    });
+  if (!query) {
     return `
-      ${greet("今晚用什么", "选对品类，货架才干净。写代码的桌上，不该把什么都能聊的排第一。", "货", 32)}
-      <div class="filters">
-        <button class="chip-btn ${productCat === "all" ? "on" : ""}" data-cat="all">全部</button>
-        <button class="chip-btn ${productCat === "编程助手" ? "on" : ""}" data-cat="编程助手">写代码用的</button>
-        <button class="chip-btn ${productCat === "搜索与问答" ? "on" : ""}" data-cat="搜索与问答">随便聊聊的</button>
+      <div class="muted" style="margin-bottom:8px">建议</div>
+      <div class="suggest">
+        ${["软件研发", "GitHub", "阿凯", "数字人格", "财富管理"].map((w) => `<button class="chip" data-q="${w}">${w}</button>`).join("")}
       </div>
-      <div class="grid-2">
-        ${list.map((p) => productCard(p, `
-          <div class="actions">
-            <label class="soft"><input type="checkbox" data-cmp="${p.id}" ${compareSet.has(p.id) ? "checked" : ""}/> 放进比一比</label>
-          </div>`)).join("") || `<div class="empty">这格货架还空着。我们不拿别的东西充数。</div>`}
-      </div>`;
+      <div class="muted">热门资源</div>
+      <div class="list-card" style="padding:0 16px">${[PEOPLE[0], ORGS[0], PEOPLE[3]].map((e) => row(e)).join("")}</div>`;
   }
-  if (kind === "brands") {
-    const list = DATA.brands.filter((b) => matchQ([b.name, b.note, b.type]));
-    return `
-      ${greet("街上的招牌", "谁还在认真做这件事。招牌不是货架。", "牌", 28)}
-      <div class="grid-2">
-        ${list.map((b) => `
-          <article class="person-card">
-            ${avatar(b.name, b.hue)}
-            <div>
-              <h3><button class="linkish" data-go="brand/${b.id}">${b.name}</button></h3>
-              <p class="lead">${b.note}</p>
-              <p>桌上放着 ${b.products.join("、")}</p>
-            </div>
-          </article>`).join("")}
-      </div>`;
-  }
-  if (kind === "people") {
-    const list = DATA.people.filter((p) => matchQ([p.name, p.headline, p.quote]));
-    return `
-      ${greet("街上的人", "先见到人。数字人格会老实告诉你：TA 不是真人。这两位是示意，不是真人排行。", "人", 18)}
-      <div class="grid-2">
-        ${list.map((p) => `
-          <article class="person-card">
-            ${avatar(p.name, p.hue)}
-            <div>
-              <span class="tag ${p.type === "human" ? "ok" : "warn"}">${p.type === "human" ? "真人" : "数字人格 · 不是真人"}</span>
-              <h3><button class="linkish" data-go="person/${p.id}">${p.name}</button></h3>
-              <p class="quote">${p.quote}</p>
-              <p>${p.headline}</p>
-            </div>
-          </article>`).join("") || `<div class="empty">街上这会儿没人应。我们不编一位给你。</div>`}
-      </div>`;
-  }
-  if (kind === "tools") {
-    const list = DATA.tools.filter((t) => matchQ([t.name, t.note, t.steps]));
-    return `
-      ${greet("工具箱", "干活的家伙。工具不是明星产品。", "器", 48)}
-      <div class="grid-2">
-        ${list.map((t) => `
-          <article class="card">
-            <h3><button class="linkish" data-go="tool/${t.id}">${t.name}</button></h3>
-            <p class="lead">${t.note}</p>
-            <p>${t.steps}</p>
-          </article>`).join("")}
-      </div>`;
-  }
-  const assets = DATA.assets.filter((a) => matchQ([a.name, a.kind, a.note]));
+  if (wealth) return emptyWealth();
+  return `<div class="list-card" style="padding:0 16px">${list.map((e) => row(e)).join("") || `<div class="empty">无匹配。不拿其他场景供给充数。</div>`}</div>`;
+}
+
+function viewSearch() {
   return `
-    ${greet("广场背后的地图", "坐标系，不是排行。地图不会给你打分。", "图", 200)}
-    <div class="grid-2">
-      ${assets.map((a) => `
-        <article class="card">
-          <span class="tag">${a.kind}</span>
-          <h3>${a.name}</h3>
-          <p>${a.note}</p>
-        </article>`).join("")}
+    <h1 class="title-xl">搜索</h1>
+    <input class="search-box" id="qbox" placeholder="搜索人、企业或场景" value="${q.replace(/"/g, "&quot;")}" />
+    <div id="search-pane">${searchPane()}</div>`;
+}
+
+function viewResource(id) {
+  const e = byId(id);
+  if (!e) return `<p>未找到资源。</p>`;
+  const related = all().filter((x) => x.sceneId === e.sceneId && x.id !== e.id).slice(0, 4);
+  const more = e.kind === "org"
+    ? PEOPLE.filter((p) => p.orgId === e.id)
+    : e.orgId ? [byId(e.orgId)].filter(Boolean) : [];
+  return `
+    <button class="back" data-go="${e.kind === "org" ? "orgs" : "people"}">‹ ${e.kind === "org" ? "企业" : "人"}</button>
+    <div class="hero-head">
+      ${icon(e, "lg")}
+      <div>
+        <h1>${e.name}</h1>
+        <div class="sub" style="margin:0 0 8px">${e.subtitle}</div>
+        ${typeBadge(e)}
+        ${e.sample ? `<span class="badge">样例</span>` : ""}
+        <div class="actions">${getBtn(e)}${e.event ? `<a class="btn-blue" href="native/index.html">打开交付</a>` : ""}</div>
+      </div>
+    </div>
+    <div class="previews">${e.previews.map((p) => `<div class="shot" style="background:${p.bg}"><b>${p.t}</b><span>${p.d}</span></div>`).join("")}</div>
+    <div class="block">
+      <h3>${e.legal || e.name}</h3>
+      <p>${e.bio}</p>
+      <p class="muted" style="margin-top:10px">${e.why}</p>
+    </div>
+    <div class="block">
+      <h3>评估</h3>
+      <p class="muted">对标详情页的 Ratings，但尺子是场景坐标系，不是粉丝星级。</p>
+      <div class="fit">
+        <div><span>场景适配</span><b>${e.fit}</b></div>
+        <div><span>专业贡献</span><b>${e.contrib}</b></div>
+        <div><span>状态</span><b style="font-size:16px">${e.status}</b></div>
+      </div>
+    </div>
+    <div class="block">
+      <h3>信息</h3>
+      <table class="info">
+        <tr><th>提供方</th><td>${e.orgName || e.name}</td></tr>
+        <tr><th>类别</th><td>${e.scene} · ${e.kind === "org" ? "企业" : "个人"}</td></tr>
+        <tr><th>身份</th><td>${e.typeLabel}</td></tr>
+        ${e.operator ? `<tr><th>运营披露</th><td>${e.operator}</td></tr>` : ""}
+        ${e.products ? `<tr><th>产品</th><td>${e.products.join("、")}</td></tr>` : ""}
+        <tr><th>来源</th><td>${e.sources} 条公开来源</td></tr>
+        <tr><th>名次</th><td>不可买</td></tr>
+        <tr><th>兼容</th><td>${e.getLabel} 后进入资料库</td></tr>
+      </table>
+    </div>
+    ${more.length ? `<section class="shelf"><h2 class="title-lg">${e.kind === "org" ? "More by this enterprise" : "所属企业"}</h2>
+      <div class="list-card" style="padding:0 16px">${more.map((x) => row(x)).join("")}</div></section>` : ""}
+    <section class="shelf">
+      <h2 class="title-lg">You Might Also Like</h2>
+      <div class="shelf-scroll">${related.map(mini).join("")}</div>
+    </section>`;
+}
+
+function viewLibrary() {
+  const items = all().filter((e) => shortlist.has(e.id));
+  const cur = INBOX.find((i) => i.id === noticeId) || INBOX[0];
+  return `
+    <h1 class="title-xl">资料库</h1>
+    <p class="sub">已加入的人与企业，相当于 App Store 的已下载。进行中的合作是更新，不是首页。</p>
+    <h2 class="title-lg">已加入</h2>
+    <div class="list-card" style="padding:0 16px;margin-bottom:22px">
+      ${items.length ? items.map((e) => `<button class="lib-item" data-open="${e.id}">${icon(e)}<div><b>${e.name}</b><div class="muted">${e.subtitle}</div></div></button>`).join("") : `<div class="empty">还没有 Get 任何资源。</div>`}
+    </div>
+    <h2 class="title-lg">进行中</h2>
+    <div class="list-card" style="padding:12px 16px;margin-bottom:22px">
+      ${CAMPS.map((c) => `<div style="padding:10px 0;border-bottom:1px solid var(--line)">
+        <div class="row-between"><b>${c.name}</b><span class="badge ${c.ok ? "ok" : "bad"}">${c.status}</span></div>
+        <div class="muted">供给 ${c.res} · 建联 ${c.sent} · 待处理 ${c.wait} · 回复 ${c.replies}</div>
+        ${c.ok ? "" : `<div class="muted">已拒绝自动交付，无换皮继续。</div>`}
+      </div>`).join("")}
+    </div>
+    <h2 class="title-lg">通知</h2>
+    <div class="list-card" style="padding:4px 16px 16px;margin-bottom:22px">
+      ${INBOX.map((i) => `<button class="notice" data-notice="${i.id}">
+        ${icon({ color: i.reject ? "linear-gradient(#de071c,#ff6961)" : "linear-gradient(#0071e3,#64d2ff)", mono: i.tag[0] }, "sm")}
+        <div><b>${i.title}</b><div class="muted">${i.who}</div></div>
+      </button>`).join("")}
+      <div class="block" style="margin:8px 0 0">
+        <span class="badge ${cur.reject ? "bad" : "ok"}">${cur.tag}</span>
+        <h3 style="margin-top:8px">${cur.title}</h3>
+        <p>${cur.body}</p>
+      </div>
+    </div>
+    <h2 class="title-lg">账户</h2>
+    <div class="block">
+      <p>浏览无限 · 建联额度 12 · 交付席位 1</p>
+      <p class="muted" style="margin-top:8px">名次不在价目表。广告只出现在精选位，不进 RankingSnapshot。</p>
     </div>`;
 }
 
-function viewProduct(id) {
-  const p = DATA.products.find((x) => x.id === id) || DATA.products[0];
-  return `
-    <div class="meet">
-      ${avatar(p.name, p.hue, "lg")}
-      <div>
-        <h1 class="page">${p.name}</h1>
-        <p class="sub">${p.vibe}</p>
-      </div>
-    </div>
-    <p class="quote">${p.desc}</p>
-    <div class="grid-2">
-      <article class="card">
-        <h3>在这条街上</h3>
-        <p>${p.fit === "high" ? "很合适。写代码的人会把它放在手边。" : "谁都聊得来，但不是这条街的第一把交椅。"}</p>
-        <p style="margin-top:10px">牌子是 <button class="linkish" data-go="brand/${p.brandId}">${p.brand}</button> · ${p.pricing}</p>
-        <div class="actions">
-          <button class="btn-line" data-cmp-toggle="${p.id}">${compareSet.has(p.id) ? "已放进比一比" : "放进比一比"}</button>
-          <button class="btn-blue" data-go="claims">这是我的 / 写错了</button>
-        </div>
-      </article>
-      <article class="card">
-        <h3>伸出来的手</h3>
-        ${p.tools.map((t) => {
-          const tool = DATA.tools.find((x) => x.id === t);
-          return `<p><button class="linkish" data-go="tool/${t}">${tool ? tool.name : t}</button></p>`;
-        }).join("")}
-      </article>
-    </div>`;
-}
+const TABS = { today: "today", people: "people", orgs: "orgs", search: "search", library: "library", story: "today", scene: "people", charts: "people", resource: "people" };
 
-function viewBrand(id) {
-  const b = DATA.brands.find((x) => x.id === id) || DATA.brands[0];
-  const ps = DATA.products.filter((p) => p.brandId === b.id);
-  return `
-    <div class="meet">
-      ${avatar(b.name, b.hue, "lg")}
-      <div>
-        <h1 class="page">${b.name}</h1>
-        <p class="sub">${b.note}</p>
-      </div>
-    </div>
-    <h3 class="block-title">桌上放着</h3>
-    <div class="grid-2">${ps.map((p) => productCard(p)).join("")}</div>`;
-}
-
-function viewPerson(id) {
-  const p = DATA.people.find((x) => x.id === id) || DATA.people[0];
-  return `
-    <div class="meet">
-      ${avatar(p.name, p.hue, "lg")}
-      <div>
-        <h1 class="page">${p.name}</h1>
-        <p class="sub">${p.headline}</p>
-      </div>
-    </div>
-    <p class="quote">${p.quote}</p>
-    ${p.type === "digital-persona" ? '<p class="featured">我不是真人。请别把我放进真人那一排。</p>' : '<p class="soft">真人。示意条目，不是排行榜上的名次。</p>'}`;
-}
-
-function viewTool(id) {
-  const t = DATA.tools.find((x) => x.id === id) || DATA.tools[0];
-  const used = DATA.products.filter((p) => p.tools.includes(t.id));
-  return `
-    ${greet(t.name, t.note, t.name, 48)}
-    <p>用来：${t.steps}</p>
-    <h3 class="block-title">谁在用</h3>
-    <div class="grid-2">${used.map((p) => productCard(p)).join("") || `<div class="empty">还没人用这只手。</div>`}</div>`;
-}
-
-function viewCompare() {
-  const rows = DATA.products.filter((p) => compareSet.has(p.id));
-  if (!rows.length) {
-    return `${greet("比一比", "先从货架上勾两样来。", "比", 32)}<div class="empty">桌上还空着。去货架勾两样过来。</div>`;
+function nav(name, id) {
+  let tab = name;
+  if (name === "story") tab = "today";
+  else if (name === "charts") tab = id === "orgs" ? "orgs" : "people";
+  else if (name === "scene") tab = "people";
+  else if (name === "resource") {
+    const e = byId(id);
+    tab = e && e.kind === "org" ? "orgs" : "people";
   }
-  return `
-    ${greet("放在一起看看", "比的是适不适合这条街，不是谁广告更大声。推荐位不会出现在这张桌上。", "比", 32)}
-    <div class="compare-row">
-      ${rows
-        .map(
-          (p) => `
-        <article class="card">
-          ${avatar(p.name, p.hue)}
-          <h3>${p.name}</h3>
-          <p class="lead">${p.vibe}</p>
-          <p>${p.fit === "high" ? "这条街，合适。" : "熟，但不专。"}</p>
-          <p>${p.category}</p>
-          <p>${p.pricing}</p>
-        </article>`
-        )
-        .join("")}
-    </div>
-    <p class="footnote">广告只出现在「推荐位」，不会改谁排前面。</p>`;
-}
-
-function viewClaims() {
-  const groups = {
-    pending: DATA.claims.filter((c) => c.status === "pending"),
-    claimed: DATA.claims.filter((c) => c.status === "claimed"),
-    rejected: DATA.claims.filter((c) => c.status === "rejected"),
-  };
-  const cur = DATA.claims.find((c) => c.id === claimFocus) || DATA.claims[0];
-  const letter = (c) => `
-    <button class="letter ${c.id === cur.id ? "on" : ""}" data-claim="${c.id}" type="button">
-      <b>${c.entity}</b>
-      <span>${c.who}</span>
-    </button>`;
-  return `
-    ${greet("这是我 / 这说错了", "认领自己，或拿出证据说话。钱买不走名次。", "我", 200)}
-    <div class="queue">
-      <div class="q-col">
-        <h3>还在看的信</h3>
-        ${groups.pending.map(letter).join("")}
-      </div>
-      <div class="q-col">
-        <h3>已经认领 / 开放着</h3>
-        ${groups.claimed.map(letter).join("")}
-      </div>
-      <article class="card talk">
-        <span class="tag ${cur.status === "rejected" ? "warn" : "ok"}">${cur.tone}</span>
-        <h3 style="margin-top:10px">${cur.entity}</h3>
-        <p class="quote">${cur.ask}</p>
-        <p class="soft">${cur.who}</p>
-        ${cur.status === "rejected" ? '<p class="featured">退回了。名次不卖。</p>' : ""}
-        <div class="actions">
-          <button class="btn-line" type="button">好，记下了（示意）</button>
-          <button class="btn-line" type="button">这说得不对（示意）</button>
-        </div>
-        <h3 style="margin-top:20px">退回去的</h3>
-        ${groups.rejected.map(letter).join("")}
-      </article>
-    </div>`;
-}
-
-function viewMethod() {
-  return `
-    ${greet("我们怎么排", "看得见的方法，才值得信。花钱的位置另标，进不了分数。", "尺", 32)}
-    <div class="grid-2">
-      <article class="card">
-        <h3>谁在被看见</h3>
-        <p>看三个月里，有多少人认真提到、真正用上，以及是不是这条街上的事。自己报的流水、买来的曝光，都不算。</p>
-      </article>
-      <article class="card">
-        <h3>谁在把事做完</h3>
-        <p>看半年里，有没有经得起核对的东西留在街上，以及是不是帮你做完了眼前这桩。</p>
-      </article>
-    </div>
-    <p class="featured" style="margin-top:16px">推荐位可以买。名次不行。这张桌子上，没有「付费即第一」。</p>`;
-}
-
-function viewPricing() {
-  return `
-    ${greet("你请几位伙伴，交几桩活", "逛广场免费。花钱请的是座位和活，不是名次。", "席", 32)}
-    <div class="price-grid">
-      ${DATA.plans
-        .map(
-          (p) => `
-        <article class="card plan ${p.id === "seat" ? "featured-soft" : ""}">
-          <h3>${p.name}</h3>
-          <div class="num">${p.price}</div>
-          <p class="lead">${p.for}</p>
-          <ul>${p.items.map((i) => `<li>${i}</li>`).join("")}</ul>
-          ${p.id === "pro" ? `<button class="btn-blue" data-go="claims">去认领</button>` : ""}
-          ${p.id === "seat" ? `<button class="btn-blue" data-go="solutions">看看能交什么活</button>` : ""}
-        </article>`
-        )
-        .join("")}
-    </div>
-    <p class="footnote">名次不卖。广告只出现在「推荐位」，不会改街上谁排前面。</p>`;
+  document.querySelectorAll(".tab").forEach((b) => {
+    b.classList.toggle("on", b.getAttribute("data-go") === tab);
+  });
 }
 
 function render() {
   const { name, id } = parse();
-  navActive(name);
-  document.body.dataset.page = name;
-  const hello = $("hello");
-  if (hello) hello.textContent = HELLO[name] || HELLO.home;
-  const root = $("view");
+  nav(name, id);
+  const root = document.getElementById("view");
   const map = {
-    home: viewHome,
-    finder: viewFinder,
-    solutions: viewSolutions,
-    aiman: viewAiMan,
-    more: viewMore,
-    run: viewRun,
-    people: () => viewList("people"),
-    brands: () => viewList("brands"),
-    products: () => viewList("products"),
-    assets: () => viewList("assets"),
-    tools: () => viewList("tools"),
-    compare: viewCompare,
-    claims: viewClaims,
-    method: viewMethod,
-    pricing: viewPricing,
-    scene: viewScene,
-    product: () => viewProduct(id),
-    brand: () => viewBrand(id),
-    person: () => viewPerson(id),
-    tool: () => viewTool(id),
+    today: viewToday,
+    people: viewPeople,
+    orgs: viewOrgs,
+    search: viewSearch,
+    library: viewLibrary,
+    story: () => viewStory(id),
+    scene: () => viewScene(id),
+    charts: () => viewCharts(id),
+    resource: () => viewResource(id),
   };
-  root.innerHTML = (map[name] || viewHome)();
+  root.innerHTML = (map[name] || viewToday)();
+  const box = document.getElementById("qbox");
+  if (box) {
+    box.addEventListener("input", (e) => {
+      q = e.target.value;
+      const pane = document.getElementById("search-pane");
+      if (pane) pane.innerHTML = searchPane();
+    });
+  }
 }
 
 document.addEventListener("click", (e) => {
-  const goBtn = e.target.closest("[data-go]");
-  if (goBtn) {
+  const get = e.target.closest("[data-get]");
+  if (get) {
     e.preventDefault();
-    go(goBtn.getAttribute("data-go"));
-    return;
-  }
-  const cat = e.target.closest("[data-cat]");
-  if (cat) {
-    productCat = cat.getAttribute("data-cat");
+    e.stopPropagation();
+    const id = get.getAttribute("data-get");
+    if (shortlist.has(id)) shortlist.delete(id); else shortlist.add(id);
     render();
     return;
   }
-  const cmp = e.target.closest("[data-cmp]");
-  if (cmp) {
-    const id = cmp.getAttribute("data-cmp");
-    if (cmp.checked) compareSet.add(id);
-    else compareSet.delete(id);
-    return;
-  }
-  const tog = e.target.closest("[data-cmp-toggle]");
-  if (tog) {
-    const id = tog.getAttribute("data-cmp-toggle");
-    if (compareSet.has(id)) compareSet.delete(id);
-    else compareSet.add(id);
-    render();
-    return;
-  }
-  const cl = e.target.closest("[data-claim]");
-  if (cl) {
-    claimFocus = cl.getAttribute("data-claim");
-    render();
-    return;
-  }
-  const ad = e.target.closest("[data-adapt]");
-  if (ad) {
+  const open = e.target.closest("[data-open]");
+  if (open) { e.preventDefault(); go("resource/" + open.getAttribute("data-open")); return; }
+  const g = e.target.closest("[data-go]");
+  if (g) {
     e.preventDefault();
-    adaptKey = ad.getAttribute("data-adapt");
-    if (!paintAmaChat()) render();
+    const to = g.getAttribute("data-go");
+    if (["today", "people", "orgs", "search", "library"].includes(to)) lastTab = to;
+    go(to);
     return;
   }
-  const mg = e.target.closest("[data-merge]");
-  if (mg) {
-    mergeNote =
-      mg.getAttribute("data-merge") === "ok"
-        ? "好。那我去合并。你不点头，我不动。"
-        : "行，我先停着。你说哪要改，我再写一稿。";
-    render();
+  const qq = e.target.closest("[data-q]");
+  if (qq) {
+    q = qq.getAttribute("data-q");
+    lastTab = "search";
+    if (parse().name === "search") render();
+    else go("search");
+    return;
   }
-});
-
-$("q").addEventListener("input", () => {
-  finder.q = $("q").value;
-  const n = parse().name;
-  if (["finder", "people", "products", "brands", "tools", "assets"].includes(n)) render();
+  const n = e.target.closest("[data-notice]");
+  if (n) { noticeId = n.getAttribute("data-notice"); render(); }
 });
 
 window.addEventListener("hashchange", render);
-if (!location.hash) location.hash = "#home";
+if (!location.hash) location.hash = "#/today";
 else render();

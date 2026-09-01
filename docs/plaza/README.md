@@ -3,7 +3,9 @@
 > AI 时代的公共注意力与专业资产交易所  
 > 三榜捕获流量与公信力，两库沉淀可复用资产，底层由 world-professors 本体作为坐标系。
 
-**定位一句话**：看见（五馆）之后，用 **场景解决方案 + AI Man** 在专业场景里把活交付完；换场景先算适配，再改编或拒绝。
+**定位一句话**：面向资源需求方的**人与企业商店**——像 App Store 一样发现、打开详情、Get 建联，再把场景交付完。
+
+货架上不是 App，是个人与企业。五馆是供给；详情页是评估现场；资料库是已加入的资源；AI Man 只作为可调用的数字专才出现。
 
 ## 与现有项目的关系
 
@@ -42,7 +44,10 @@
 | [05 增长与运营](05-go-to-market.md) | GTM、内容冷启动、组织、合规 |
 | [06 Success.ai 对标](06-success-ai-reference.md) | 实际 Demo/工作台映射，以及不抄什么 |
 | [07 场景解决方案 · AI Man](07-scenario-solution-ai-man.md) | 交付层：自适应数字专才、改编规则、R9 收入 |
-| [可点击 Demo](../../demo/plaza/README.md) | 营销页 + 工作台（含解决方案 / AI Man / 改编台） |
+| [08 需求方生态](08-demand-side-ecosystem.md) | Success.ai 工作台 + 小豆芽/海汇能力映射：找人、找企业、评估链接、交付 |
+| [09 AI 原生工作场景](09-ai-native-work-scenario.md) | 交付活动：工具调用、人机门、拒单 |
+| [10 App Store 交互](10-app-store-interaction.md) | 人/企业商店：Today、货架、详情、Get、资料库 |
+| [可点击 Demo](../../demo/plaza/README.md) | Plaza Store（App Store 语法） |
 
 规范工作流：`.spec-workflow/specs/digital-era-plaza/`  
 实体模板：`data/plaza/templates/`

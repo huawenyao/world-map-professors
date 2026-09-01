@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>交付活动 · 研发交付 AI Man</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="event">
+    <header class="event-top">
+      <a class="back" href="../index.html#/resource/aim-tech-sd-feature">‹ 阿码</a>
+      <div class="run-status" id="run-status">待命</div>
+    </header>
+    <div class="event-hero">
+      <div class="icon lg" style="background:linear-gradient(145deg,#1d1d1f,#434344)">码</div>
+      <div>
+        <div class="kicker">In-App Event</div>
+        <h1>开发者生态联合方案</h1>
+        <p>从数字专才详情点「调用」进来。这是交付活动，不是聊天套壳。</p>
+      </div>
+    </div>
+    <section class="brief-bar">
+      <textarea id="brief" rows="3">我们是科技企业生态团队。需要在「软件研发」场景：1）找可建联的实践者/数字专才；2）找 GitHub 类企业做联合方案；3）评估后发建联；4）启动功能交付。不要买名次，不要冷邮件群发。</textarea>
+      <div class="brief-actions">
+        <button class="btn-blue" id="btn-run" type="button">开始交付</button>
+        <button class="btn-line" id="btn-wealth" type="button">对照：财富管理达人投放</button>
+      </div>
+    </section>
+    <div class="kpis">
+      <div class="kpi"><span>工具</span><b id="kpi-tools">0</b></div>
+      <div class="kpi"><span>人机门</span><b id="kpi-gates">0 / 3</b></div>
+      <div class="kpi"><span>产物</span><b id="kpi-arts">0</b></div>
+    </div>
+    <div class="event-grid">
+      <section class="panel">
+        <h3>活动流</h3>
+        <p class="muted">人话记录，不倒 JSON。</p>
+        <div id="trace" class="trace-list"></div>
+        <div id="gate" class="gate-box" hidden></div>
+      </section>
+      <section class="panel">
+        <h3>产物</h3>
+        <div id="arts"></div>
+      </section>
+    </div>
+  </div>
+  <script src="catalog.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
