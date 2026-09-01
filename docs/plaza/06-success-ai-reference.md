@@ -57,7 +57,9 @@ Success.ai 的品类是 **AI Sales OS（获客外联）**，不是榜单广场�
 | Analytics | **评估与方法** | 虚荣 PV、粉丝榜 |
 | 三套餐两数字 | **浏览 / 建联额度 / 交付席位** | 按席把坐标订阅拆碎 |
 
-## 3. 因此产品形态改为「广场 OS」
+## 3. 战役语法仍可用，但第一表面已换成商店
+
+广场的第一表面是 App Store 语法，见 [10-app-store-interaction.md](10-app-store-interaction.md)。Success.ai 的战役 / 收件箱映射只留在**资料库**与**交付活动**里。
 
 原规划偏维基站点。对标 Demo 后，P0 可点击物应是：
 
@@ -81,7 +83,7 @@ Success.ai 的品类是 **AI Sales OS（获客外联）**，不是榜单广场�
 3. **合作项目建联**（Link）
 4. **场景交付与检查点签收**（Deliver / Sign-off）
 
-可点击原型：[`demo/plaza/`](../../demo/plaza/README.md)（`index.html` 营销 Demo，`app.html` 工作台）。
+可点击原型：[`demo/plaza/`](../../demo/plaza/README.md)（Plaza Store：Today / 人 / 企业 / 搜索 / 资料库）。
 
 ## 4. 明确不抄的部分
 

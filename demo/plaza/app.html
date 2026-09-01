@@ -2,69 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Plaza OS · 需求方工作台</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta http-equiv="refresh" content="0; url=index.html#/library" />
+  <title>转到 Plaza Store</title>
+  <script>location.replace("index.html" + (location.hash && location.hash !== "#" ? location.hash : "#/library"));</script>
 </head>
-<body>
-  <div class="app">
-    <aside class="sidenav">
-      <a class="logo" href="index.html">Plaza <span>OS</span></a>
-      <div class="nav-label">需求</div>
-      <button class="nav-item" data-go="home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
-        工作台
-      </button>
-      <button class="nav-item" data-go="people">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.2"/><path d="M15 19a4.5 4.5 0 0 1 5-4.4"/></svg>
-        找人
-      </button>
-      <button class="nav-item" data-go="orgs">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V8l6-3 6 3v12"/><path d="M10 20v-6h4v6M16 11h4v9h-4"/></svg>
-        找企业
-      </button>
-      <button class="nav-item" data-go="eval">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/></svg>
-        评估
-      </button>
-      <button class="nav-item" data-go="shortlist">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1.2" fill="currentColor"/><circle cx="4" cy="12" r="1.2" fill="currentColor"/><circle cx="4" cy="18" r="1.2" fill="currentColor"/></svg>
-        短名单
-      </button>
-      <button class="nav-item gold" data-go="campaigns">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
-        合作项目
-      </button>
-      <a class="nav-item gold" href="native/index.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M8 7h8l-1 13H9z"/><path d="M9 11h6"/></svg>
-        作战室
-      </a>
-      <button class="nav-item gold" data-go="deliver">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
-        交付
-      </button>
-      <button class="nav-item" data-go="inbox">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="m4 7 8 6 8-6"/></svg>
-        收件箱
-      </button>
-      <div class="nav-label">供给库存</div>
-      <button class="nav-item" data-go="supply-people">人</button>
-      <button class="nav-item" data-go="supply-brands">品牌</button>
-      <button class="nav-item" data-go="supply-products">产品</button>
-      <button class="nav-item" data-go="supply-assets">资产</button>
-      <button class="nav-item" data-go="supply-tools">工具</button>
-      <div class="nav-label">信任</div>
-      <button class="nav-item" data-go="method">方法</button>
-      <button class="nav-item" data-go="pricing">套餐</button>
-    </aside>
-    <div class="main">
-      <header class="top">
-        <input id="q" type="search" placeholder="按场景、姓名、品牌检索供给…" />
-        <a class="btn-line" href="index.html">营销页</a>
-      </header>
-      <div class="view" id="view"></div>
-    </div>
-  </div>
-  <script src="app.js"></script>
-</body>
+<body>正在转到 Plaza Store…</body>
 </html>

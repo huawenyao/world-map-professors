@@ -1,21 +1,20 @@
-# 数字时代广场 · 需求方工作台 Demo
+# Plaza Store
 
-设计语法对标 Success.ai：近黑营销页 + 柠檬黄 CTA、左导航 OS、Lead Finder 表、Campaign 三数字、InboxHub 三瓷砖。  
-能力对标新榜海汇选号评估 + 小豆芽任务/收件闭环。  
-**不做**灯笼街景，也**不做**多账号矩阵分发 / 冷邮件。
+交互对标 **Apple App Store**。货架上不是 App，而是**个人**和**企业**。
 
-| 文件 | 用途 |
+| 路径 | 对标 |
 |------|------|
-| `index.html` | 营销页：Find · Evaluate · Link · Deliver |
-| `app.html` | 需求方工作台 |
+| `index.html#/today` | Today 编辑专题 |
+| `#/people` | Games/Apps：人的货架、真人示意榜、数字人格隔离 |
+| `#/orgs` | 企业货架 |
+| `#/search` | Search |
+| `#/library` | 已加入 / 进行中 / 通知 |
+| `#/resource/{id}` | 资源详情页（Get、预览、评估、信息） |
+| `native/` | 数字专才的交付活动（In-App Event） |
 
-主路径：找人 / 找企业 → 评估 → 短名单 → 合作项目 → 交付签收。财富管理显示覆盖不足，研发供给不得充数。
-
-AI 原生作战室：`native/index.html`（Brief → 工具调用 → 人机门）。
+硬约束：名次不可买；数字人格不进真人榜；财富管理覆盖不足不得用研发供给填充。
 
 ```bash
 python3 -m http.server 4173 --directory demo/plaza
 # http://127.0.0.1:4173/
-# http://127.0.0.1:4173/app.html#people
-# http://127.0.0.1:4173/app.html#orgs
 ```

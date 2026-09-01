@@ -2,136 +2,36 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Plaza OS · Find, Evaluate &amp; Deliver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Plaza Store</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="mkt">
-  <header class="m-nav">
-    <a class="brand" href="index.html">Plaza <span>OS</span></a>
-    <nav>
-      <a href="#products">产品</a>
-      <a href="#why">为何</a>
-      <a href="app.html#home">工作台</a>
-      <a class="btn-gold" href="native/index.html">打开作战室</a>
+<body>
+  <div class="shell">
+    <main class="canvas" id="view"></main>
+    <nav class="tabbar" aria-label="Plaza Store">
+      <button class="tab" data-go="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+        今日
+      </button>
+      <button class="tab" data-go="people">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.2"/><path d="M15 19a4.4 4.4 0 0 1 5-4.2"/></svg>
+        人
+      </button>
+      <button class="tab" data-go="orgs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V8l6-3 6 3v12"/><path d="M10 20v-6h4v6M16 11h4v9h-4"/></svg>
+        企业
+      </button>
+      <button class="tab" data-go="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="m20 20-3.5-3.5"/></svg>
+        搜索
+      </button>
+      <button class="tab" data-go="library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="7" height="7" rx="1.5"/><rect x="13" y="5" width="7" height="7" rx="1.5"/><rect x="4" y="14" width="7" height="5" rx="1.5"/><rect x="13" y="14" width="7" height="5" rx="1.5"/></svg>
+        资料库
+      </button>
     </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-copy">
-      <div class="kicker">The Plaza OS for resource demand</div>
-      <h1>Find, Evaluate<br />&amp; Deliver.</h1>
-      <p>评估并链接达人与品牌，再把场景交付完。语法学 Success.ai 的 Find → Close，库存来自五馆。名次不可买，冷邮件不群发。</p>
-      <div class="cta-row">
-        <a class="btn-gold" href="native/index.html">Try War Room</a>
-        <a class="btn-ghost" href="app.html#people">Try Lead Finder</a>
-      </div>
-      <div class="hero-proof">
-        <span>五馆供给库存</span>
-        <span>名次不可买</span>
-        <span>人机门签收</span>
-      </div>
-    </div>
-    <div class="os-preview" aria-hidden="true">
-      <div class="os-chrome">
-        <div class="os-dot"></div><div class="os-dot"></div><div class="os-dot"></div>
-        <span>Campaigns</span>
-      </div>
-      <div class="os-body">
-        <aside>
-          <b>Plaza OS</b>
-          <i>找人</i><i>找企业</i><i class="on">合作项目</i><i>收件箱</i>
-        </aside>
-        <div class="os-main">
-          <div class="os-camp">
-            <em>软件研发功能交付</em>
-            <div class="os-nums"><span>建联 <b>4</b></span><span>待处理 <b>1</b></span><span>回复 <b>2</b></span></div>
-          </div>
-          <div class="os-camp">
-            <em>开发者生态企业合作</em>
-            <div class="os-nums"><span>建联 <b>2</b></span><span>待处理 <b>1</b></span><span>回复 <b>0</b></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section products" id="products">
-    <div class="kicker">Our Products</div>
-    <h2>需求方把供给跑成战役，而不是逛馆。</h2>
-    <div class="prod-tabs">
-      <article class="prod">
-        <h3>找人 / 找企业</h3>
-        <p>Lead Finder 语法。过滤器锁场景与身份。数字人格强制非真人，财富管理覆盖不足则空态。</p>
-        <a href="app.html#people">打开找人 →</a>
-      </article>
-      <article class="prod">
-        <h3>合作项目</h3>
-        <p>Campaign 瓷砖：建联 / 待处理 / 回复。一个人或一家企业就是一次供给调用。</p>
-        <a href="app.html#campaigns">打开战役 →</a>
-      </article>
-      <article class="prod">
-        <h3>收件箱</h3>
-        <p>InboxHub：Sent / Inbox / 驳回。买名次直接拒。认证不等于改排名。</p>
-        <a href="app.html#inbox">打开收件箱 →</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="stats-band" id="why">
-    <div>
-      <b>五馆</b>
-      <span>人 / 品牌 / 产品 / 资产 / 工具，全部带场景锚点</span>
-    </div>
-    <div>
-      <b>0</b>
-      <span>名次可买的条目。广告只在 ads/，不进 RankingSnapshot</span>
-    </div>
-    <div>
-      <b>3</b>
-      <span>作战室人机门：短名单、建联稿、代码审查</span>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="kicker">Mapped from Success.ai</div>
-    <h2>学工作台，不学冷邮件。</h2>
-    <div class="grid-3">
-      <article class="card"><h3>Lead Finder</h3><p>找人 + 找企业。同一套过滤器，目标换成达人、专才或可合作机构。</p></article>
-      <article class="card"><h3>Campaigns</h3><p>合作项目三数字横排。状态是建联中 / 交付中 / 不可用，不是 Sent/Open/Reply 的发信量。</p></article>
-      <article class="card"><h3>InboxHub</h3><p>顶部三计数瓷砖 + 列表 + 详情。处理建联、认领、驳回买名次。</p></article>
-      <article class="card"><h3>三档两数字</h3><p>浏览 / 建联额度 / 交付席位。名次不在价目表。</p></article>
-      <article class="card"><h3>AI Operator</h3><p>作战室跑工具链，不是聊天套壳。低适配 brief 直接 refuse。</p></article>
-      <article class="card"><h3>不做的</h3><p>冷邮件、预热、无限发送、灯笼街、矩阵发布、用粉丝数当名次。</p></article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="kicker">Why Plaza OS</div>
-    <h2>资源需求方的成交单元是合作项目。</h2>
-    <table class="cmp">
-      <thead><tr><th></th><th>广场</th><th>Success.ai</th><th>小豆芽式运营工具</th><th>海汇式达人投放台</th></tr></thead>
-      <tbody>
-        <tr><td>主用户</td><td class="ok">资源需求方</td><td>销售 / GTM</td><td>创作者 / 门店</td><td>品牌投放媒介</td></tr>
-        <tr><td>Find</td><td class="ok">达人 + 企业</td><td class="ok">700M 联系人</td><td class="no">—</td><td class="ok">商业达人选号</td></tr>
-        <tr><td>评估尺子</td><td class="ok">贡献 × 场景适配</td><td>职位 / 意向</td><td>播放互动</td><td>粉丝 / 报价</td></tr>
-        <tr><td>战役单元</td><td class="ok">合作项目 + 交付</td><td class="ok">外联 Campaign</td><td>内容发布任务</td><td>投放作品</td></tr>
-        <tr><td>矩阵 / 冷邮件</td><td class="no">不做</td><td class="ok">核心能力</td><td class="ok">核心能力</td><td class="no">—</td></tr>
-        <tr><td>名次可买</td><td class="no">否</td><td>—</td><td>—</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="bottom-cta">
-    <p class="kicker">Experience the Plaza OS</p>
-    <h2>Find and Win Your Ideal Partners.</h2>
-    <p>评估链接，再把场景交付完。样例街区：科技 / 软件研发。</p>
-    <div class="cta-row">
-      <a class="btn-gold" href="native/index.html">打开作战室</a>
-      <a class="btn-ghost" href="app.html#home">打开工作台</a>
-    </div>
-  </section>
-
-  <footer class="m-foot">人物为 Schema 样例，非正式真人排行。广告不进名次快照。</footer>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>

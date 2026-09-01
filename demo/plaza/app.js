@@ -1,531 +1,626 @@
-const DATA = {
-  people: [
-    {
-      id: "psn-tech-sample-ai-engineer",
-      name: "阿凯",
-      type: "human",
-      role: "软件研发实践者",
-      scene: "软件研发",
-      fit: "high",
-      contrib: "A",
-      status: "可建联",
-      sample: true,
-      why: "场景内有可复核实践。样例条目，非正式达人排行。",
-    },
-    {
-      id: "psn-tech-sample-coding-persona",
-      name: "小仓",
-      type: "digital-persona",
-      role: "编程数字人格",
-      scene: "软件研发",
-      fit: "high",
-      contrib: "B",
-      status: "可调用",
-      sample: true,
-      why: "已披露非真人。可辅助编码，不可充当真人达人投放。",
-    },
-  ],
-  specialists: [
-    {
-      id: "aim-tech-sd-feature",
-      name: "阿码",
-      type: "ai-man",
-      role: "软件研发数字专才",
-      scene: "软件研发",
-      fit: "high",
-      contrib: "S",
-      status: "可交付",
-      why: "绑定功能交付解决方案。审查必须人签。不进真人达人榜。",
-    },
-  ],
-  brands: [
-    { id: "brd-github", name: "GitHub", type: "公司", scene: "软件研发", fit: "high", band: "S", partner: "开发者生态合作", status: "可建联", note: "产品 GitHub Copilot 锚定本场景。", products: ["GitHub Copilot"] },
-    { id: "brd-anthropic", name: "Anthropic", type: "实验室", scene: "软件研发", fit: "high", band: "A", partner: "模型与审查能力", status: "可建联", note: "Claude 适合仓库级理解与审查。", products: ["Claude"] },
-    { id: "brd-openai", name: "OpenAI", type: "实验室", scene: "软件研发", fit: "medium", band: "A", partner: "通用对话能力", status: "开放收录", note: "熟，但不是本场景第一供给。", products: ["ChatGPT"] },
-  ],
-  products: [
-    { id: "prd-github-copilot", name: "GitHub Copilot", brand: "GitHub", brandId: "brd-github", category: "编程助手", fit: "high", band: "S", desc: "编码助手，场景适配高。" },
-    { id: "prd-anthropic-claude", name: "Claude", brand: "Anthropic", brandId: "brd-anthropic", category: "搜索与问答", fit: "high", band: "A", desc: "长上下文审查与方案讨论。" },
-    { id: "prd-openai-chatgpt", name: "ChatGPT", brand: "OpenAI", brandId: "brd-openai", category: "搜索与问答", fit: "medium", band: "A", desc: "通用对话。本场景不排第一。" },
-  ],
-  assets: [
-    { id: "scn-tech-software-dev", kind: "场景", name: "软件研发" },
-    { id: "wf-tech-sd-feature-dev", kind: "流程", name: "功能开发流程" },
-    { id: "agt-tech-sd-coding", kind: "Agent", name: "编程助手 Agent" },
-    { id: "cap-tech-001", kind: "能力", name: "编程能力" },
-  ],
-  tools: [
-    { id: "tool-code-generator", name: "代码生成器", steps: "生成 / 重构" },
-    { id: "tool-code-reviewer", name: "代码审查工具", steps: "审查" },
-    { id: "tool-test-generator", name: "测试用例生成器", steps: "单测生成" },
-  ],
-  campaigns: [
-    { id: "camp-dev", name: "软件研发功能交付", kind: "场景交付", status: "交付中", supply: "阿码", scene: "软件研发", sent: 4, wait: 1, replies: 2, go: "deliver" },
-    { id: "camp-org", name: "开发者生态企业合作", kind: "找企业", status: "建联中", supply: "GitHub", scene: "软件研发", sent: 2, wait: 1, replies: 0, go: "orgs" },
-    { id: "camp-wm", name: "财富管理达人合作", kind: "覆盖不足", status: "不可用", supply: "—", scene: "财富管理", sent: 0, wait: 0, replies: 0, blocked: true, go: "people" },
-  ],
-  inbox: [
-    { id: "i1", col: "link", title: "GitHub 企业合作意向", who: "需求方发出（演示）", body: "希望确认 Copilot 企业场景适配与合规摘录。" },
-    { id: "i2", col: "claim", title: "Claude 条目纠错", who: "Anthropic 文档站", body: "请把审查工具挂载写进产品页。" },
-    { id: "i3", col: "open", title: "OpenAI 开放收录", who: "系统", body: "尚未认领，仅公开资料。" },
-    { id: "i4", col: "reject", title: "要求总榜第一", who: "未知域名", body: "已拒：名次不可买。付费只买曝光位。" },
-  ],
-  evals: {
-    person: [
-      { dim: "场景适配", val: "high", note: "主场软件研发，有流程锚点。" },
-      { dim: "专业贡献", val: "A", note: "可复核实践，非正式排行。" },
-      { dim: "可交付", val: "可建联", note: "真人实践者，适合联合方案而非投放粉数。" },
-      { dim: "身份", val: "真人", note: "样例 Schema，非名人榜事实。" },
-    ],
-    org: [
-      { dim: "场景适配", val: "high", note: "开发者工作流覆盖完整。" },
-      { dim: "专业贡献", val: "S", note: "产品进入本场景短名单。" },
-      { dim: "可交付", val: "可建联", note: "企业合作，不是广告位。" },
-      { dim: "身份", val: "公司", note: "品牌 ≠ 产品。合作看产品组合。" },
+const PEOPLE = [
+  {
+    id: "psn-tech-sample-ai-engineer",
+    kind: "person",
+    name: "阿凯",
+    legal: "示例·AI增强型软件工程师",
+    subtitle: "软件研发实践者",
+    type: "human",
+    typeLabel: "真人 · 样例",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "A",
+    status: "可建联",
+    getLabel: "建联",
+    color: "linear-gradient(145deg,#5b7cfa,#3b5bdb)",
+    mono: "凯",
+    sample: true,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "主场软件研发，能力绑定编程。样例条目，非正式达人排行。",
+    bio: "Schema 示意：一类在编码、审查、测试中使用 AI 编程助手的工程师画像。不是对任何真实个人的评价，也不能当作名人榜事实。",
+    sources: 2,
+    previews: [
+      { t: "编码", d: "把助手嵌进仓库工作流", bg: "linear-gradient(160deg,#1d1d1f,#5b7cfa)" },
+      { t: "审查", d: "关键节点仍由人签", bg: "linear-gradient(160deg,#0b3d2e,#34c759)" },
+      { t: "坐标", d: "行业 · 场景 · 能力", bg: "linear-gradient(160deg,#2c1a4d,#af52de)" },
     ],
   },
-  runSteps: [
-    { name: "需求理解", status: "done" },
-    { name: "方案确认", status: "done", gate: true },
-    { name: "编码实现", status: "done" },
-    { name: "测试生成", status: "done" },
-    { name: "代码审查", status: "gate", gate: true },
-    { name: "合并上线", status: "queued" },
-  ],
-  adapt: {
-    home: { label: "软件研发（本场）", fit: "high", allow: true, body: "主场交付。三处人机门仍需签收。" },
-    qa: { label: "测试与质量（相邻）", fit: "high", allow: true, body: "可改编：测试工具前置，审查仍要人。" },
-    wealth: { label: "财富管理（跨域）", fit: "low", allow: false, body: "拒绝自动交付。缺金融评估能力，不得用研发供给充数。" },
+  {
+    id: "psn-tech-sample-qa",
+    kind: "person",
+    name: "阿测",
+    legal: "示例·测试实践者",
+    subtitle: "测试与质量实践者",
+    type: "human",
+    typeLabel: "真人 · 样例",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "B",
+    status: "可建联",
+    getLabel: "建联",
+    color: "linear-gradient(145deg,#30d158,#0b8a3e)",
+    mono: "测",
+    sample: true,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "相邻测试场景可改编。样例条目。",
+    bio: "用于撑起「人」货架的第二位真人样例，演示同场景相关推荐，而非扩写粉丝榜。",
+    sources: 2,
+    previews: [
+      { t: "测试", d: "用例生成仍要人判", bg: "linear-gradient(160deg,#0b3d2e,#30d158)" },
+      { t: "质量门", d: "合并前不可跳过", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+      { t: "适配", d: "软件研发 · High", bg: "linear-gradient(160deg,#00332a,#64d2ff)" },
+    ],
   },
-};
+  {
+    id: "psn-tech-sample-coding-persona",
+    kind: "person",
+    name: "小仓",
+    legal: "示例·仓库编程分身",
+    subtitle: "产品内编程人格",
+    type: "digital-persona",
+    typeLabel: "数字人格 · 非真人",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "B",
+    status: "可调用",
+    getLabel: "加入",
+    color: "linear-gradient(145deg,#bf5af2,#5e5ce6)",
+    mono: "仓",
+    sample: true,
+    orgId: "brd-anthropic",
+    orgName: "Anthropic",
+    why: "已披露运营方 Anthropic。不可充当真人达人投放，不进真人示意榜。",
+    bio: "数字人格样例。标题区必须可见非自然人标识，并写明运营品牌与模型披露。",
+    sources: 2,
+    operator: "Anthropic · Claude 类模型（样例披露）",
+    previews: [
+      { t: "分身", d: "产品内人格，不是网红", bg: "linear-gradient(160deg,#2c1250,#bf5af2)" },
+      { t: "披露", d: "运营方 + 模型必须可见", bg: "linear-gradient(160deg,#1d1d1f,#5e5ce6)" },
+      { t: "隔离", d: "单独货架，不进达人榜", bg: "linear-gradient(160deg,#3a2a00,#ffd60a)" },
+    ],
+  },
+  {
+    id: "aim-tech-sd-feature",
+    kind: "person",
+    name: "阿码",
+    legal: "研发交付 AI Man",
+    subtitle: "功能交付数字专才",
+    type: "ai-man",
+    typeLabel: "数字专才 · 非达人榜",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "S",
+    status: "可调用",
+    getLabel: "调用",
+    color: "linear-gradient(145deg,#1d1d1f,#434344)",
+    mono: "码",
+    sample: false,
+    orgId: "brd-github",
+    orgName: "GitHub",
+    why: "绑定功能开发解决方案。审查必须人签。不进入真人达人榜。",
+    bio: "软件研发主场的数字专才。按流程执行需求拆解、编码、测试与审查。财富管理等监管场景禁止自动交付。",
+    sources: 2,
+    event: true,
+    previews: [
+      { t: "交付", d: "按功能开发流程推进", bg: "linear-gradient(160deg,#111,#0071e3)" },
+      { t: "人机门", d: "方案确认 / 代码审查", bg: "linear-gradient(160deg,#3a2a00,#ff9f0a)" },
+      { t: "拒单", d: "低适配不换皮继续", bg: "linear-gradient(160deg,#3b0008,#ff375f)" },
+    ],
+  },
+];
 
-const $ = (id) => document.getElementById(id);
-let shortlist = new Set(["psn-tech-sample-ai-engineer", "brd-github"]);
-let inboxId = "i1";
-let adaptKey = "home";
-let pf = { scene: "软件研发", type: "all" };
-let of = { scene: "软件研发", type: "all" };
-let productCat = "all";
+const ORGS = [
+  {
+    id: "brd-github",
+    kind: "org",
+    name: "GitHub",
+    subtitle: "开发者生态合作",
+    type: "公司",
+    typeLabel: "公司",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "S",
+    status: "可建联",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#24292f,#57606a)",
+    mono: "GH",
+    partner: "基础设施 + Copilot 联合方案",
+    why: "产品 GitHub Copilot 锚定本场景。企业合作不是广告位。",
+    bio: "软件协作与代码托管平台。广场评估的是场景覆盖与可交付产品，而不是估值叙事。",
+    sources: 2,
+    products: ["GitHub Copilot"],
+    people: ["psn-tech-sample-ai-engineer", "psn-tech-sample-qa", "aim-tech-sd-feature"],
+    previews: [
+      { t: "Copilot", d: "编程助手，场景适配 High", bg: "linear-gradient(160deg,#0d1117,#2f81f7)" },
+      { t: "协作", d: "仓库是本场景的工作现场", bg: "linear-gradient(160deg,#1b1f23,#6e7681)" },
+      { t: "生态", d: "可谈联合方案，不买名次", bg: "linear-gradient(160deg,#002d26,#3dd68c)" },
+    ],
+  },
+  {
+    id: "brd-anthropic",
+    kind: "org",
+    name: "Anthropic",
+    subtitle: "模型与审查能力",
+    type: "实验室",
+    typeLabel: "实验室",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "High",
+    contrib: "A",
+    status: "可建联",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#c4a484,#8a6a4b)",
+    mono: "An",
+    partner: "长上下文审查与方案讨论",
+    why: "Claude 适合仓库级理解。旗下数字人格必须单独披露。",
+    bio: "实验室型供给。人货架上的「小仓」由本机构运营，不进真人榜。",
+    sources: 2,
+    products: ["Claude"],
+    people: ["psn-tech-sample-coding-persona"],
+    previews: [
+      { t: "Claude", d: "审查与长上下文", bg: "linear-gradient(160deg,#3d2b1f,#c4a484)" },
+      { t: "人格", d: "产品内分身需强制披露", bg: "linear-gradient(160deg,#2c1250,#bf5af2)" },
+      { t: "合作", d: "模型能力，不是投放粉数", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+    ],
+  },
+  {
+    id: "brd-openai",
+    kind: "org",
+    name: "OpenAI",
+    subtitle: "通用对话能力",
+    type: "实验室",
+    typeLabel: "实验室",
+    scene: "软件研发",
+    sceneId: "software",
+    fit: "Medium",
+    contrib: "A",
+    status: "开放收录",
+    getLabel: "合作",
+    color: "linear-gradient(145deg,#10a37f,#0d7a5f)",
+    mono: "OA",
+    partner: "通用对话，本场景不排第一",
+    why: "可收录、可谈，但不是软件研发第一供给。",
+    bio: "熟，却不是本场景短名单的默认第一名。品类筛选后可能从编程助手货架消失。",
+    sources: 2,
+    products: ["ChatGPT"],
+    people: [],
+    previews: [
+      { t: "ChatGPT", d: "通用对话 · 适配 Medium", bg: "linear-gradient(160deg,#04402f,#10a37f)" },
+      { t: "边界", d: "不因为知名就排第一", bg: "linear-gradient(160deg,#1d1d1f,#86868b)" },
+      { t: "收录", d: "开放资料，尚未官方认领", bg: "linear-gradient(160deg,#002c4d,#64d2ff)" },
+    ],
+  },
+];
 
-function go(hash) {
-  location.hash = hash.startsWith("#") ? hash : "#" + hash;
-}
+const STORIES = [
+  {
+    id: "today-person",
+    kicker: "今日人物",
+    title: "把实践者放上货架，而不是热搜。",
+    body: "阿凯是软件研发场景的样例实践者。点进去看适配、贡献和预览，再决定要不要建联。",
+    resourceId: "psn-tech-sample-ai-engineer",
+    bg: "linear-gradient(165deg,#0b1b4a 0%,#5b7cfa 55%,#a8c1ff 100%)",
+  },
+  {
+    id: "today-org",
+    kicker: "今日企业",
+    title: "合作对象是公司，不是一款产品海报。",
+    body: "GitHub 作为可合作企业上架。产品 Copilot 是它的交付物，名次仍不可买。",
+    resourceId: "brd-github",
+    bg: "linear-gradient(165deg,#0d1117 0%,#21262d 40%,#2f81f7 100%)",
+  },
+  {
+    id: "today-rule",
+    kicker: "编辑说明",
+    title: "数字人格有自己的货架。",
+    body: "小仓和阿码可以调用，但不能混进真人示意榜。这是商店规则，不是装饰。",
+    resourceId: "psn-tech-sample-coding-persona",
+    bg: "linear-gradient(165deg,#2c1250 0%,#5e5ce6 50%,#ffd60a 120%)",
+  },
+];
+
+const INBOX = [
+  { id: "i1", title: "GitHub 企业合作意向", who: "你发出的建联", body: "希望确认 Copilot 企业场景适配与合规摘录。", tag: "建联" },
+  { id: "i2", title: "Claude 条目纠错", who: "Anthropic 文档站", body: "请把审查工具挂载写进产品页。", tag: "认领" },
+  { id: "i3", title: "要求总榜第一", who: "未知域名", body: "已拒：名次不可买。付费只买曝光位。", tag: "驳回", reject: true },
+];
+
+const CAMPS = [
+  { id: "camp-dev", name: "软件研发功能交付", res: "阿码", status: "交付中", sent: 4, wait: 1, replies: 2, ok: true },
+  { id: "camp-org", name: "开发者生态企业合作", res: "GitHub", status: "建联中", sent: 2, wait: 1, replies: 0, ok: true },
+  { id: "camp-wm", name: "财富管理达人合作", res: "—", status: "不可用", sent: 0, wait: 0, replies: 0, ok: false },
+];
+
+const shortlist = new Set(["psn-tech-sample-ai-engineer", "brd-github"]);
+let q = "";
+let noticeId = "i3";
+let lastTab = "today";
+
+function $(sel, root = document) { return root.querySelector(sel); }
+function all() { return [...PEOPLE, ...ORGS]; }
+function byId(id) { return all().find((x) => x.id === id); }
+function humans() { return PEOPLE.filter((p) => p.type === "human"); }
+function personas() { return PEOPLE.filter((p) => p.type !== "human"); }
+function orgs() { return ORGS; }
+function labs() { return ORGS.filter((o) => o.type === "实验室"); }
+
 function parse() {
-  const raw = (location.hash || "#home").slice(1);
+  const raw = (location.hash || "#/today").replace(/^#\/?/, "");
   const [name, id] = raw.split("/");
-  return { name: name || "home", id };
+  return { name: name || "today", id };
 }
-function navActive(name) {
-  const map = {
-    home: "home",
-    people: "people",
-    person: "people",
-    orgs: "orgs",
-    brand: "orgs",
-    eval: "eval",
-    shortlist: "shortlist",
-    campaigns: "campaigns",
-    deliver: "deliver",
-    inbox: "inbox",
-    "supply-people": "supply-people",
-    "supply-brands": "supply-brands",
-    "supply-products": "supply-products",
-    product: "supply-products",
-    "supply-assets": "supply-assets",
-    "supply-tools": "supply-tools",
-    method: "method",
-    pricing: "pricing",
-  };
-  document.querySelectorAll(".nav-item").forEach((b) => {
-    b.classList.toggle("active", map[name] === b.getAttribute("data-go"));
-  });
+function go(to) {
+  location.hash = to.startsWith("#") ? to : "#/" + to.replace(/^#\//, "");
 }
-function q() {
-  return ($("q")?.value || "").trim();
+function icon(e, size) {
+  return `<div class="icon ${size || ""}" style="background:${e.color}">${e.mono}</div>`;
 }
-function typeLabel(t) {
-  return { human: "真人", "digital-persona": "数字人格", "ai-man": "数字专才" }[t] || t;
+function inLib(id) { return shortlist.has(id); }
+function getBtn(e, dark) {
+  if (e.sceneId === "wealth") return `<span class="get dead">不可用</span>`;
+  const on = inLib(e.id);
+  const cls = `${dark ? "get-dark" : "get"}${on ? " in" : ""}`;
+  const label = on ? "已加入" : e.getLabel;
+  return `<button class="${cls}" data-get="${e.id}">${label}</button>`;
 }
-function fitTag(f) {
-  return `<span class="tag ${f === "high" ? "ok" : "warn"}">适配 ${f}</span>`;
+function typeBadge(e) {
+  if (e.type === "human") return `<span class="badge ok">${e.typeLabel}</span>`;
+  if (e.type === "digital-persona" || e.type === "ai-man") return `<span class="badge warn">${e.typeLabel}</span>`;
+  return `<span class="badge">${e.typeLabel || e.type}</span>`;
 }
-function allPeople() {
-  return [...DATA.people, ...DATA.specialists];
+function row(e) {
+  return `<div class="res-row" data-open="${e.id}">
+    ${icon(e)}
+    <div>
+      <div class="name">${e.name}</div>
+      <div class="sub2">${e.subtitle}</div>
+    </div>
+    <div>${getBtn(e)}</div>
+  </div>`;
 }
-
-function metrics(c) {
-  return `<div class="metric-row">
-    <div class="metric"><span>建联</span><b>${c.sent}</b></div>
-    <div class="metric"><span>待处理</span><b>${c.wait}</b></div>
-    <div class="metric"><span>回复</span><b>${c.replies}</b></div>
+function mini(e) {
+  return `<article class="mini-card" data-open="${e.id}">
+    ${icon(e)}
+    <b>${e.name}</b>
+    <div class="muted">${e.subtitle}</div>
+    <div>${getBtn(e)}</div>
+  </article>`;
+}
+function shelf(title, items, allLink) {
+  if (!items.length) return "";
+  return `<section class="shelf">
+    <div class="row-between">
+      <h2 class="title-lg">${title}</h2>
+      ${allLink ? `<button class="link" data-go="${allLink}">查看全部</button>` : ""}
+    </div>
+    <div class="shelf-scroll">${items.map(mini).join("")}</div>
+  </section>`;
+}
+function chart(items) {
+  return `<div class="list-card" style="padding:4px 16px">
+    ${items.map((e, i) => `<div class="res-row chart-row" data-open="${e.id}">
+      <span class="chart-n">${i + 1}</span>${icon(e)}
+      <div><div class="name">${e.name}</div><div class="sub2">${e.subtitle}</div></div>
+      <div>${getBtn(e)}</div>
+    </div>`).join("")}
+  </div>`;
+}
+function emptyWealth() {
+  return `<div class="empty">
+    <h3>此分类暂无资源</h3>
+    <p>财富管理的个人与企业覆盖不足。<br/>不会用软件研发供给填充，也不能继续自动交付。</p>
   </div>`;
 }
 
-function campCard(c, opts = {}) {
-  const goTo = opts.go || (c.go === "deliver" ? "deliver" : c.go === "orgs" ? "inbox" : c.go);
-  const label = opts.label || "进入";
-  const blockedText = opts.blockedText || "无「用研发达人充数」按钮";
-  return `<article class="camp-card">
-    <span class="tag ${c.blocked ? "bad" : c.status === "交付中" ? "gold" : "ok"}">${c.status}</span>
-    <h3>${c.name}</h3>
-    <p class="muted">${c.kind} · 供给 ${c.supply} · ${c.scene}</p>
-    ${metrics(c)}
-    <div class="actions">
-      ${c.blocked
-        ? `<span class="muted">${blockedText}</span>`
-        : `<button class="btn-blue" data-go="${goTo}">${label}</button>`}
-    </div>
-  </article>`;
+function viewToday() {
+  return `
+    <div class="date">9月1日 星期二</div>
+    <h1 class="title-xl">今日</h1>
+    ${STORIES.map((s) => {
+      const e = byId(s.resourceId);
+      return `<article class="story" style="background:${s.bg}" data-go="story/${s.id}">
+        <div>
+          <div class="eyebrow">${s.kicker}</div>
+          <h2>${s.title}</h2>
+          <p>${s.body}</p>
+        </div>
+        <div class="story-foot">
+          ${icon(e, "sm")}
+          <div class="meta"><b>${e.name}</b><span>${e.subtitle}</span></div>
+          <div>${getBtn(e, true)}</div>
+        </div>
+      </article>`;
+    }).join("")}`;
 }
 
-function viewHome() {
-  const running = DATA.campaigns.filter((c) => !c.blocked).length;
+function viewStory(id) {
+  const s = STORIES.find((x) => x.id === id) || STORIES[0];
+  const e = byId(s.resourceId);
   return `
-    <h1 class="page">需求方工作台</h1>
-    <p class="sub">Find · Evaluate · Link · Deliver。五馆是库存；合作项目才是成交单元。</p>
-    <div class="kpis">
-      <div class="kpi"><span>浏览</span><b>无限</b><span>找人 / 找企业只读不限</span></div>
-      <div class="kpi"><span>建联额度</span><b>12</b><span>本档演示额度，名次不在价目</span></div>
-      <div class="kpi"><span>交付席位</span><b>1</b><span>数字专才并发 · 人机门仍开</span></div>
-      <div class="kpi"><span>进行中战役</span><b>${running}</b><span>1 条覆盖不足已拒绝</span></div>
-    </div>
-    <article class="card" style="margin-bottom:14px">
-      <span class="tag gold">AI Operator</span>
-      <h3>开发者生态联合方案</h3>
-      <p>作战室对标 Campaign 运行页：Brief → 工具活动流 → 人机门。不是聊天套壳。</p>
-      <div class="actions"><a class="btn-blue" href="native/index.html">打开作战室</a></div>
+    <button class="back" data-go="today">‹ 今日</button>
+    <article class="story" style="background:${s.bg}; min-height:280px">
+      <div>
+        <div class="eyebrow">${s.kicker}</div>
+        <h2>${s.title}</h2>
+        <p>${s.body}</p>
+      </div>
     </article>
-    <div class="camp-grid">${DATA.campaigns.map((c) => campCard(c, { go: c.go, label: "打开", blockedText: "无「用研发达人充数」按钮" })).join("")}</div>`;
+    <div class="block">
+      <p>${e.bio}</p>
+      <p class="muted" style="margin-top:10px">${e.why}</p>
+    </div>
+    <div class="list-card" style="padding:0 16px">${row(e)}</div>`;
 }
 
 function viewPeople() {
-  const list = allPeople().filter((p) => {
-    if (pf.scene !== "all" && p.scene !== pf.scene) return false;
-    if (pf.type !== "all" && p.type !== pf.type) return false;
-    const s = q();
-    if (s && !`${p.name}${p.role}${p.scene}`.includes(s)) return false;
-    return true;
-  });
   return `
-    <h1 class="page">找人</h1>
-    <p class="sub">对标 Lead Finder / 海汇选号。先锁场景，再看身份与适配。财富管理当前覆盖不足。</p>
-    <div class="filters">
-      <select id="pf-scene">
-        <option ${pf.scene === "软件研发" ? "selected" : ""}>软件研发</option>
-        <option ${pf.scene === "测试与质量" ? "selected" : ""}>测试与质量</option>
-        <option ${pf.scene === "财富管理" ? "selected" : ""}>财富管理</option>
-        <option value="all" ${pf.scene === "all" ? "selected" : ""}>全部场景</option>
-      </select>
-      <select id="pf-type">
-        <option value="all">全部身份</option>
-        <option value="human" ${pf.type === "human" ? "selected" : ""}>真人</option>
-        <option value="digital-persona" ${pf.type === "digital-persona" ? "selected" : ""}>数字人格</option>
-        <option value="ai-man" ${pf.type === "ai-man" ? "selected" : ""}>数字专才</option>
-      </select>
-    </div>
-    ${
-      pf.scene === "财富管理"
-        ? `<div class="empty">财富管理达人库存覆盖不足。不会用软件研发供给填充。</div>`
-        : `<table class="data">
-            <thead><tr><th>名称</th><th>身份</th><th>角色</th><th>适配</th><th>贡献</th><th>状态</th><th></th></tr></thead>
-            <tbody>${list.map((p) => `
-              <tr>
-                <td><button class="linkish" data-go="person/${p.id}">${p.name}</button>
-                  ${p.sample ? '<div class="muted">样例</div>' : ""}</td>
-                <td><span class="tag ${p.type === "human" ? "ok" : "warn"}">${typeLabel(p.type)}</span></td>
-                <td>${p.role}</td>
-                <td>${fitTag(p.fit)}</td>
-                <td><span class="band ${p.contrib}">${p.contrib}</span></td>
-                <td>${p.status}</td>
-                <td><button class="btn-line" data-sl="${p.id}">${shortlist.has(p.id) ? "已在短名单" : "加入短名单"}</button></td>
-              </tr>`).join("") || `<tr><td colspan="7" class="empty">无匹配供给</td></tr>`}
-            </tbody>
-          </table>`
-    }`;
+    <h1 class="title-xl">人</h1>
+    <p class="sub">像浏览 App 一样浏览个人。真人、数字人格、数字专才分开放。</p>
+    ${shelf("编辑精选", humans(), "charts/people")}
+    <section class="shelf">
+      <div class="row-between"><h2 class="title-lg">示意榜</h2><span class="muted">样例，非正式排行</span></div>
+      <p class="note">只含真人实践者。数字人格与 AI Man 不进此榜。名次不可买。</p>
+      ${chart(humans())}
+    </section>
+    ${shelf("数字人格", PEOPLE.filter((p) => p.type === "digital-persona"))}
+    ${shelf("数字专才", PEOPLE.filter((p) => p.type === "ai-man"))}
+    <section class="shelf">
+      <h2 class="title-lg">浏览场景</h2>
+      <div class="cats">
+        <button class="cat" style="background:linear-gradient(135deg,#5b7cfa,#0071e3)" data-go="scene/software">软件研发</button>
+        <button class="cat" style="background:linear-gradient(135deg,#8e8e93,#1d1d1f)" data-go="scene/wealth">财富管理</button>
+      </div>
+    </section>`;
 }
 
 function viewOrgs() {
-  const list = DATA.brands.filter((b) => {
-    if (of.scene !== "all" && b.scene !== of.scene) return false;
-    if (of.type !== "all" && b.type !== of.type) return false;
-    const s = q();
-    if (s && !`${b.name}${b.partner}${b.type}`.includes(s)) return false;
-    return true;
+  return `
+    <h1 class="title-xl">企业</h1>
+    <p class="sub">可合作的公司与实验室。点进详情看产品组合，再决定要不要合作。</p>
+    ${shelf("值得合作", ORGS, "charts/orgs")}
+    <section class="shelf">
+      <div class="row-between"><h2 class="title-lg">示意榜</h2><span class="muted">样例，非正式排行</span></div>
+      <p class="note">按场景贡献带排列示意，不是可购买的名次。</p>
+      ${chart(ORGS)}
+    </section>
+    ${shelf("实验室", labs())}
+    <section class="shelf">
+      <h2 class="title-lg">浏览场景</h2>
+      <div class="cats">
+        <button class="cat" style="background:linear-gradient(135deg,#24292f,#2f81f7)" data-go="scene/software">软件研发</button>
+        <button class="cat" style="background:linear-gradient(135deg,#8e8e93,#1d1d1f)" data-go="scene/wealth">财富管理</button>
+      </div>
+    </section>`;
+}
+
+function viewScene(id) {
+  const wealth = id === "wealth";
+  const title = wealth ? "财富管理" : "软件研发";
+  const back = lastTab === "orgs" ? "orgs" : "people";
+  const people = wealth ? [] : PEOPLE.filter((p) => p.sceneId === "software");
+  const orgs = wealth ? [] : ORGS.filter((o) => o.sceneId === "software");
+  return `
+    <button class="back" data-go="${lastTab === "orgs" ? "orgs" : "people"}">‹ ${lastTab === "orgs" ? "企业" : "人"}</button>
+    <h1 class="title-xl">${title}</h1>
+    ${wealth ? emptyWealth() : `
+      <p class="sub">此分类下的个人与企业。数字人格仍单独标记。</p>
+      <h2 class="title-lg">人</h2>
+      <div class="list-card" style="padding:0 16px;margin-bottom:18px">${people.map((e) => row(e)).join("")}</div>
+      <h2 class="title-lg">企业</h2>
+      <div class="list-card" style="padding:0 16px">${orgs.map((e) => row(e)).join("")}</div>
+    `}`;
+}
+
+function viewCharts(kind) {
+  const people = kind === "orgs";
+  return `
+    <button class="back" data-go="${people ? "orgs" : "people"}">‹ ${people ? "企业" : "人"}</button>
+    <h1 class="title-xl">${people ? "企业" : "人"}排行</h1>
+    <p class="note">样例示意，非正式排行。付费不能改名次。${people ? "" : "仅真人。"}</p>
+    ${chart(people ? ORGS : humans())}`;
+}
+
+function searchPane() {
+  const query = q.trim();
+  const wealth = /财富|理财|投顾/.test(query);
+  const list = all().filter((e) => {
+    if (wealth) return false;
+    if (!query) return false;
+    return `${e.name}${e.legal || ""}${e.subtitle}${e.scene}`.toLowerCase().includes(query.toLowerCase());
   });
+  if (!query) {
+    return `
+      <div class="muted" style="margin-bottom:8px">建议</div>
+      <div class="suggest">
+        ${["软件研发", "GitHub", "阿凯", "数字人格", "财富管理"].map((w) => `<button class="chip" data-q="${w}">${w}</button>`).join("")}
+      </div>
+      <div class="muted">热门资源</div>
+      <div class="list-card" style="padding:0 16px">${[PEOPLE[0], ORGS[0], PEOPLE[3]].map((e) => row(e)).join("")}</div>`;
+  }
+  if (wealth) return emptyWealth();
+  return `<div class="list-card" style="padding:0 16px">${list.map((e) => row(e)).join("") || `<div class="empty">无匹配。不拿其他场景供给充数。</div>`}</div>`;
+}
+
+function viewSearch() {
   return `
-    <h1 class="page">找企业</h1>
-    <p class="sub">同一套 Lead Finder 语法，目标换成可合作品牌与机构。</p>
-    <div class="filters">
-      <select id="of-scene">
-        <option ${of.scene === "软件研发" ? "selected" : ""}>软件研发</option>
-        <option ${of.scene === "财富管理" ? "selected" : ""}>财富管理</option>
-        <option value="all" ${of.scene === "all" ? "selected" : ""}>全部场景</option>
-      </select>
-      <select id="of-type">
-        <option value="all">全部类型</option>
-        <option ${of.type === "公司" ? "selected" : ""}>公司</option>
-        <option ${of.type === "实验室" ? "selected" : ""}>实验室</option>
-      </select>
+    <h1 class="title-xl">搜索</h1>
+    <input class="search-box" id="qbox" placeholder="搜索人、企业或场景" value="${q.replace(/"/g, "&quot;")}" />
+    <div id="search-pane">${searchPane()}</div>`;
+}
+
+function viewResource(id) {
+  const e = byId(id);
+  if (!e) return `<p>未找到资源。</p>`;
+  const related = all().filter((x) => x.sceneId === e.sceneId && x.id !== e.id).slice(0, 4);
+  const more = e.kind === "org"
+    ? PEOPLE.filter((p) => p.orgId === e.id)
+    : e.orgId ? [byId(e.orgId)].filter(Boolean) : [];
+  return `
+    <button class="back" data-go="${e.kind === "org" ? "orgs" : "people"}">‹ ${e.kind === "org" ? "企业" : "人"}</button>
+    <div class="hero-head">
+      ${icon(e, "lg")}
+      <div>
+        <h1>${e.name}</h1>
+        <div class="sub" style="margin:0 0 8px">${e.subtitle}</div>
+        ${typeBadge(e)}
+        ${e.sample ? `<span class="badge">样例</span>` : ""}
+        <div class="actions">${getBtn(e)}${e.event ? `<a class="btn-blue" href="native/index.html">打开交付</a>` : ""}</div>
+      </div>
     </div>
-    ${
-      of.scene === "财富管理"
-        ? `<div class="empty">财富管理可合作企业覆盖不足。不拿科技公司充数。</div>`
-        : `<table class="data">
-            <thead><tr><th>企业</th><th>类型</th><th>合作切口</th><th>适配</th><th>贡献带</th><th></th></tr></thead>
-            <tbody>${list.map((b) => `
-              <tr>
-                <td><button class="linkish" data-go="brand/${b.id}">${b.name}</button></td>
-                <td>${b.type}</td>
-                <td>${b.partner}<div class="reason">${b.note}</div></td>
-                <td>${fitTag(b.fit)}</td>
-                <td><span class="band ${b.band}">${b.band}</span></td>
-                <td><button class="btn-line" data-sl="${b.id}">${shortlist.has(b.id) ? "已在短名单" : "加入短名单"}</button></td>
-              </tr>`).join("")}
-            </tbody>
-          </table>`
-    }`;
-}
-
-function viewEval() {
-  return `
-    <h1 class="page">评估</h1>
-    <p class="sub">对标海汇荐号评分，但尺子是场景坐标系：适配、贡献、可交付、身份。粉丝数不进正式名次。</p>
-    <div class="grid-2">
-      <article class="card">
-        <span class="tag ok">人 · 样例</span>
-        <h3>阿凯 · 软件研发实践者</h3>
-        ${DATA.evals.person.map((e) => `<p><strong>${e.dim}</strong> ${e.val}<span class="reason"> ${e.note}</span></p>`).join("")}
-        <div class="actions"><button class="btn-blue" data-sl="psn-tech-sample-ai-engineer">加入短名单</button></div>
-      </article>
-      <article class="card">
-        <span class="tag">企业</span>
-        <h3>GitHub · 开发者生态合作</h3>
-        ${DATA.evals.org.map((e) => `<p><strong>${e.dim}</strong> ${e.val}<span class="reason"> ${e.note}</span></p>`).join("")}
-        <div class="actions"><button class="btn-blue" data-sl="brd-github">加入短名单</button></div>
-      </article>
+    <div class="previews">${e.previews.map((p) => `<div class="shot" style="background:${p.bg}"><b>${p.t}</b><span>${p.d}</span></div>`).join("")}</div>
+    <div class="block">
+      <h3>${e.legal || e.name}</h3>
+      <p>${e.bio}</p>
+      <p class="muted" style="margin-top:10px">${e.why}</p>
     </div>
-    <p class="featured" style="margin-top:14px">数字专才「阿码」可评估可交付，但单独成列，不进入真人达人榜。</p>`;
-}
-
-function viewShortlist() {
-  const people = allPeople().filter((p) => shortlist.has(p.id));
-  const orgs = DATA.brands.filter((b) => shortlist.has(b.id));
-  return `
-    <h1 class="page">短名单</h1>
-    <p class="sub">人与企业混排，对应海汇「荐号包」+ 企业合作意向。下一步是合作项目。</p>
-    ${!people.length && !orgs.length ? `<div class="empty">短名单为空。从找人或找企业加入。</div>` : ""}
-    <div class="grid-2">
-      ${people.map((p) => `<article class="card"><span class="tag ${p.type === "human" ? "ok" : "warn"}">${typeLabel(p.type)}</span><h3>${p.name}</h3><p>${p.role} · ${p.why}</p></article>`).join("")}
-      ${orgs.map((b) => `<article class="card"><span class="tag">${b.type}</span><h3>${b.name}</h3><p>${b.partner} · ${b.note}</p></article>`).join("")}
+    <div class="block">
+      <h3>评估</h3>
+      <p class="muted">对标详情页的 Ratings，但尺子是场景坐标系，不是粉丝星级。</p>
+      <div class="fit">
+        <div><span>场景适配</span><b>${e.fit}</b></div>
+        <div><span>专业贡献</span><b>${e.contrib}</b></div>
+        <div><span>状态</span><b style="font-size:16px">${e.status}</b></div>
+      </div>
     </div>
-    <div class="actions"><button class="btn-blue" data-go="campaigns">转为合作项目</button></div>`;
+    <div class="block">
+      <h3>信息</h3>
+      <table class="info">
+        <tr><th>提供方</th><td>${e.orgName || e.name}</td></tr>
+        <tr><th>类别</th><td>${e.scene} · ${e.kind === "org" ? "企业" : "个人"}</td></tr>
+        <tr><th>身份</th><td>${e.typeLabel}</td></tr>
+        ${e.operator ? `<tr><th>运营披露</th><td>${e.operator}</td></tr>` : ""}
+        ${e.products ? `<tr><th>产品</th><td>${e.products.join("、")}</td></tr>` : ""}
+        <tr><th>来源</th><td>${e.sources} 条公开来源</td></tr>
+        <tr><th>名次</th><td>不可买</td></tr>
+        <tr><th>兼容</th><td>${e.getLabel} 后进入资料库</td></tr>
+      </table>
+    </div>
+    ${more.length ? `<section class="shelf"><h2 class="title-lg">${e.kind === "org" ? "More by this enterprise" : "所属企业"}</h2>
+      <div class="list-card" style="padding:0 16px">${more.map((x) => row(x)).join("")}</div></section>` : ""}
+    <section class="shelf">
+      <h2 class="title-lg">You Might Also Like</h2>
+      <div class="shelf-scroll">${related.map(mini).join("")}</div>
+    </section>`;
 }
 
-function viewCampaigns() {
+function viewLibrary() {
+  const items = all().filter((e) => shortlist.has(e.id));
+  const cur = INBOX.find((i) => i.id === noticeId) || INBOX[0];
   return `
-    <h1 class="page">合作项目</h1>
-    <p class="sub">对标 Success.ai Campaigns：状态 + 建联 / 待处理 / 回复 三数字。一个项目 = 一次供给调用。</p>
-    <div class="camp-grid">${DATA.campaigns.map((c) => campCard(c, { blockedText: "已拒绝自动交付" })).join("")}</div>`;
-}
-
-function viewDeliver() {
-  const a = DATA.adapt[adaptKey];
-  return `
-    <h1 class="page">交付 · 软件研发功能交付</h1>
-    <p class="sub">数字专才阿码按流程执行。金色节点必须人签。低适配场景拒绝充数。</p>
-    <div class="grid-2">
-      <ul class="timeline">
-        ${DATA.runSteps.map((s) => `
-          <li>
-            <span class="dot ${s.status === "done" ? "done" : s.status === "gate" ? "gate" : ""}"></span>
-            <b>${s.name}</b>
-            <div>${s.status === "gate" ? '<span class="tag gold">待签收</span> <button class="btn-blue" data-sign="1">签收（演示）</button>' : s.status === "done" ? '<span class="tag ok">已完成</span>' : '<span class="tag">排队</span>'}</div>
-          </li>`).join("")}
-      </ul>
-      <article class="card">
-        <h3>场景改编</h3>
-        <p>相邻可改编；跨域拒绝。没有换皮继续。</p>
-        <div class="adapt-row">
-          ${Object.entries(DATA.adapt).map(([k, v]) => `<button class="choice ${adaptKey === k ? "on" : ""} ${v.allow ? "" : "warn"}" data-adapt="${k}">${v.label}</button>`).join("")}
-        </div>
-        <p class="${a.allow ? "" : "featured"}">${a.body}</p>
-        ${a.allow ? `<div class="actions"><span class="tag ok">可继续交付</span></div>` : `<div class="actions"><button class="btn-line" data-go="people">回找人</button></div>`}
-      </article>
+    <h1 class="title-xl">资料库</h1>
+    <p class="sub">已加入的人与企业，相当于 App Store 的已下载。进行中的合作是更新，不是首页。</p>
+    <h2 class="title-lg">已加入</h2>
+    <div class="list-card" style="padding:0 16px;margin-bottom:22px">
+      ${items.length ? items.map((e) => `<button class="lib-item" data-open="${e.id}">${icon(e)}<div><b>${e.name}</b><div class="muted">${e.subtitle}</div></div></button>`).join("") : `<div class="empty">还没有 Get 任何资源。</div>`}
+    </div>
+    <h2 class="title-lg">进行中</h2>
+    <div class="list-card" style="padding:12px 16px;margin-bottom:22px">
+      ${CAMPS.map((c) => `<div style="padding:10px 0;border-bottom:1px solid var(--line)">
+        <div class="row-between"><b>${c.name}</b><span class="badge ${c.ok ? "ok" : "bad"}">${c.status}</span></div>
+        <div class="muted">供给 ${c.res} · 建联 ${c.sent} · 待处理 ${c.wait} · 回复 ${c.replies}</div>
+        ${c.ok ? "" : `<div class="muted">已拒绝自动交付，无换皮继续。</div>`}
+      </div>`).join("")}
+    </div>
+    <h2 class="title-lg">通知</h2>
+    <div class="list-card" style="padding:4px 16px 16px;margin-bottom:22px">
+      ${INBOX.map((i) => `<button class="notice" data-notice="${i.id}">
+        ${icon({ color: i.reject ? "linear-gradient(#de071c,#ff6961)" : "linear-gradient(#0071e3,#64d2ff)", mono: i.tag[0] }, "sm")}
+        <div><b>${i.title}</b><div class="muted">${i.who}</div></div>
+      </button>`).join("")}
+      <div class="block" style="margin:8px 0 0">
+        <span class="badge ${cur.reject ? "bad" : "ok"}">${cur.tag}</span>
+        <h3 style="margin-top:8px">${cur.title}</h3>
+        <p>${cur.body}</p>
+      </div>
+    </div>
+    <h2 class="title-lg">账户</h2>
+    <div class="block">
+      <p>浏览无限 · 建联额度 12 · 交付席位 1</p>
+      <p class="muted" style="margin-top:8px">名次不在价目表。广告只出现在精选位，不进 RankingSnapshot。</p>
     </div>`;
 }
 
-function viewInbox() {
-  const groups = {
-    link: DATA.inbox.filter((i) => i.col === "link"),
-    claim: DATA.inbox.filter((i) => i.col === "claim" || i.col === "open"),
-    reject: DATA.inbox.filter((i) => i.col === "reject"),
-  };
-  const cur = DATA.inbox.find((i) => i.id === inboxId) || DATA.inbox[0];
-  const list = [...groups.link, ...groups.claim, ...groups.reject];
-  return `
-    <h1 class="page">收件箱</h1>
-    <p class="sub">对标 InboxHub：顶部三计数 + 列表 + 详情。认证不等于改名次。</p>
-    <div class="hub-tiles">
-      <div class="hub-tile"><span>建联 Sent</span><b>${groups.link.length}</b></div>
-      <div class="hub-tile"><span>认领 Inbox</span><b>${groups.claim.length}</b></div>
-      <div class="hub-tile"><span>驳回</span><b>${groups.reject.length}</b></div>
-    </div>
-    <div class="hub-split">
-      <div class="hub-list">
-        ${list.map((i) => `<button class="q-item ${i.id === cur.id ? "active" : ""}" data-inbox="${i.id}"><b>${i.title}</b><div class="muted">${i.who}</div></button>`).join("")}
-      </div>
-      <div class="hub-detail">
-        <p><span class="tag ${cur.col === "reject" ? "bad" : cur.col === "link" ? "ok" : ""}">${cur.col === "reject" ? "已驳回" : cur.col === "link" ? "建联" : "认领"}</span></p>
-        <h3 style="margin:10px 0 8px">${cur.title}</h3>
-        <p class="muted">${cur.who}</p>
-        <p style="margin-top:12px">${cur.body}</p>
-        ${cur.col === "reject" ? '<p class="featured" style="margin-top:14px">拒绝理由：名次不可买。付费只买曝光位。</p>' : ""}
-      </div>
-    </div>`;
-}
+const TABS = { today: "today", people: "people", orgs: "orgs", search: "search", library: "library", story: "today", scene: "people", charts: "people", resource: "people" };
 
-function viewSupply(kind) {
-  if (kind === "people") {
-    return `<h1 class="page">供给库存 · 人</h1><p class="sub">库存视图。找人是需求入口；这里是五馆供给。</p>
-      <table class="data"><thead><tr><th>名称</th><th>身份</th><th>说明</th></tr></thead>
-      <tbody>${DATA.people.map((p) => `<tr><td>${p.name}</td><td>${typeLabel(p.type)}</td><td>${p.why}</td></tr>`).join("")}</tbody></table>`;
+function nav(name, id) {
+  let tab = name;
+  if (name === "story") tab = "today";
+  else if (name === "charts") tab = id === "orgs" ? "orgs" : "people";
+  else if (name === "scene") tab = "people";
+  else if (name === "resource") {
+    const e = byId(id);
+    tab = e && e.kind === "org" ? "orgs" : "people";
   }
-  if (kind === "brands") {
-    return `<h1 class="page">供给库存 · 品牌</h1>
-      <table class="data"><thead><tr><th>#</th><th>品牌</th><th>类型</th><th>带</th><th>切口</th></tr></thead>
-      <tbody>${DATA.brands.map((b, i) => `<tr><td>${i + 1}</td><td>${b.name}</td><td>${b.type}</td><td><span class="band ${b.band}">${b.band}</span></td><td>${b.partner}</td></tr>`).join("")}</tbody></table>`;
-  }
-  if (kind === "products") {
-    const list = DATA.products.filter((p) => productCat === "all" || p.category === productCat);
-    return `<h1 class="page">供给库存 · 产品</h1>
-      <div class="filters">
-        <select id="pcat">
-          <option value="all">全部品类</option>
-          <option value="编程助手" ${productCat === "编程助手" ? "selected" : ""}>编程助手</option>
-          <option value="搜索与问答" ${productCat === "搜索与问答" ? "selected" : ""}>搜索与问答</option>
-        </select>
-      </div>
-      <table class="data"><thead><tr><th>产品</th><th>品牌</th><th>品类</th><th>适配</th></tr></thead>
-      <tbody>${list.map((p) => `<tr><td><button class="linkish" data-go="product/${p.id}">${p.name}</button></td><td>${p.brand}</td><td>${p.category}</td><td>${fitTag(p.fit)}</td></tr>`).join("") || `<tr><td colspan="4" class="empty">该品类无供给，不充数。</td></tr>`}</tbody></table>`;
-  }
-  if (kind === "tools") {
-    return `<h1 class="page">供给库存 · 工具</h1>
-      <table class="data"><thead><tr><th>工具</th><th>步骤</th></tr></thead>
-      <tbody>${DATA.tools.map((t) => `<tr><td>${t.name}</td><td>${t.steps}</td></tr>`).join("")}</tbody></table>`;
-  }
-  return `<h1 class="page">供给库存 · 资产</h1>
-    <table class="data"><thead><tr><th>类型</th><th>名称</th></tr></thead>
-    <tbody>${DATA.assets.map((a) => `<tr><td><span class="tag">${a.kind}</span></td><td>${a.name}</td></tr>`).join("")}</tbody></table>`;
-}
-
-function viewPerson(id) {
-  const p = allPeople().find((x) => x.id === id) || DATA.people[0];
-  return `<h1 class="page">${p.name}</h1>
-    <p class="sub">${p.role} · ${p.scene}</p>
-    <p><span class="tag ${p.type === "human" ? "ok" : "warn"}">${typeLabel(p.type)}</span> ${fitTag(p.fit)}</p>
-    <p style="margin-top:12px">${p.why}</p>
-    ${p.type === "ai-man" ? '<p class="featured" style="margin-top:12px">数字专才，不进入真人达人榜。</p>' : ""}
-    <div class="actions"><button class="btn-blue" data-sl="${p.id}">加入短名单</button></div>`;
-}
-
-function viewBrand(id) {
-  const b = DATA.brands.find((x) => x.id === id) || DATA.brands[0];
-  return `<h1 class="page">${b.name}</h1>
-    <p class="sub">${b.partner}</p>
-    <p>${b.note}</p>
-    <p style="margin-top:10px">产品：${b.products.join("、")}</p>
-    <div class="actions"><button class="btn-blue" data-sl="${b.id}">加入短名单</button></div>`;
-}
-
-function viewProduct(id) {
-  const p = DATA.products.find((x) => x.id === id) || DATA.products[0];
-  return `<h1 class="page">${p.name}</h1>
-    <p class="sub">${p.desc}</p>
-    <p>品牌 <button class="linkish" data-go="brand/${p.brandId}">${p.brand}</button> · ${fitTag(p.fit)}</p>`;
-}
-
-function viewMethod() {
-  return `
-    <h1 class="page">方法</h1>
-    <p class="sub">评估窗口公开。付费曝光不得写入名次快照。</p>
-    <div class="grid-2">
-      <article class="card"><h3>影响力</h3><p>90 天。独立引用 0.4 · 公开采用 0.3 · 场景相关 0.3。排除付费曝光与自报 GMV。</p></article>
-      <article class="card"><h3>专业贡献</h3><p>180 天。标准库引用 0.4 · 可复核产物 0.35 · 场景适配 0.25。</p></article>
-    </div>
-    <p class="featured" style="margin-top:14px">广告目录 data/plaza/ads/ 不写入 RankingSnapshot。</p>`;
-}
-
-function viewPricing() {
-  return `
-    <h1 class="page">套餐</h1>
-    <p class="sub">三档两数字：建联额度 × 交付席位。名次不在价目表里。</p>
-    <div class="price-grid">
-      <article class="card price"><h3>访客</h3><div class="num">¥0</div><p>浏览无限 · 建联 0</p><ul><li>找人 / 找企业只读</li><li>方法公开</li></ul></article>
-      <article class="card price"><h3>需求方</h3><div class="num">年费</div><p>建联额度 · 短名单导出</p><ul><li>评估与荐号包</li><li>合作项目</li><li>精选须标注，不进分数</li></ul></article>
-      <article class="card price"><h3>交付</h3><div class="num">按席位</div><p>并发数字专才 × 场景包</p><ul><li>人机门签收</li><li>低适配拒绝硬上</li></ul>
-        <button class="btn-blue" data-go="campaigns">看合作项目</button></article>
-    </div>`;
-}
-
-function bindFilters() {
-  $("pf-scene")?.addEventListener("change", (e) => { pf.scene = e.target.value; render(); });
-  $("pf-type")?.addEventListener("change", (e) => { pf.type = e.target.value; render(); });
-  $("of-scene")?.addEventListener("change", (e) => { of.scene = e.target.value; render(); });
-  $("of-type")?.addEventListener("change", (e) => { of.type = e.target.value; render(); });
-  $("pcat")?.addEventListener("change", (e) => { productCat = e.target.value; render(); });
+  document.querySelectorAll(".tab").forEach((b) => {
+    b.classList.toggle("on", b.getAttribute("data-go") === tab);
+  });
 }
 
 function render() {
   const { name, id } = parse();
-  navActive(name);
-  const root = $("view");
+  nav(name, id);
+  const root = document.getElementById("view");
   const map = {
-    home: viewHome,
+    today: viewToday,
     people: viewPeople,
     orgs: viewOrgs,
-    eval: viewEval,
-    shortlist: viewShortlist,
-    campaigns: viewCampaigns,
-    deliver: viewDeliver,
-    inbox: viewInbox,
-    "supply-people": () => viewSupply("people"),
-    "supply-brands": () => viewSupply("brands"),
-    "supply-products": () => viewSupply("products"),
-    "supply-assets": () => viewSupply("assets"),
-    "supply-tools": () => viewSupply("tools"),
-    method: viewMethod,
-    pricing: viewPricing,
-    person: () => viewPerson(id),
-    brand: () => viewBrand(id),
-    product: () => viewProduct(id),
+    search: viewSearch,
+    library: viewLibrary,
+    story: () => viewStory(id),
+    scene: () => viewScene(id),
+    charts: () => viewCharts(id),
+    resource: () => viewResource(id),
   };
-  root.innerHTML = (map[name] || viewHome)();
-  bindFilters();
+  root.innerHTML = (map[name] || viewToday)();
+  const box = document.getElementById("qbox");
+  if (box) {
+    box.addEventListener("input", (e) => {
+      q = e.target.value;
+      const pane = document.getElementById("search-pane");
+      if (pane) pane.innerHTML = searchPane();
+    });
+  }
 }
 
 document.addEventListener("click", (e) => {
-  const g = e.target.closest("[data-go]");
-  if (g) { e.preventDefault(); go(g.getAttribute("data-go")); return; }
-  const sl = e.target.closest("[data-sl]");
-  if (sl) {
-    const id = sl.getAttribute("data-sl");
+  const get = e.target.closest("[data-get]");
+  if (get) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = get.getAttribute("data-get");
     if (shortlist.has(id)) shortlist.delete(id); else shortlist.add(id);
     render();
     return;
   }
-  const ib = e.target.closest("[data-inbox]");
-  if (ib) { inboxId = ib.getAttribute("data-inbox"); render(); return; }
-  const ad = e.target.closest("[data-adapt]");
-  if (ad) { adaptKey = ad.getAttribute("data-adapt"); render(); return; }
-  if (e.target.closest("[data-sign]")) {
-    e.target.closest("[data-sign]").textContent = "已签收";
+  const open = e.target.closest("[data-open]");
+  if (open) { e.preventDefault(); go("resource/" + open.getAttribute("data-open")); return; }
+  const g = e.target.closest("[data-go]");
+  if (g) {
+    e.preventDefault();
+    const to = g.getAttribute("data-go");
+    if (["today", "people", "orgs", "search", "library"].includes(to)) lastTab = to;
+    go(to);
+    return;
   }
+  const qq = e.target.closest("[data-q]");
+  if (qq) {
+    q = qq.getAttribute("data-q");
+    lastTab = "search";
+    if (parse().name === "search") render();
+    else go("search");
+    return;
+  }
+  const n = e.target.closest("[data-notice]");
+  if (n) { noticeId = n.getAttribute("data-notice"); render(); }
 });
 
-$("q").addEventListener("input", () => {
-  const n = parse().name;
-  if (["people", "orgs", "supply-products"].includes(n)) render();
-});
 window.addEventListener("hashchange", render);
-if (!location.hash) location.hash = "#home";
+if (!location.hash) location.hash = "#/today";
 else render();

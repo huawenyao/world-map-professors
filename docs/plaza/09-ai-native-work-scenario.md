@@ -29,4 +29,4 @@
 
 对照 brief（财富管理达人投放）会在检索后 `refuse`：覆盖不足，禁止用研发供给充数。
 
-入口：`demo/plaza/native/`（Plaza OS 左导航「作战室」）。
+入口：从 Plaza Store 数字专才详情点「调用 / 打开交付」，或直接打开 `demo/plaza/native/`。
