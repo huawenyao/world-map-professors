@@ -1,0 +1,123 @@
+# ========================================
+# 能力定义: AI经济学人
+# Capability: AI Economist
+# ========================================
+
+id: cap-media-001
+name: AI经济学人
+name_en: AI Economist
+category: domain-specific
+sub_category: media
+
+description: |
+  在媒体行业中运用AI工具生成《经济学人》风格的深度分析与评论的能力，
+  兼顾事实核查、结构化论证、克制表达与跨领域视角，
+  产出可读性强且观点稳健的专业内容。
+
+# 别名
+aliases:
+  - 经济学人风格媒体写作
+  - AI财经评论写作
+
+# === 能力等级定义 ===
+levels:
+  beginner:
+    description: 能完成结构清晰的短评
+    skills:
+      - 按“结论-证据-影响”结构成稿
+      - 使用基础宏观或行业指标支撑观点
+      - 维持客观克制的语气
+    tasks:
+      - 撰写 400-600 字的新闻评论
+      - 基于1-2个权威来源完成要点整理
+      - 为观点补充单一维度数据
+
+  intermediate:
+    description: 能整合多源信息形成平衡视角
+    skills:
+      - 进行跨来源事实核查与引用
+      - 呈现不同立场并给出取舍理由
+      - 将政策、行业与市场情绪纳入叙事
+    tasks:
+      - 撰写 800-1200 字的专题分析
+      - 在文末给出风险与不确定性提示
+      - 设计吸引读者的导语与标题
+
+  advanced:
+    description: 能构建有深度的分析框架
+    skills:
+      - 区分结构性与周期性驱动因素
+      - 进行跨区域、跨行业比较分析
+      - 用证据链支持非共识观点
+    tasks:
+      - 完成 1500+ 字的深度评论
+      - 设计“基准情景-替代情景”结构
+      - 将数据、案例与逻辑推演整合成结论
+
+  expert:
+    description: 能输出具有编辑级水准的内容并建立规范
+    skills:
+      - 建立稳定一致的经济学人式文体风格
+      - 制定事实核查与AI协作流程
+      - 指导团队提升写作与编辑质量
+    tasks:
+      - 输出可发布的专题系列或年度特稿
+      - 制定栏目风格指南与审稿清单
+      - 对复杂议题给出可执行的观点摘要
+
+# === 学习路径 ===
+learning_path:
+  prerequisites:
+    - cap-ai-001   # AI工具使用能力
+    - cap-fin-005  # 经济学人风格金融市场分析写作
+
+  estimated_time: "2-4个月"
+
+  resources:
+    courses:
+      - "Writing in the Sciences - Stanford (Coursera)"
+      - "Financial Markets - Yale (Coursera)"
+      - "Media Ethics and Fact-Checking (edX)"
+    books:
+      - "The Economist Style Guide"
+      - "The Sense of Style - Steven Pinker"
+      - "Verification Handbook"
+    practice:
+      - "每周拆解1篇《经济学人》评论文章"
+      - "同一议题进行多版本压缩与改写"
+      - "建立常用宏观与行业指标卡片库"
+
+  milestones:
+    - month: 1
+      goal: "建立结构化写作与引用习惯"
+    - month: 2
+      goal: "能写出多视角、含风险提示的评论"
+    - month: 4
+      goal: "形成稳定可复用的写作框架"
+
+# === 可迁移性 ===
+transferability:
+  across_industries: medium
+  across_scenarios: high
+
+# === AI影响评估 ===
+ai_impact: enhanced
+
+# 相关能力
+related_capabilities:
+  - cap-ai-001
+  - cap-fin-005
+
+# 适用角色
+applicable_roles:
+  - 财经记者
+  - 研究评论员
+  - 媒体编辑
+  - 内容策划
+
+metadata:
+  created_at: "2026-01-28T10:00:00"
+  updated_at: "2026-01-28T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"

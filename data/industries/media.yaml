@@ -1,0 +1,58 @@
+# ========================================
+# 行业定义: 媒体与出版
+# Industry: Media & Publishing
+# ========================================
+
+id: ind-media
+name: 媒体与出版
+name_en: Media & Publishing
+description: |
+  新闻、出版、广播与数字内容等媒体行业，
+  以信息采集、内容生产与分发为核心，
+  强调事实核查、公信力与叙事能力。
+
+# 子行业定义
+sub_industries:
+  - id: ind-media-news
+    name: 新闻与资讯
+    name_en: News & Information
+    description: 新闻采编、深度报道、评论专栏
+
+  - id: ind-media-publishing
+    name: 出版与图书
+    name_en: Publishing
+    description: 图书出版、杂志、期刊与知识产品
+
+  - id: ind-media-broadcast
+    name: 广播与电视
+    name_en: Broadcasting
+    description: 电视台、广播电台与视频节目制作
+
+  - id: ind-media-digital
+    name: 数字内容
+    name_en: Digital Media
+    description: 数字媒体平台、播客与新媒体内容
+
+# 行业特征
+characteristics:
+  regulatory_level: medium
+  data_sensitivity: medium
+  ai_maturity: emerging
+  automation_potential: medium
+
+# 行业通用能力要求
+common_capabilities:
+  - cap-media-001  # AI经济学人
+  - cap-ai-001     # AI工具使用能力
+
+# 相关行业
+related_industries:
+  - ind-finance
+  - ind-technology
+
+metadata:
+  created_at: "2026-01-28T10:00:00"
+  updated_at: "2026-01-28T10:00:00"
+  author: "World Professors Team"
+  version: "1.0"
+  schema_version: "1.0"
